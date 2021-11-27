@@ -21,6 +21,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     TextView text;
     String code;
+    String password = getString(R.string.andy_password);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
             try {
                 res = Jsoup.connect("https://rosariosis.asianhope.org/")
                         //DO NOT SCROLL RIGHT
-                        .data("username", "rseah", "password",                                                                                              "significantcookie52")
+                        .data("USERNAME", "adosan", "PASSWORD", password)
                         .method(Connection.Method.POST)
                         .execute();
             } catch (IOException e) {
@@ -65,7 +66,6 @@ public class HomePageActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
 
             return null;
