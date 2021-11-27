@@ -21,6 +21,8 @@ public class HomePageActivity extends AppCompatActivity {
 
     TextView text;
     String code;
+
+    //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password = getString(R.string.andy_password);
 
     @Override
