@@ -68,8 +68,8 @@ public class HomePageActivity extends AppCompatActivity {
 
             //Here you parse the page that you want. Put the url that you see when you have logged in
             try {
-                //this should work in pulling html of the login page :)
-                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/").cookies(loginCookies).get();
+                //this should work in pulling html of the login page :) -yc
+                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php").cookies(loginCookies).get();
                 code = doc.html();
 
             } catch (IOException e) {
