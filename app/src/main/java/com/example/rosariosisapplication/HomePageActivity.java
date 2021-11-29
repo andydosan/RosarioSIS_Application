@@ -17,6 +17,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.UncheckedIOException;
+import org.w3c.dom.Document;
+
+import java.net.SocketException;
+import java.util.Map;
+
 public class HomePageActivity extends AppCompatActivity {
 
     TextView text;
@@ -60,11 +68,10 @@ public class HomePageActivity extends AppCompatActivity {
 
             //Here you parse the page that you want. Put the url that you see when you have logged in
             try {
-                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php")
-                        .cookies(loginCookies)
-                        .get();
+                //this should work in pulling html of the login page :)
+                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/").cookies(loginCookies).get();
+                code = doc.html();
 
-                code = doc.text();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,4 +86,30 @@ public class HomePageActivity extends AppCompatActivity {
             text.setText(code);
         }
     }
+
+    /* below is the unfixed version to log into the actuality
+    public void connectWebsite(){
+        try{
+            Connection.Response res = Jsoup.connect("https://rosariosis.asianhope.org/")
+                    .data("username",name, "password", "x")
+                    .method(Connection.Method.POST)
+                    .execute();
+            //for cookies
+            Map<String, String> cookies = res.cookies();
+
+            //remain in session?
+            Document doc = (Document) Jsoup.connect("url").cookies(cookies).get();
+            tv1.setText((CharSequence) doc);
+
+        }catch (SocketException e){
+            e.printStackTrace();
+        }
+        catch (UncheckedIOException e){
+            e.printStackTrace();
+        }
+        catch(Exception e){
+
+        }
+    }
+     */
 }
