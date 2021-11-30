@@ -34,7 +34,7 @@ public class HomePageActivity extends AppCompatActivity {
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
-    final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/";
+    final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
     @Override
@@ -42,7 +42,8 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        text = findViewById(R.id.html);
+        password = getResources().getString(R.string.andy_password);
+        text = (TextView) findViewById(R.id.html);
         password = getString(R.string.andy_password);
 
         description_webscrape dw = new description_webscrape();
@@ -59,32 +60,34 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            /*
             //With this you login and a session is created
             Connection.Response res = null;
             try {
-                res = Jsoup.connect("https://rosariosis.asianhope.org/")
+                res = Jsoup.connect("https://rosariosis.asianhope.org/index.php")
                         //DO NOT SCROLL RIGHT
-                        .data("USERNAME", "adosan", "PASSWORD", password)
+                        .data("USERNAME", "adosan")
+                        .data("PASSWORD", password)
                         .method(Connection.Method.POST)
+                        .userAgent(USER_AGENT)
                         .execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
-            //This will get you cookies
-            Map<String, String> loginCookies = res.cookies();
+                Map<String, String> loginCookies = res.cookies();
 
-            //Here you parse the page that you want. Put the url that you see when you have logged in
-            try {
                 //this should work in pulling html of the login page :) -yc
-                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php").cookies(loginCookies).get();
+                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php").cookies(loginCookies).get();
                 code = doc.html();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            //This will get you cookies
+
+             */
             // idk im just doing things at this point https://sodocumentation.net/jsoup/topic/4631/logging-into-websites-with-jsoup (first example here)
-            /* this is the code from recently yes yes (haven't tested it out yet)
+            // this is the code from recently yes yes (haven't tested it out yet)
+
             try {
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .method(Connection.Method.GET)
@@ -115,10 +118,10 @@ public class HomePageActivity extends AppCompatActivity {
                         .method(Connection.Method.POST)
                         .userAgent(USER_AGENT)
                         .execute();
-                text.setText(homePage.parse().html());
+                code = homePage.parse().html();
             } catch (IOException e) {
                 e.printStackTrace();
-            } */
+            }
 
 
 
@@ -127,7 +130,6 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-
             text.setText(code);
         }
     }
