@@ -13,6 +13,7 @@ import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +33,9 @@ public class HomePageActivity extends AppCompatActivity {
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password = getString(R.string.andy_password);
+    final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
+    final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/";
+    final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,43 @@ public class HomePageActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            // idk im just doing things at this point https://sodocumentation.net/jsoup/topic/4631/logging-into-websites-with-jsoup (first example here)
+            /* this is the code from recently yes yes (haven't tested it out yet)
+            try {
+                Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
+                        .method(Connection.Method.GET)
+                        .userAgent(USER_AGENT)
+                        .execute();
+
+                // this is the document containing response html
+                org.jsoup.nodes.Document loginDoc = loginForm.parse();
+                // save the cookies to be passed on to next request
+                HashMap <String, String> cookies = new HashMap<>(loginForm.cookies());
+
+                // # Prepare login credentials
+                String authToken = loginDoc.select("#login > form > div:nth-child(1) > input[type=\"hidden\"]:nth-child(2)")
+                        .first()
+                        .attr("value");
+
+                HashMap <String, String> formData = new HashMap<>();
+                formData.put("commit", "Sign in");
+                formData.put("utf8", "e2 9c 93");
+                formData.put("login", "adosan");
+                formData.put("password", password);
+                formData.put("authenticity_token", authToken);
+
+                // # Now send the form for login
+                Connection.Response homePage = Jsoup.connect(LOGIN_ACTION_URL)
+                        .cookies(cookies)
+                        .data(formData)
+                        .method(Connection.Method.POST)
+                        .userAgent(USER_AGENT)
+                        .execute();
+                text.setText(homePage.parse().html());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } */
+
 
 
             return null;
@@ -87,29 +128,5 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
-    /* below is the unfixed version to log into the actuality
-    public void connectWebsite(){
-        try{
-            Connection.Response res = Jsoup.connect("https://rosariosis.asianhope.org/")
-                    .data("username",name, "password", "x")
-                    .method(Connection.Method.POST)
-                    .execute();
-            //for cookies
-            Map<String, String> cookies = res.cookies();
 
-            //remain in session?
-            Document doc = (Document) Jsoup.connect("url").cookies(cookies).get();
-            tv1.setText((CharSequence) doc);
-
-        }catch (SocketException e){
-            e.printStackTrace();
-        }
-        catch (UncheckedIOException e){
-            e.printStackTrace();
-        }
-        catch(Exception e){
-
-        }
-    }
-     */
 }
