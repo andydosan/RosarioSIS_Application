@@ -32,7 +32,7 @@ public class HomePageActivity extends AppCompatActivity {
     String code;
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
-    String password = getString(R.string.andy_password);
+    String password;
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/";
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
@@ -43,6 +43,10 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         text = findViewById(R.id.html);
+        password = getString(R.string.andy_password);
+
+        description_webscrape dw = new description_webscrape();
+        dw.execute();
 
     }
 
