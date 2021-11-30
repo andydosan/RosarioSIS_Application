@@ -32,6 +32,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
+    String bruh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
