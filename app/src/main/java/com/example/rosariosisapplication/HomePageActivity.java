@@ -94,30 +94,38 @@ public class HomePageActivity extends AppCompatActivity {
                         .method(Connection.Method.GET)
                         .userAgent(USER_AGENT)
                         .execute();
-                // this is the document containing response html
-                org.jsoup.nodes.Document loginDoc = loginForm.parse();
+
                 // save the cookies to be passed on to next request
                 HashMap <String, String> cookies = new HashMap<>(loginForm.cookies());
+                HashMap <String, String> formData = new HashMap<>();
+
+                // this is the document containing response html
+                org.jsoup.nodes.Document loginDoc = loginForm.parse();
+
+
+                //SAVE DA COOKIES
+                cookies.putAll(loginForm.cookies());
 
                 // # Prepare login credentials
-                String authToken = loginDoc.select("#login > form > div:nth-child(1) > input[type=\"hidden\"]:nth-child(2)")
+               /* String authToken = loginDoc.select("#login > form > div:nth-child(1) > input[type=\"hidden\"]:nth-child(2)")
                         .first()
                         .attr("value");
                 //login credentials are what seem to be an issue but the bottom one doesn't work either
                 String authTokenTest = loginDoc.select("input#token").first().attr("value");
+*/
 
-                HashMap <String, String> formData = new HashMap<>();
-                formData.put("commit", "Sign in");
-                formData.put("utf8", "e2 9c 93");
-                formData.put("login", "adosan");
-                formData.put("password", password);
-                formData.put("authenticity_token", authTokenTest);
+                //formData.put("commit", "Sign in");
+                //formData.put("utf8", "e2 9c 93");
+                formData.put("USERNAME", "adosan");
+                formData.put("PASSWORD", password);
+                //formData.put("authenticity_token", authTokenTest);
 
                 // # Now send the form for login
-                Connection.Response homePage = Jsoup.connect(LOGIN_ACTION_URL)
+                Connection.Response homePage = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(cookies)
                         .data(formData)
                         .method(Connection.Method.POST)
+                        .followRedirects(true)
                         .userAgent(USER_AGENT)
                         .execute();
                 code = homePage.parse().html();
