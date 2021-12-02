@@ -35,7 +35,8 @@ public class HomePageActivity extends AppCompatActivity {
     String password;
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
-    final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
+    //rather than the grades, the initial log in action url is the portral page possibly?
+    final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,6 @@ public class HomePageActivity extends AppCompatActivity {
                         .method(Connection.Method.GET)
                         .userAgent(USER_AGENT)
                         .execute();
-
                 // this is the document containing response html
                 org.jsoup.nodes.Document loginDoc = loginForm.parse();
                 // save the cookies to be passed on to next request
@@ -103,13 +103,15 @@ public class HomePageActivity extends AppCompatActivity {
                 String authToken = loginDoc.select("#login > form > div:nth-child(1) > input[type=\"hidden\"]:nth-child(2)")
                         .first()
                         .attr("value");
+                //login credentials are what seem to be an issue but the bottom one doesn't work either
+                String authTokenTest = loginDoc.select("input#token").first().attr("value");
 
                 HashMap <String, String> formData = new HashMap<>();
                 formData.put("commit", "Sign in");
                 formData.put("utf8", "e2 9c 93");
                 formData.put("login", "adosan");
                 formData.put("password", password);
-                formData.put("authenticity_token", authToken);
+                formData.put("authenticity_token", authTokenTest);
 
                 // # Now send the form for login
                 Connection.Response homePage = Jsoup.connect(LOGIN_ACTION_URL)
@@ -119,10 +121,10 @@ public class HomePageActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .execute();
                 code = homePage.parse().html();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
 
             return null;
@@ -130,7 +132,13 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            text.setText(code);
+            if(code != null){
+                text.setText(code);
+            }
+            else {
+                text.setText("Something went wrong! There was nothing downloaded.");
+            }
+
         }
     }
 
