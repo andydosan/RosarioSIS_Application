@@ -37,6 +37,7 @@ public class HomePageActivity extends AppCompatActivity {
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
+    final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,33 +62,6 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            /*
-            //With this you login and a session is created
-            Connection.Response res = null;
-            try {
-                res = Jsoup.connect("https://rosariosis.asianhope.org/index.php")
-                        //DO NOT SCROLL RIGHT
-                        .data("USERNAME", "adosan")
-                        .data("PASSWORD", password)
-                        .method(Connection.Method.POST)
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-                Map<String, String> loginCookies = res.cookies();
-
-                //this should work in pulling html of the login page :) -yc
-                org.jsoup.nodes.Document doc = Jsoup.connect("https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php").cookies(loginCookies).get();
-                code = doc.html();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //This will get you cookies
-
-             */
-            // idk im just doing things at this point https://sodocumentation.net/jsoup/topic/4631/logging-into-websites-with-jsoup (first example here)
-            // this is the code from recently yes yes (haven't tested it out yet)
 
             try {
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
@@ -95,44 +69,26 @@ public class HomePageActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .execute();
 
-                // save the cookies to be passed on to next request
-                HashMap <String, String> cookies = new HashMap<>(loginForm.cookies());
-                HashMap <String, String> formData = new HashMap<>();
-
-                // this is the document containing response html
-                org.jsoup.nodes.Document loginDoc = loginForm.parse();
-
-
-                //SAVE DA COOKIES
-                cookies.putAll(loginForm.cookies());
-
-                // # Prepare login credentials
-               /* String authToken = loginDoc.select("#login > form > div:nth-child(1) > input[type=\"hidden\"]:nth-child(2)")
-                        .first()
-                        .attr("value");
-                //login credentials are what seem to be an issue but the bottom one doesn't work either
-                String authTokenTest = loginDoc.select("input#token").first().attr("value");
-*/
-
-                //formData.put("commit", "Sign in");
-                //formData.put("utf8", "e2 9c 93");
-                formData.put("USERNAME", "adosan");
-                formData.put("PASSWORD", password);
-                //formData.put("authenticity_token", authTokenTest);
-
-                // # Now send the form for login
-                Connection.Response homePage = Jsoup.connect(LOGIN_FORM_URL)
-                        .cookies(cookies)
-                        .data(formData)
+                loginForm = Jsoup.connect(LOGIN_FORM_URL)
+                        .cookies(loginForm.cookies())
+                        .data("USERNAME", "adosan")
+                        .data("PASSWORD", password)
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
                         .execute();
-                code = homePage.parse().html();
+
+                org.jsoup.nodes.Document doc = Jsoup.connect(GRADES_URL)
+                        .cookies(loginForm.cookies())
+                        .userAgent(USER_AGENT)
+                        .get();
+
+                code = doc.html();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
 
             return null;
