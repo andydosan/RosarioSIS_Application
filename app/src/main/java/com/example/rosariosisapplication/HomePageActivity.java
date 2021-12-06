@@ -21,6 +21,7 @@ import java.util.Set;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.UncheckedIOException;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 
 import java.net.SocketException;
@@ -33,6 +34,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
+    ArrayList<String> grades = new ArrayList<>();
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
@@ -85,11 +87,25 @@ public class HomePageActivity extends AppCompatActivity {
 
                 code = doc.html();
 
+                org.jsoup.nodes.Element table = doc.select("table[class=list widefat rt]").get(0);
+                Elements rows = table.select("tr");
+
+                for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+                    org.jsoup.nodes.Element row = rows.get(i);
+                    Elements cols = row.select("td");
+
+                    grades.add(cols.get(0).text());
+                    grades.add(cols.get(1).text());
+                    grades.add(cols.get(3).text());
+                }
+
+                for (int i = 0; i < grades.size(); i++) {
+                    Log.d("Myapp", grades.get(i));
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
 
             return null;
         }
