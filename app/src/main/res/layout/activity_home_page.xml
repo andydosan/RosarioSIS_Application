@@ -1,200 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="0,1,2"
-    android:gravity="center">
+    android:id="@+id/scrollView">
 
-    <TableRow
-        android:background="#000000"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_margin="1dp"
-        android:layout_weight="1"
+        android:layout_height="fill_parent">
 
-        >
-
-        <TextView
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_column="0"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="Class"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:id="@+id/main" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Teacher"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:layout_column="1"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:textStyle="bold"
-            />
+            <TableRow
+                android:background="#ff00aa63"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rowHeader">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Grade"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_column="2"
-            />
-    </TableRow>
+                <TextView
+                    android:text="Class"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
 
-    <TableRow
-        android:background="#000000"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_margin="1dp"
-        android:layout_weight="1"
-        >
+                <TextView
+                    android:text="Teacher"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
 
-        <TextView
-            android:id="@+id/C1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_column="0"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-
-            android:text="A"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            tools:text="A" />
-
-        <TextView
-            android:id="@+id/T1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_column="1"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-
-            android:text="B"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            tools:text="B" />
-
-        <TextView
-            android:id="@+id/G1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_column="2"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-
-            android:text="C"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
-            tools:text="C" />
-    </TableRow>
+                <TextView
+                    android:text="Percent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/background_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </TableRow>
+        </TableLayout>
 
 
-
-    <TableRow
-        android:background="#000000"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_margin="1dp"
-        android:layout_weight="1"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" Text"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:layout_column="0"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" Text"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:layout_column="1"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" Text"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:layout_column="2" />
-    </TableRow>
-
-    <TableRow
-        android:background="#000000"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_margin="1dp"
-        android:layout_weight="1"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" Text"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:layout_column="0"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" Text"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:layout_column="1"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=" Text"
-            android:textColor="@color/black"
-            android:layout_margin="1dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:layout_column="2" />
-    </TableRow>
-
-
-</TableLayout>
+    </LinearLayout>
+</ScrollView>

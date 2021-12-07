@@ -2,6 +2,7 @@ package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,8 +14,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -27,12 +30,13 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     private EditText ePassword;
     private TextView eAttemptsInfo;
     private Button eLogin;
+    private CheckBox check;
     private int counter = 5;
 
-    String test;
 
     String userName = "";
     String userPassword = "";
+
 
     /* Class to hold credentials */
     class Credentials
@@ -52,6 +56,16 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         eName = findViewById(R.id.etName);
         ePassword = findViewById(R.id.etPassword);
         eLogin = findViewById(R.id.btnLogin);
+        check = findViewById(R.id.checkBox);
+
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("remember","");
+        if(checkbox.equals("true")){
+            Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+            startActivity(intent);
+        }else if(checkbox.equals("false")){
+            Toast.makeText(this,"Please Sign In.", Toast.LENGTH_SHORT).show();
+        }
 
         /* Describe the logic when the login button is clicked */
         eLogin.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +116,30 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
                 }
             }
         });
+
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()) {
+
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.apply();
+                    Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+
+                } else if (!compoundButton.isChecked()) {
+
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
+                    Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
     }
 
     /* Validate the credentials */
