@@ -34,7 +34,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
-    ArrayList<String> grades = new ArrayList<>();
+    ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
@@ -47,7 +47,7 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         password = getResources().getString(R.string.andy_password);
-        text = (TextView) findViewById(R.id.html);
+        //text = (TextView) findViewById(R.id.html);
         password = getString(R.string.andy_password);
 
         description_webscrape dw = new description_webscrape();
@@ -73,8 +73,8 @@ public class HomePageActivity extends AppCompatActivity {
 
                 loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(loginForm.cookies())
-                        .data("USERNAME", "adosan")
-                        .data("PASSWORD", password)
+                        .data("USERNAME", "rseah")
+                        .data("PASSWORD",                                               "significantcookie52")
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
@@ -93,15 +93,23 @@ public class HomePageActivity extends AppCompatActivity {
                 for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
                     org.jsoup.nodes.Element row = rows.get(i);
                     Elements cols = row.select("td");
+                    Elements link = row.select("a[href]");
 
-                    grades.add(cols.get(0).text());
-                    grades.add(cols.get(1).text());
-                    grades.add(cols.get(3).text());
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(cols.get(0).text()); //Class name
+                    temp.add(cols.get(1).text()); //Teacher name
+                    temp.add(cols.get(3).text()); //Grade (percent)
+                    temp.add(link.get(0).attr("href"));
+                    grades.add(temp);
                 }
 
                 for (int i = 0; i < grades.size(); i++) {
-                    Log.d("Myapp", grades.get(i));
+                    for (int j = 0; j < grades.get(i).size(); j++) {
+                        Log.d("Myapp", grades.get(i).get(j));
+                    }
                 }
+
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -112,13 +120,13 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if(code != null){
+            /*if(code != null){
                 text.setText(code);
             }
             else {
                 text.setText("Something went wrong! There was nothing downloaded.");
             }
-
+*/
         }
     }
 
