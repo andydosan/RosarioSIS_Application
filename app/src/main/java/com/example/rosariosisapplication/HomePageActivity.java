@@ -99,7 +99,7 @@ public class HomePageActivity extends AppCompatActivity {
                     temp.add(cols.get(0).text()); //Class name
                     temp.add(cols.get(1).text()); //Teacher name
                     temp.add(cols.get(3).text()); //Grade (percent)
-                    temp.add(link.get(0).attr("href"));
+                    temp.add("https://rosariosis.asianhope.org/" + link.get(0).attr("href"));
                     grades.add(temp);
                 }
 
