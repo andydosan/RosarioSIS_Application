@@ -23,7 +23,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
 
     /* Define the UI elements */
     private EditText eName;
@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private Button eLogin;
     private CheckBox check;
     private int counter = 5;
+
+    String test;
 
     String userName = "";
     String userPassword = "";
@@ -98,6 +100,18 @@ public class MainActivity extends AppCompatActivity {
 
                         /* Allow the user in to your app by going into the next activity */
                         startActivity(new Intent(MainActivity.this, HomePageActivity.class));
+
+                        TextView tableC1 = (TextView) findViewById(R.id.C1); //Class1
+                        TextView tableT1 = (TextView) findViewById(R.id.T1); //Teacher1
+                        TextView tableG1 = (TextView) findViewById(R.id.G1); //Grade1
+
+                        String Class1 = "Art";
+                        String Teacher1 = "Ms. Mendoza";
+                        String Grade1 = "100%";
+
+                        tableC1.setText(Class1);
+                        tableT1.setText(Teacher1);
+                        tableG1.setText(Grade1);
                     }
 
                 }
@@ -143,4 +157,6 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
     }
+
+
 }
