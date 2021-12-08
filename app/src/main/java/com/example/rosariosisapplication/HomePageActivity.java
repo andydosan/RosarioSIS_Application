@@ -35,6 +35,7 @@ public class HomePageActivity extends AppCompatActivity {
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
     ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
@@ -74,7 +75,7 @@ public class HomePageActivity extends AppCompatActivity {
                 loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(loginForm.cookies())
                         .data("USERNAME", "rseah")
-                        .data("PASSWORD",                                               "significantcookie52")
+                        .data("PASSWORD",                                                                                                             "significantcookie52")
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
@@ -94,18 +95,49 @@ public class HomePageActivity extends AppCompatActivity {
                     org.jsoup.nodes.Element row = rows.get(i);
                     Elements cols = row.select("td");
                     Elements link = row.select("a[href]");
+                    String classLink = "https://rosariosis.asianhope.org/" + link.get(0).attr("href");
 
                     ArrayList<String> temp = new ArrayList<String>();
                     temp.add(cols.get(0).text()); //Class name
                     temp.add(cols.get(1).text()); //Teacher name
                     temp.add(cols.get(3).text()); //Grade (percent)
-                    temp.add("https://rosariosis.asianhope.org/" + link.get(0).attr("href"));
+
+                    temp.add(classLink);
                     grades.add(temp);
+
+                    //NEW TEST CODE
+                    org.jsoup.nodes.Document doc1 = Jsoup.connect(classLink)
+                            .cookies(loginForm.cookies())
+                            .userAgent(USER_AGENT)
+                            .get();
+
+                    org.jsoup.nodes.Element table1 = doc1.select("table[class=list widefat rt]").get(0);
+                    Elements rows1 = table1.select("tr");
+                    for (int j = 1; j < rows1.size(); j++) {
+
+                        org.jsoup.nodes.Element row1 = rows1.get(j);
+                        Elements cols1 = row1.select("td");
+                        ArrayList<String> temp1 = new ArrayList<String>();
+                        temp1.add(cols1.get(0).text()); //Assignment Name
+                        //temp1.add(cols1.get(1).text()); //Assignment Category
+                        //temp1.add(cols1.get(2).text()); //Points / Possible
+                        //temp1.add(cols1.get(3).text()); //Grade (percent)
+                        classGrades.add(temp1);
+                    }
+
+                    //NEW TEST CODE
+
                 }
 
                 for (int i = 0; i < grades.size(); i++) {
                     for (int j = 0; j < grades.get(i).size(); j++) {
                         Log.d("Myapp", grades.get(i).get(j));
+                    }
+                }
+
+                for (int i = 0; i < classGrades.size(); i++) {
+                    for (int j = 0; j < classGrades.get(i).size(); j++) {
+                        Log.d("Myapp", classGrades.get(i).get(j));
                     }
                 }
 
