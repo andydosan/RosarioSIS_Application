@@ -124,14 +124,17 @@ public class HomePageActivity extends AppCompatActivity {
                         if (firstElement != null) {
                             Elements assignmentname = firstElement.select("a[href]");
                             temp1.add(assignmentname.text());
-                            Log.d("Checkelement", assignmentname.text());
-                        } else {
+                            //Log.d("Checkelement", assignmentname.text());
+                            Log.d("Checkelement", "HAS HREF");
+                        }
+                        else {
                             temp1.add(cols1.get(0).text()); //Assignment Name
+                            //Log.d("Checkelement", "DOESNT HAVE HREF");
                         }
 
 
 
-                        Log.d("Myapp", cols1.get(0).text());
+                        //Log.d("Myapp", cols1.get(0).text());
                         //temp1.add(cols1.get(1).text()); //Assignment Category
                         //temp1.add(cols1.get(2).text()); //Points / Possible
                         //temp1.add(cols1.get(3).text()); //Grade (percent)
