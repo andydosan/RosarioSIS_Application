@@ -117,8 +117,21 @@ public class HomePageActivity extends AppCompatActivity {
 
                         org.jsoup.nodes.Element row1 = rows1.get(j);
                         Elements cols1 = row1.select("td");
+                        Elements firstElement = row1.select("td:has(a[href])");
+
                         ArrayList<String> temp1 = new ArrayList<String>();
-                        temp1.add(cols1.get(0).text()); //Assignment Name
+
+                        if (firstElement != null) {
+                            Elements assignmentname = firstElement.select("a[href]");
+                            temp1.add(assignmentname.text());
+                            Log.d("Checkelement", assignmentname.text());
+                        } else {
+                            temp1.add(cols1.get(0).text()); //Assignment Name
+                        }
+
+
+
+                        Log.d("Myapp", cols1.get(0).text());
                         //temp1.add(cols1.get(1).text()); //Assignment Category
                         //temp1.add(cols1.get(2).text()); //Points / Possible
                         //temp1.add(cols1.get(3).text()); //Grade (percent)
