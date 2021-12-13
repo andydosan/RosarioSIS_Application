@@ -21,6 +21,7 @@ import java.util.Set;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.UncheckedIOException;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 
@@ -115,29 +116,29 @@ public class HomePageActivity extends AppCompatActivity {
                     Elements rows1 = table1.select("tr");
                     for (int j = 1; j < rows1.size(); j++) {
 
-                        org.jsoup.nodes.Element row1 = rows1.get(j);
-                        Elements cols1 = row1.select("td");
+                        Element row1 = rows1.get(j);
+                        Elements cols1 = row1.select("td"); //.not(":has(a[href])");
                         Elements firstElement = row1.select("td:has(a[href])");
 
                         ArrayList<String> temp1 = new ArrayList<String>();
 
-                        if (firstElement != null) {
+                        if (firstElement.size() > 0) {
                             Elements assignmentname = firstElement.select("a[href]");
-                            temp1.add(assignmentname.text());
+                            //temp1.add(assignmentname.text());
+                            //temp1.add(cols1.get(0).text());
+                            //temp1.add(cols1.get(1).text());
+                            //temp1.add(cols1.get(2).text());
                             //Log.d("Checkelement", assignmentname.text());
-                            Log.d("Checkelement", "HAS HREF");
+                            Log.d("Myapp", "HAS HREF");
                         }
                         else {
                             temp1.add(cols1.get(0).text()); //Assignment Name
-                            //Log.d("Checkelement", "DOESNT HAVE HREF");
+                            temp1.add(cols1.get(1).text()); //Assignment Category
+                            //temp1.add(cols1.get(2).text()); //Points / Possible
+                            //temp1.add(cols1.get(3).text()); //Grade (percent)
+                            Log.d("Myapp", "DOESNT HAVE HREF");
                         }
 
-
-
-                        //Log.d("Myapp", cols1.get(0).text());
-                        //temp1.add(cols1.get(1).text()); //Assignment Category
-                        //temp1.add(cols1.get(2).text()); //Points / Possible
-                        //temp1.add(cols1.get(3).text()); //Grade (percent)
                         classGrades.add(temp1);
                     }
 
