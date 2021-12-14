@@ -117,8 +117,12 @@ public class HomePageActivity extends AppCompatActivity {
                     for (int j = 1; j < rows1.size(); j++) {
 
                         Element row1 = rows1.get(j);
-                        Elements cols1 = row1.select("td"); //.not(":has(a[href])");
+                        Elements cols1 = row1.select("td");
                         Elements firstElement = row1.select("td:has(a[href])");
+
+                        for (Element element : cols1) {
+                            Log.d("Myapp", element.text());
+                        }
 
                         ArrayList<String> temp1 = new ArrayList<String>();
 
@@ -129,14 +133,14 @@ public class HomePageActivity extends AppCompatActivity {
                             //temp1.add(cols1.get(1).text());
                             //temp1.add(cols1.get(2).text());
                             //Log.d("Checkelement", assignmentname.text());
-                            Log.d("Myapp", "HAS HREF");
+                            //Log.d("Myapp", "HAS HREF");
                         }
                         else {
-                            temp1.add(cols1.get(0).text()); //Assignment Name
-                            temp1.add(cols1.get(1).text()); //Assignment Category
+                            //temp1.add(cols1.get(0).text()); //Assignment Name
+                            //temp1.add(cols1.get(1).text()); //Assignment Category
                             //temp1.add(cols1.get(2).text()); //Points / Possible
                             //temp1.add(cols1.get(3).text()); //Grade (percent)
-                            Log.d("Myapp", "DOESNT HAVE HREF");
+                            //Log.d("Myapp", "DOESNT HAVE HREF");
                         }
 
                         classGrades.add(temp1);
@@ -154,7 +158,7 @@ public class HomePageActivity extends AppCompatActivity {
 
                 for (int i = 0; i < classGrades.size(); i++) {
                     for (int j = 0; j < classGrades.get(i).size(); j++) {
-                        Log.d("Myapp", classGrades.get(i).get(j));
+                        //Log.d("Myapp", classGrades.get(i).get(j));
                     }
                 }
 
