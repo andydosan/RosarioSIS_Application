@@ -21,9 +21,9 @@ import java.util.Set;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.UncheckedIOException;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Document;
 
 import java.net.SocketException;
 import java.util.Map;
@@ -82,7 +82,25 @@ public class HomePageActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .execute();
 
-                org.jsoup.nodes.Document doc = Jsoup.connect(GRADES_URL)
+                /*
+                Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                        .method(Connection.Method.GET)
+                        .cookies(loginForm.cookies())
+                        .userAgent(USER_AGENT)
+                        .execute();
+
+                 */
+
+                Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                        .cookies(loginForm.cookies())
+                        .data("syear", "2021")
+                        .data("mp", "73")
+                        .method(Connection.Method.POST)
+                        .followRedirects(true)
+                        .userAgent(USER_AGENT)
+                        .execute();
+
+                Document doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
                         .userAgent(USER_AGENT)
                         .get();
@@ -107,6 +125,7 @@ public class HomePageActivity extends AppCompatActivity {
                     grades.add(temp);
 
                     //NEW TEST CODE
+
                     org.jsoup.nodes.Document doc1 = Jsoup.connect(classLink)
                             .cookies(loginForm.cookies())
                             .userAgent(USER_AGENT)
@@ -118,29 +137,32 @@ public class HomePageActivity extends AppCompatActivity {
 
                         Element row1 = rows1.get(j);
                         Elements cols1 = row1.select("td"); //.not(":has(a[href])");
-                        Elements firstElement = row1.select("td:has(a[href])");
+                        //Elements firstElement = row1.select("td:has(a[href])");
+                        Elements assignmentname = cols1.select("a");
+                        Log.d("asdf", String.valueOf(assignmentname));
 
                         ArrayList<String> temp1 = new ArrayList<String>();
 
-                        if (firstElement.size() > 0) {
-                            Elements assignmentname = firstElement.select("a[href]");
-                            //temp1.add(assignmentname.text());
+                        if (assignmentname.size() > 0) {
+                            temp1.add(assignmentname.text());
                             //temp1.add(cols1.get(0).text());
-                            //temp1.add(cols1.get(1).text());
-                            //temp1.add(cols1.get(2).text());
+                            temp1.add(cols1.get(1).text());
+                            temp1.add(cols1.get(2).text());
+                            temp1.add(cols1.get(3).text());
                             //Log.d("Checkelement", assignmentname.text());
                             Log.d("Myapp", "HAS HREF");
-                        }
-                        else {
-                            temp1.add(cols1.get(0).text()); //Assignment Name
-                            temp1.add(cols1.get(1).text()); //Assignment Category
+                        } else {
+                            //temp1.add(cols1.get(0).text()); //Assignment Name
+                            //temp1.add(cols1.get(1).text()); //Assignment Category
                             //temp1.add(cols1.get(2).text()); //Points / Possible
                             //temp1.add(cols1.get(3).text()); //Grade (percent)
                             Log.d("Myapp", "DOESNT HAVE HREF");
                         }
 
+
                         classGrades.add(temp1);
                     }
+
 
                     //NEW TEST CODE
 
