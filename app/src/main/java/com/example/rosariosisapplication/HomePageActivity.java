@@ -75,8 +75,8 @@ public class HomePageActivity extends AppCompatActivity {
 
                 loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(loginForm.cookies())
-                        .data("USERNAME", "rseah")
-                        .data("PASSWORD",                                                                                                             "significantcookie52")
+                        .data("USERNAME", "adosan")
+                        .data("PASSWORD", password)
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
@@ -132,14 +132,18 @@ public class HomePageActivity extends AppCompatActivity {
                             .get();
 // BROTHERrr
                     org.jsoup.nodes.Element table1 = doc1.select("table[class=list widefat rt]").get(0);
+                    doc1.select(".header2").remove();
+                    doc1.select(".header2 align-right").remove();
+
                     Elements rows1 = table1.select("tr");
                     for (int j = 1; j < rows1.size(); j++) {
 
                         Element row1 = rows1.get(j);
                         Elements cols1 = row1.select("td"); //.not(":has(a[href])");
                         //Elements firstElement = row1.select("td:has(a[href])");
+                        cols1.select("div").remove();
+
                         Elements assignmentname = cols1.select("a");
-                        Log.d("asdf", String.valueOf(assignmentname));
 
                         ArrayList<String> temp1 = new ArrayList<String>();
 
@@ -149,16 +153,14 @@ public class HomePageActivity extends AppCompatActivity {
                             temp1.add(cols1.get(1).text());
                             temp1.add(cols1.get(2).text());
                             temp1.add(cols1.get(3).text());
-                            //Log.d("Checkelement", assignmentname.text());
-                            Log.d("Myapp", "HAS HREF");
-                        } else {
-                            //temp1.add(cols1.get(0).text()); //Assignment Name
-                            //temp1.add(cols1.get(1).text()); //Assignment Category
-                            //temp1.add(cols1.get(2).text()); //Points / Possible
-                            //temp1.add(cols1.get(3).text()); //Grade (percent)
-                            Log.d("Myapp", "DOESNT HAVE HREF");
-                        }
+                        } else if (cols1.size() > 0) {
+                            temp1.add(cols1.get(0).text()); //Assignment Name
+                            temp1.add(cols1.get(1).text()); //Assignment Category
+                            temp1.add(cols1.get(2).text()); //Points / Possible
+                            temp1.add(cols1.get(3).text()); //Grade (percent)
 
+                            Log.d(cols.get(0).text(), cols1.get(0).text());
+                        }
 
                         classGrades.add(temp1);
                     }
@@ -168,6 +170,7 @@ public class HomePageActivity extends AppCompatActivity {
 
                 }
 
+                /*
                 for (int i = 0; i < grades.size(); i++) {
                     for (int j = 0; j < grades.get(i).size(); j++) {
                         Log.d("Myapp", grades.get(i).get(j));
@@ -179,6 +182,8 @@ public class HomePageActivity extends AppCompatActivity {
                         Log.d("Myapp", classGrades.get(i).get(j));
                     }
                 }
+
+                 */
 
 
 
