@@ -75,7 +75,7 @@
         android:layout_marginStart="127dp"
         android:layout_marginEnd="127dp"
         android:layout_marginBottom="96dp"
-        android:text="Save Credentials?"
+        android:text="Remember Me"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

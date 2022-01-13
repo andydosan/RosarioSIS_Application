@@ -28,7 +28,6 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     /* Define the UI elements */
     private EditText eName;
     private EditText ePassword;
-    private TextView eAttemptsInfo;
     private Button eLogin;
     private CheckBox check;
     private int counter = 5;
@@ -106,26 +105,19 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
             }
         });
 
-        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (compoundButton.isChecked()) {
-
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "true");
-                    editor.apply();
-                    Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-
-                } else if (!compoundButton.isChecked()) {
-
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "false");
-                    editor.apply();
-                    Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
-
-                }
+        check.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (compoundButton.isChecked()) {
+                SharedPreferences preferences1 = getSharedPreferences("checkbox", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences1.edit();
+                editor.putString("remember", "true");
+                editor.apply();
+                //Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+            } else if (!compoundButton.isChecked()) {
+                SharedPreferences preferences1 = getSharedPreferences("checkbox", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences1.edit();
+                editor.putString("remember", "false");
+                editor.apply();
+                //Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
             }
         });
 
