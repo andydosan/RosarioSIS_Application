@@ -2,9 +2,11 @@ package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -195,10 +197,15 @@ public class HomePageActivity extends AppCompatActivity {
 
             for (int i = 0; i < grades.size(); i++) {
                 TableRow tbrow0 = new TableRow(HomePageActivity.this);
+                tbrow0.setMinimumHeight(200);
 
                 TextView tv0 = new TextView(HomePageActivity.this);
                 TextView tv1 = new TextView(HomePageActivity.this);
                 TextView tv2 = new TextView(HomePageActivity.this);
+                tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+                tv1.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+                tv2.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+                tv0.setGravity(Gravity.CENTER);
 
                 tv0.setText(grades.get(i).get(0));
                 tv1.setText(grades.get(i).get(1));
