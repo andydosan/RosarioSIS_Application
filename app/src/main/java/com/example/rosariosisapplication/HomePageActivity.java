@@ -6,7 +6,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -30,8 +34,7 @@ import java.util.Map;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    TextView text;
-    String code;
+    TableLayout classes;
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
@@ -49,8 +52,9 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         password = getResources().getString(R.string.andy_password);
-        //text = (TextView) findViewById(R.id.html);
         password = getString(R.string.andy_password);
+
+        classes = (TableLayout) findViewById(R.id.main);
 
         description_webscrape dw = new description_webscrape();
         dw.execute();
@@ -105,8 +109,6 @@ public class HomePageActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .get();
 
-                code = doc.html();
-
                 org.jsoup.nodes.Element table = doc.select("table[class=list widefat rt]").get(0);
                 Elements rows = table.select("tr");
 
@@ -130,7 +132,7 @@ public class HomePageActivity extends AppCompatActivity {
                             .cookies(loginForm.cookies())
                             .userAgent(USER_AGENT)
                             .get();
-// BROTHERrr
+
                     org.jsoup.nodes.Element table1 = doc1.select("table[class=list widefat rt]").get(0);
                     doc1.select(".header2").remove();
                     doc1.select(".header2 align-right").remove();
@@ -139,27 +141,22 @@ public class HomePageActivity extends AppCompatActivity {
                     for (int j = 1; j < rows1.size(); j++) {
 
                         Element row1 = rows1.get(j);
-                        Elements cols1 = row1.select("td"); //.not(":has(a[href])");
-                        //Elements firstElement = row1.select("td:has(a[href])");
-                        cols1.select("div").remove();
-
-                        Elements assignmentname = cols1.select("a");
+                        Elements cols1 = row1.select("td");
 
                         ArrayList<String> temp1 = new ArrayList<String>();
 
-                        if (assignmentname.size() > 0) {
-                            temp1.add(assignmentname.text());
-                            //temp1.add(cols1.get(0).text());
-                            temp1.add(cols1.get(1).text());
-                            temp1.add(cols1.get(2).text());
-                            temp1.add(cols1.get(3).text());
-                        } else if (cols1.size() > 0) {
+                        if (cols1.size() > 0) {
                             temp1.add(cols1.get(0).text()); //Assignment Name
                             temp1.add(cols1.get(1).text()); //Assignment Category
                             temp1.add(cols1.get(2).text()); //Points / Possible
                             temp1.add(cols1.get(3).text()); //Grade (percent)
 
-                            Log.d(cols.get(0).text(), cols1.get(0).text());
+                            //Comment
+                            if (cols1.get(4).text().length() > 0) {
+                                temp1.add(cols1.get(4).text());
+                            } else {
+                                temp1.add ("No comment");
+                            }
                         }
 
                         classGrades.add(temp1);
@@ -177,14 +174,13 @@ public class HomePageActivity extends AppCompatActivity {
                     }
                 }
 
+                 */
+
                 for (int i = 0; i < classGrades.size(); i++) {
                     for (int j = 0; j < classGrades.get(i).size(); j++) {
                         Log.d("Myapp", classGrades.get(i).get(j));
                     }
                 }
-
-                 */
-
 
 
             } catch (IOException e) {
@@ -196,13 +192,25 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            /*if(code != null){
-                text.setText(code);
+
+            for (int i = 0; i < grades.size(); i++) {
+                TableRow tbrow0 = new TableRow(HomePageActivity.this);
+
+                TextView tv0 = new TextView(HomePageActivity.this);
+                TextView tv1 = new TextView(HomePageActivity.this);
+                TextView tv2 = new TextView(HomePageActivity.this);
+
+                tv0.setText(grades.get(i).get(0));
+                tv1.setText(grades.get(i).get(1));
+                tv2.setText(grades.get(i).get(2));
+
+                tbrow0.addView(tv0);
+                tbrow0.addView(tv1);
+                tbrow0.addView(tv2);
+
+                classes.addView(tbrow0);
             }
-            else {
-                text.setText("Something went wrong! There was nothing downloaded.");
-            }
-*/
+
         }
     }
 
