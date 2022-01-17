@@ -88,15 +88,6 @@ public class HomePageActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .execute();
 
-                /*
-                Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                        .method(Connection.Method.GET)
-                        .cookies(loginForm.cookies())
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-                 */
-
                 Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                         .cookies(loginForm.cookies())
                         .data("syear", "2021")
