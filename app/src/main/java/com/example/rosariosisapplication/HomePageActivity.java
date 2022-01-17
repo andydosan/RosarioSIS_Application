@@ -154,23 +154,10 @@ public class HomePageActivity extends AppCompatActivity {
 
                         classGrades.add(temp1);
                     }
-
-
-                    //NEW TEST CODE
-
                 }
-
-                for (int i = 0; i < classGrades.size(); i++) {
-                    for (int j = 0; j < classGrades.get(i).size(); j++) {
-                        Log.d("Myapp", classGrades.get(i).get(j));
-                    }
-                }
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 
@@ -199,9 +186,6 @@ public class HomePageActivity extends AppCompatActivity {
 
                 classes.addView(tbrow0);
             }
-
         }
     }
-
-
 }
