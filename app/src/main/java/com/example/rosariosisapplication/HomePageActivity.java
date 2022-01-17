@@ -40,8 +40,8 @@ public class HomePageActivity extends AppCompatActivity {
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
-    ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
-    ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
+    public ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
+    public ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
@@ -168,15 +168,6 @@ public class HomePageActivity extends AppCompatActivity {
                     //NEW TEST CODE
 
                 }
-
-                /*
-                for (int i = 0; i < grades.size(); i++) {
-                    for (int j = 0; j < grades.get(i).size(); j++) {
-                        Log.d("Myapp", grades.get(i).get(j));
-                    }
-                }
-
-                 */
 
                 for (int i = 0; i < classGrades.size(); i++) {
                     for (int j = 0; j < classGrades.get(i).size(); j++) {
