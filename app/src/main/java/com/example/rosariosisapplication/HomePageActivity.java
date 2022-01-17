@@ -158,6 +158,15 @@ public class HomePageActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            //TESTING PURPOSES, PLS DONT DELETE YET
+            //TODO: have class name in classGrades
+            for (int i = 0; i< classGrades.size();i++){
+                for (int j = 0; j< classGrades.get(i).size();j++){
+                    Log.d("classgrades", classGrades.get(i).get(j));
+                }
+            }
+
             return null;
         }
 
