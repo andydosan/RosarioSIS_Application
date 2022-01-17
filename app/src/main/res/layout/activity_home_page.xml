@@ -13,7 +13,8 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main" >
+            android:id="@+id/main"
+            android:shrinkColumns="*">>
 
             <TableRow
                 android:background="#ff00aa63"
@@ -24,6 +25,7 @@
                 <TextView
                     android:text="Class"
                     android:layout_weight="1"
+                    android:layout_column="-5"
                     android:gravity="center_horizontal"
                     android:typeface="normal"
                     android:fontFamily="sans-serif-medium"
@@ -35,6 +37,7 @@
                 <TextView
                     android:text="Teacher"
                     android:layout_weight="1"
+                    android:layout_column="-5"
                     android:gravity="center_horizontal"
                     android:typeface="normal"
                     android:fontFamily="sans-serif-medium"
@@ -46,6 +49,7 @@
                 <TextView
                     android:text="Percent"
                     android:layout_weight="1"
+                    android:layout_column="-5"
                     android:gravity="center_horizontal"
                     android:typeface="normal"
                     android:fontFamily="sans-serif-medium"
@@ -78,6 +82,6 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="149dp"
-            android:layout_marginBottom="34dp"/>
+            android:layout_marginBottom="34dp" />
     </LinearLayout>
 </ScrollView>

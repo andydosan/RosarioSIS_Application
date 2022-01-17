@@ -183,7 +183,14 @@ public class HomePageActivity extends AppCompatActivity {
                 tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
                 tv1.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
                 tv2.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+
                 tv0.setGravity(Gravity.CENTER);
+                tv1.setGravity(Gravity.CENTER);
+                tv2.setGravity(Gravity.CENTER);
+
+                tv0.setWidth(1500);
+                tv1.setWidth(1500);
+                tv2.setWidth(1500);
 
                 tv0.setText(grades.get(i).get(0));
                 tv1.setText(grades.get(i).get(1));
