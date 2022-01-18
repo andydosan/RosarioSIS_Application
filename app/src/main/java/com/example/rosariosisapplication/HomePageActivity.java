@@ -139,6 +139,7 @@ public class HomePageActivity extends AppCompatActivity {
                         ArrayList<String> temp1 = new ArrayList<String>();
 
                         if (cols1.size() > 0) {
+                            temp1.add(cols.get(0).text());
                             temp1.add(cols1.get(0).text()); //Assignment Name
                             temp1.add(cols1.get(1).text()); //Assignment Category
                             temp1.add(cols1.get(2).text()); //Points / Possible
@@ -172,6 +173,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
 
             for (int i = 0; i < grades.size(); i++) {
                 TableRow tbrow0 = new TableRow(HomePageActivity.this);
