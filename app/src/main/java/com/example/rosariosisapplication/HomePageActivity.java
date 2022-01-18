@@ -7,7 +7,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,6 +40,8 @@ import java.util.Map;
 public class HomePageActivity extends AppCompatActivity {
 
     TableLayout classes;
+    Spinner quarterSelect;
+    ArrayAdapter adapter;
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
@@ -57,6 +62,7 @@ public class HomePageActivity extends AppCompatActivity {
         password = getString(R.string.andy_password);
 
         classes = (TableLayout) findViewById(R.id.main);
+        quarterSelect = (Spinner) findViewById(R.id.Years);
 
         description_webscrape dw = new description_webscrape();
         dw.execute();
@@ -88,6 +94,7 @@ public class HomePageActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .execute();
 
+                /*
                 Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                         .cookies(loginForm.cookies())
                         .data("syear", "2021")
@@ -96,6 +103,8 @@ public class HomePageActivity extends AppCompatActivity {
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
                         .execute();
+
+                 */
 
                 Document doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
@@ -206,4 +215,5 @@ public class HomePageActivity extends AppCompatActivity {
             }
         }
     }
+
 }
