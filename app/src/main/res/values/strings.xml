@@ -1,4 +1,42 @@
 <resources>
     <string name="app_name">RosarioSIS Application</string>
     <string name="andy_password">ancientcity69</string>
+
+
+
+
+
+    <string-array name="quarters">
+        <item>Quarter 1</item>
+        <item>Quarter 2</item>
+        <item>Quarter 3</item>
+        <item>Quarter 4</item>
+    </string-array>
+
+
+
+
+
+
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

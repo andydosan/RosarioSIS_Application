@@ -37,11 +37,11 @@ import org.jsoup.select.Elements;
 import java.net.SocketException;
 import java.util.Map;
 
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TableLayout classes;
     Spinner quarterSelect;
-    ArrayAdapter adapter;
+    ArrayAdapter<CharSequence> adapter;
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
@@ -53,6 +53,16 @@ public class HomePageActivity extends AppCompatActivity {
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
     final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
+    //Form data for each quarter
+    public String[][] formData = {
+            {"Quarter 1", "70"},
+            {"Quarter 2", "73"},
+            {"Quarter 3", "75"},
+            {"Quarter 4", "72"},
+    };
+    public String quarterName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +72,31 @@ public class HomePageActivity extends AppCompatActivity {
         password = getString(R.string.andy_password);
 
         classes = (TableLayout) findViewById(R.id.main);
-        quarterSelect = (Spinner) findViewById(R.id.Years);
+
+        quarterSelect = (Spinner) findViewById(R.id.Years); //TODO: change "Years" into "Quarters"
+        adapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        quarterSelect.setAdapter(adapter);
+        quarterSelect.setOnItemSelectedListener(this);
+
+
+
 
         description_webscrape dw = new description_webscrape();
         dw.execute();
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
+
+        description_webscrape dw = new description_webscrape(); //not sure if this part works
+        dw.execute();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
