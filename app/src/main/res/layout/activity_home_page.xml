@@ -17,7 +17,7 @@
             android:shrinkColumns="*">>
 
             <TableRow
-                android:background="#ff00aa63"
+                android:background="@drawable/gradiant"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rowHeader">

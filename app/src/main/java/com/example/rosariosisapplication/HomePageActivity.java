@@ -67,6 +67,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        getSupportActionBar().hide();
 
         password = getResources().getString(R.string.andy_password);
         password = getString(R.string.andy_password);

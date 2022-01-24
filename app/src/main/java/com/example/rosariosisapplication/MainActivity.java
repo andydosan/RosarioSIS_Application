@@ -51,6 +51,8 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         /* Bind the XML views to Java Code Elements */
         eName = findViewById(R.id.etName);
         ePassword = findViewById(R.id.etPassword);
