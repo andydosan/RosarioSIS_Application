@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -80,17 +81,15 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
         quarterSelect.setAdapter(adapter);
         quarterSelect.setOnItemSelectedListener(this);
 
-
-
-
-        description_webscrape dw = new description_webscrape();
-        dw.execute();
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
+        classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
+
+
+
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
@@ -212,8 +211,11 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
-
+            while (classes.getChildCount() > 1) {
+                TableRow row =  (TableRow)classes.getChildAt(1);
+                classes.removeView(row);
+                //j=tl.getChildCount();
+            }
             for (int i = 0; i < grades.size(); i++) {
                 TableRow tbrow0 = new TableRow(HomePageActivity.this);
                 tbrow0.setMinimumHeight(200);
