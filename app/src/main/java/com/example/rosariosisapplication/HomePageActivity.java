@@ -159,8 +159,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                     temp.add(classLink);
                     grades.add(temp);
 
-                    //NEW TEST CODE
-
                     org.jsoup.nodes.Document doc1 = Jsoup.connect(classLink)
                             .cookies(loginForm.cookies())
                             .userAgent(USER_AGENT)
