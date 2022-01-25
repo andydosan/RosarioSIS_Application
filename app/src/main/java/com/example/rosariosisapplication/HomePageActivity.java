@@ -46,9 +46,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
-    public ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
-    public ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
-    public Integer classnum;
+    public static ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
+    public static ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
+    public static int classnum;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
@@ -239,10 +239,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 tv1.setText(grades.get(i).get(1));
                 tv2.setText(grades.get(i).get(2));
 
-                tbrow0.addView(tv0);
-                tbrow0.addView(tv1);
-                tbrow0.addView(tv2);
-
                 Integer temp = i;
 
                 tv0.setOnClickListener(new View.OnClickListener() {
@@ -253,6 +249,10 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         startActivity(new Intent(HomePageActivity.this, AssignmentGrades.class));
                     }
                 });
+
+                tbrow0.addView(tv0);
+                tbrow0.addView(tv1);
+                tbrow0.addView(tv2);
 
                 classes.addView(tbrow0);
             }
