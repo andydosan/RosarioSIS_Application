@@ -48,6 +48,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     String password;
     public ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
     public ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
+    public Integer classnum;
+
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
@@ -233,6 +235,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 tv2.setWidth(1500);
 
                 tv0.setText(grades.get(i).get(0));
+                tv0.setClickable(true);
                 tv1.setText(grades.get(i).get(1));
                 tv2.setText(grades.get(i).get(2));
 
@@ -240,10 +243,13 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 tbrow0.addView(tv1);
                 tbrow0.addView(tv2);
 
+                Integer temp = i;
+
                 tv0.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
+                        classnum = temp;
                         startActivity(new Intent(HomePageActivity.this, AssignmentGrades.class));
                     }
                 });
