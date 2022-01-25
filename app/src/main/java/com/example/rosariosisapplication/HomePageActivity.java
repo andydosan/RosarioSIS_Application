@@ -2,13 +2,13 @@ package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -68,7 +68,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        getSupportActionBar().hide();
 
         password = getResources().getString(R.string.andy_password);
         password = getString(R.string.andy_password);
@@ -81,15 +80,17 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
         quarterSelect.setAdapter(adapter);
         quarterSelect.setOnItemSelectedListener(this);
 
+
+
+
+        description_webscrape dw = new description_webscrape();
+        dw.execute();
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
-        classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
-
-
-
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
@@ -197,25 +198,21 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             //TESTING PURPOSES, PLS DONT DELETE YET
+            Log.d("notiftest", String.valueOf(classGrades));
             //TODO: have class name in classGrades
             for (int i = 0; i< classGrades.size();i++){
                 for (int j = 0; j< classGrades.get(i).size();j++){
                     Log.d("classgrades", classGrades.get(i).get(j));
                 }
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            while (classes.getChildCount() > 1) {
-                TableRow row =  (TableRow)classes.getChildAt(1);
-                classes.removeView(row);
-                //j=tl.getChildCount();
-            }
+            classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
+
             for (int i = 0; i < grades.size(); i++) {
                 TableRow tbrow0 = new TableRow(HomePageActivity.this);
                 tbrow0.setMinimumHeight(200);
@@ -242,6 +239,14 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 tbrow0.addView(tv0);
                 tbrow0.addView(tv1);
                 tbrow0.addView(tv2);
+
+                tv0.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(HomePageActivity.this, AssignmentGrades.class));
+                    }
+                });
 
                 classes.addView(tbrow0);
             }
