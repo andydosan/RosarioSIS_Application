@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -55,7 +56,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     String password;
     public static ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
     public static ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
-    public static int classnum;
+    public static String classname;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
@@ -94,8 +95,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
 
 
-        description_webscrape dw = new description_webscrape();
-        dw.execute();
 
     }
 
@@ -105,6 +104,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
+
     }
 
     @Override
@@ -203,7 +203,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             }
                         }
 
-                        classGrades.add(temp1);
+                        if (temp1.size() > 0) {
+                            classGrades.add(temp1);
+                        }
                     }
                 }
             } catch (IOException e) {
@@ -267,7 +269,14 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
+
+            // Remove all rows except the first one
+            if (classes.getChildCount() > 1) {
+
+                classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
+                classes.invalidate();
+            }
+
 
             for (int i = 0; i < grades.size(); i++) {
                 TableRow tbrow0 = new TableRow(HomePageActivity.this);
@@ -288,18 +297,18 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 tv1.setWidth(1500);
                 tv2.setWidth(1500);
 
-                tv0.setText(grades.get(i).get(0));
+                String temp = grades.get(i).get(0);
+
+                tv0.setText(temp);
                 tv0.setClickable(true);
                 tv1.setText(grades.get(i).get(1));
                 tv2.setText(grades.get(i).get(2));
-
-                Integer temp = i;
 
                 tv0.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        classnum = temp;
+                        classname = temp;
                         startActivity(new Intent(HomePageActivity.this, AssignmentGrades.class));
                     }
                 });
