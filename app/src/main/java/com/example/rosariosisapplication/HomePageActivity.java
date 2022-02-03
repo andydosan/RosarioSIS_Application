@@ -15,13 +15,20 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -55,6 +62,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     //rather than the grades, the initial log in action url is the portral page possibly?
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
     final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
+
+    private static final String FILE_NAME = "gradeData.txt";
 
     //Form data for each quarter
     public String[][] formData = {
@@ -208,6 +217,51 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                     Log.d("classgrades", classGrades.get(i).get(j));
                 }
             }
+
+            FileOutputStream fos = null;
+            try {
+                fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+                fos.write(classGrades.toString().getBytes(StandardCharsets.UTF_8));
+                Log.d("testsavedtxt", getFilesDir() + "/" + FILE_NAME);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (fos != null){
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            FileInputStream fis = null;
+            try {
+                fis = openFileInput(FILE_NAME);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader br = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                String text;
+                while ((text = br.readLine()) != null) {
+                    sb.append(text).append("\n");
+                }
+                Log.d("testsavedtxt", sb.toString());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+            e.printStackTrace();
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
             return null;
         }
 
@@ -257,6 +311,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 classes.addView(tbrow0);
             }
         }
+
     }
 
 }
