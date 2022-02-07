@@ -123,6 +123,19 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
         protected Void doInBackground(Void... voids) {
 
             try {
+
+                grades = new ArrayList<ArrayList<String>>();
+                classGrades = new ArrayList<ArrayList<String>>();
+                
+                String mp = null;
+                
+                for(int i=0; i<formData.length;i++){
+                    if(formData[i][0].equals(quarterName)){
+                        mp = formData[i][1];
+                    }
+                }
+
+                    
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .method(Connection.Method.GET)
                         .userAgent(USER_AGENT)
@@ -137,17 +150,17 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .userAgent(USER_AGENT)
                         .execute();
 
-                /*
+                
                 Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                         .cookies(loginForm.cookies())
                         .data("syear", "2021")
-                        .data("mp", "73")
+                        .data("mp", mp)
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
                         .execute();
 
-                 */
+                 
 
                 Document doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
@@ -271,11 +284,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
         protected void onPostExecute(Void aVoid) {
 
             // Remove all rows except the first one
-            if (classes.getChildCount() > 1) {
+            classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
+            classes.invalidate();
 
-                classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
-                classes.invalidate();
-            }
 
 
             for (int i = 0; i < grades.size(); i++) {
