@@ -57,12 +57,14 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public static ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
     public static ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
     public static String classname;
+    public int counter=0;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
     final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
+
 
     private static final String FILE_NAME = "gradeData.txt";
 
@@ -74,7 +76,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
             {"Quarter 4", "72"},
     };
     public String quarterName;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +92,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quarterSelect.setAdapter(adapter);
         quarterSelect.setOnItemSelectedListener(this);
-
-
-
-
-
     }
 
     @Override
@@ -104,6 +100,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
+        counter++;
 
     }
 
@@ -134,7 +131,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         mp = formData[i][1];
                     }
                 }
-
                     
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .method(Connection.Method.GET)
@@ -150,17 +146,16 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .userAgent(USER_AGENT)
                         .execute();
 
-                
-                Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                        .cookies(loginForm.cookies())
-                        .data("syear", "2021")
-                        .data("mp", mp)
-                        .method(Connection.Method.POST)
-                        .followRedirects(true)
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-                 
+                if (counter > 1) {
+                    Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                            .cookies(loginForm.cookies())
+                            .data("syear", "2021")
+                            .data("mp", mp)
+                            .method(Connection.Method.POST)
+                            .followRedirects(true)
+                            .userAgent(USER_AGENT)
+                            .execute();
+                }
 
                 Document doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
@@ -232,12 +227,14 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
             }
             //TESTING PURPOSES, PLS DONT DELETE YET
             Log.d("notiftest", String.valueOf(classGrades));
-            //TODO: have class name in classGrades
+
+            /*
             for (int i = 0; i< classGrades.size();i++){
                 for (int j = 0; j< classGrades.get(i).size();j++){
                     Log.d("classgrades", classGrades.get(i).get(j));
                 }
             }
+             */
 
             FileOutputStream fos = null;
             try {
@@ -294,6 +291,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
             classes.invalidate();
 
             if (grades.size() == 0) {
+                //TODO: proper formatting
                 TableRow tbrow0 = new TableRow(HomePageActivity.this);
                 tbrow0.setMinimumHeight(200);
 
