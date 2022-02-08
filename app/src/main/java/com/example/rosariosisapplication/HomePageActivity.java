@@ -29,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,7 +66,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
     final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
-
     private static final String FILE_NAME = "gradeData.txt";
 
     //Form data for each quarter
@@ -75,7 +75,12 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
             {"Quarter 3", "75"},
             {"Quarter 4", "72"},
     };
+
     public String quarterName;
+
+    //Testing
+    public ArrayList<ArrayList<String>> markingperiods = new ArrayList<ArrayList<String>>();
+    public ArrayList<ArrayList<String>> years = new ArrayList<ArrayList<String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +130,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 classGrades = new ArrayList<ArrayList<String>>();
                 
                 String mp = null;
-                
+
+
                 for(int i=0; i<formData.length;i++){
                     if(formData[i][0].equals(quarterName)){
                         mp = formData[i][1];
@@ -162,6 +168,29 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .userAgent(USER_AGENT)
                         .get();
 
+                // Marking periods and years
+                Elements syearselector = doc.select("select#syear");
+                Elements mpselector = doc.select("select#mp");
+                syearselector = syearselector.select("option");
+                mpselector = mpselector.select("option");
+
+                for (int i = 0; i < syearselector.size(); i++) {
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(syearselector.get(i).text());
+                    temp.add(syearselector.get(i).val());
+                    years.add(temp);
+                }
+
+                for (int i = 0; i < mpselector.size(); i++) {
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(mpselector.get(i).text());
+                    temp.add(mpselector.get(i).val());
+                    markingperiods.add(temp);
+                }
+
+                Log.d("Testing", String.valueOf(years));
+                Log.d("Testing", String.valueOf(markingperiods));
+
                 org.jsoup.nodes.Element table;
                 if(doc.select("table[class=list widefat rt]").isEmpty()){
                     return null;
@@ -169,7 +198,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                    table = doc.select("table[class=list widefat rt]").get(0);
                 }
                 Elements rows = table.select("tr");
-
 
                 for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
                     org.jsoup.nodes.Element row = rows.get(i);
