@@ -180,7 +180,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                     temp.add(syearselector.get(i).val());
                     years.add(temp);
                 }
-//Bruh
+
                 for (int i = 0; i < mpselector.size(); i++) {
                     ArrayList<String> temp = new ArrayList<String>();
                     temp.add(mpselector.get(i).text());
