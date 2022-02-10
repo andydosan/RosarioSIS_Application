@@ -59,6 +59,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public static ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
     public static String classname;
     public int counter=0;
+    public String mp = null;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
@@ -128,15 +129,19 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
                 grades = new ArrayList<ArrayList<String>>();
                 classGrades = new ArrayList<ArrayList<String>>();
-                
-                String mp = null;
 
+                //String mp = null;
 
+/*
                 for(int i=0; i<formData.length;i++){
                     if(formData[i][0].equals(quarterName)){
                         mp = formData[i][1];
                     }
                 }
+
+ */
+
+
                     
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .method(Connection.Method.GET)
@@ -153,6 +158,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .execute();
 
                 if (counter > 1) {
+                    if(mp!=null){
                     Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                             .cookies(loginForm.cookies())
                             .data("syear", "2021")
@@ -161,7 +167,11 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .followRedirects(true)
                             .userAgent(USER_AGENT)
                             .execute();
+                    }
                 }
+
+
+
 
                 Document doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
@@ -188,8 +198,22 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                     markingperiods.add(temp);
                 }
 
-                Log.d("Testing", String.valueOf(years));
+               // Log.d("Testing", String.valueOf(years));
                 Log.d("Testing", String.valueOf(markingperiods));
+
+
+
+                for(int i=0; i<markingperiods.size();i++){
+                    if(markingperiods.get(i).get(0).equals(quarterName)){
+                        mp = markingperiods.get(i).get(1);
+                    }
+                }
+
+
+
+
+
+
 
                 org.jsoup.nodes.Element table;
                 if(doc.select("table[class=list widefat rt]").isEmpty()){
