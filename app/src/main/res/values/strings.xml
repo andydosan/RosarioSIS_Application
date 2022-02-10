@@ -4,6 +4,7 @@
 
 
     <string-array name="quarters">
+        <item>Select Quarter</item>
         <item>Quarter 1</item>
         <item>Quarter 2</item>
         <item>Quarter 3</item>
