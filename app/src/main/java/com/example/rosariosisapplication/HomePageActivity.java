@@ -157,6 +157,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .userAgent(USER_AGENT)
                         .execute();
 
+
                 if (counter > 1) {
                     if(mp!=null){
                     Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
@@ -169,7 +170,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .execute();
                     }
                 }
-//bruh
 
 
 
@@ -184,18 +184,20 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 syearselector = syearselector.select("option");
                 mpselector = mpselector.select("option");
 
-                for (int i = 0; i < syearselector.size(); i++) {
-                    ArrayList<String> temp = new ArrayList<String>();
-                    temp.add(syearselector.get(i).text());
-                    temp.add(syearselector.get(i).val());
-                    years.add(temp);
-                }
-//Bruh
-                for (int i = 0; i < mpselector.size(); i++) {
-                    ArrayList<String> temp = new ArrayList<String>();
-                    temp.add(mpselector.get(i).text());
-                    temp.add(mpselector.get(i).val());
-                    markingperiods.add(temp);
+                if(counter == 1){
+                    for (int i = 0; i < syearselector.size(); i++) {
+                        ArrayList<String> temp = new ArrayList<String>();
+                        temp.add(syearselector.get(i).text());
+                        temp.add(syearselector.get(i).val());
+                        years.add(temp);
+                    }
+
+                    for (int i = 0; i < mpselector.size(); i++) {
+                        ArrayList<String> temp = new ArrayList<String>();
+                        temp.add(mpselector.get(i).text());
+                        temp.add(mpselector.get(i).val());
+                        markingperiods.add(temp);
+                    }
                 }
 
                // Log.d("Testing", String.valueOf(years));
@@ -208,6 +210,10 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         mp = markingperiods.get(i).get(1);
                     }
                 }
+
+
+
+
 
 
 
