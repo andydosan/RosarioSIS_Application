@@ -106,8 +106,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
 
-        initialTask iT = new initialTask();
-        iT.execute();
+
+
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
@@ -122,93 +122,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
-    private class initialTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Connection.Response loginForm = null;
-            try {
-                loginForm = Jsoup.connect(LOGIN_FORM_URL)
-                        .method(Connection.Method.GET)
-                        .userAgent(USER_AGENT)
-                        .execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                loginForm = Jsoup.connect(LOGIN_FORM_URL)
-                        .cookies(loginForm.cookies())
-                        .data("USERNAME", "adosan")
-                        .data("PASSWORD", password)
-                        .method(Connection.Method.POST)
-                        .followRedirects(true)
-                        .userAgent(USER_AGENT)
-                        .execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-                    try {
-                        Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                                .cookies(loginForm.cookies())
-                                .data("syear", "2021")
-                                .method(Connection.Method.POST)
-                                .followRedirects(true)
-                                .userAgent(USER_AGENT)
-                                .execute();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-            Document doc = null;
-            try {
-                doc = Jsoup.connect(GRADES_URL)
-                        .cookies(loginForm.cookies())
-                        .userAgent(USER_AGENT)
-                        .get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Marking periods and years
-            Elements syearselector = doc.select("select#syear");
-            Elements mpselector = doc.select("select#mp");
-            syearselector = syearselector.select("option");
-            mpselector = mpselector.select("option");
-
-            if(counter == 1){
-                for (int i = 0; i < syearselector.size(); i++) {
-                    ArrayList<String> temp = new ArrayList<String>();
-                    temp.add(syearselector.get(i).text());
-                    temp.add(syearselector.get(i).val());
-                    years.add(temp);
-                }
-
-                for (int i = 0; i < mpselector.size(); i++) {
-                    ArrayList<String> temp = new ArrayList<String>();
-                    temp.add(mpselector.get(i).text());
-                    temp.add(mpselector.get(i).val());
-                    markingperiods.add(temp);
-                }
-            }
-
-            // Log.d("Testing", String.valueOf(years));
-            Log.d("Testing", String.valueOf(markingperiods));
-
-
-
-            for(int i=0; i<markingperiods.size();i++){
-                if(markingperiods.get(i).get(0).equals(quarterName)){
-                    mp = markingperiods.get(i).get(1);
-                }
-            }
-            Log.d("ryan", mp);
-            return null;
-        }
-    }
 
     private class description_webscrape extends AsyncTask<Void, Void, Void> {
 
@@ -235,6 +148,77 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 }
 
  */
+
+                Connection.Response loginForm2 = Jsoup.connect(LOGIN_FORM_URL)
+                        .method(Connection.Method.GET)
+                        .userAgent(USER_AGENT)
+                        .execute();
+
+                loginForm2 = Jsoup.connect(LOGIN_FORM_URL)
+                        .cookies(loginForm2.cookies())
+                        .data("USERNAME", "adosan")
+                        .data("PASSWORD", password)
+                        .method(Connection.Method.POST)
+                        .followRedirects(true)
+                        .userAgent(USER_AGENT)
+                        .execute();
+
+
+                if (counter > 1) {
+                    if(mp!=null){
+                        Connection.Response quarter2 = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                                .cookies(loginForm2.cookies())
+                                .data("syear", "2021")
+                                .data("mp", mp)
+                                .method(Connection.Method.POST)
+                                .followRedirects(true)
+                                .userAgent(USER_AGENT)
+                                .execute();
+                    }
+                }
+
+
+
+                Document doc2 = Jsoup.connect(GRADES_URL)
+                        .cookies(loginForm2.cookies())
+                        .userAgent(USER_AGENT)
+                        .get();
+
+                // Marking periods and years
+                Elements syearselector2 = doc2.select("select#syear");
+                Elements mpselector2 = doc2.select("select#mp");
+                syearselector2 = syearselector2.select("option");
+                mpselector2 = mpselector2.select("option");
+
+                if(counter == 1){
+                    for (int i = 0; i < syearselector2.size(); i++) {
+                        ArrayList<String> temp = new ArrayList<String>();
+                        temp.add(syearselector2.get(i).text());
+                        temp.add(syearselector2.get(i).val());
+                        years.add(temp);
+                    }
+
+                    for (int i = 0; i < mpselector2.size(); i++) {
+                        ArrayList<String> temp = new ArrayList<String>();
+                        temp.add(mpselector2.get(i).text());
+                        temp.add(mpselector2.get(i).val());
+                        markingperiods.add(temp);
+                    }
+                }
+
+                // Log.d("Testing", String.valueOf(years));
+                Log.d("Testing", String.valueOf(markingperiods));
+
+
+
+                for(int i=0; i<markingperiods.size();i++){
+                    if(markingperiods.get(i).get(0).equals(quarterName)){
+                        mp = markingperiods.get(i).get(1);
+                    }
+                }
+
+
+
 
 
                     
