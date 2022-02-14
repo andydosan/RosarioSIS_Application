@@ -61,6 +61,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public static String classname;
     public int counter=0;
     public String mp = null;
+    int initialSpinnerPosition;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
@@ -106,22 +107,14 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
 
-
-
-
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
-        counter++;
-
     }
-
-
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
 
     private class description_webscrape extends AsyncTask<Void, Void, Void> {
 
@@ -138,90 +131,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 grades = new ArrayList<ArrayList<String>>();
                 classGrades = new ArrayList<ArrayList<String>>();
 
-                //String mp = null;
-
-/*
-                for(int i=0; i<formData.length;i++){
-                    if(formData[i][0].equals(quarterName)){
-                        mp = formData[i][1];
-                    }
-                }
-
- */
-
-                Connection.Response loginForm2 = Jsoup.connect(LOGIN_FORM_URL)
-                        .method(Connection.Method.GET)
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-                loginForm2 = Jsoup.connect(LOGIN_FORM_URL)
-                        .cookies(loginForm2.cookies())
-                        .data("USERNAME", "adosan")
-                        .data("PASSWORD", password)
-                        .method(Connection.Method.POST)
-                        .followRedirects(true)
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-
-                if (counter > 1) {
-                    if(mp!=null){
-                        Connection.Response quarter2 = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                                .cookies(loginForm2.cookies())
-                                .data("syear", "2021")
-                                .data("mp", mp)
-                                .method(Connection.Method.POST)
-                                .followRedirects(true)
-                                .userAgent(USER_AGENT)
-                                .execute();
-                    }
-                }
-
-
-
-                Document doc2 = Jsoup.connect(GRADES_URL)
-                        .cookies(loginForm2.cookies())
-                        .userAgent(USER_AGENT)
-                        .get();
-
-                // Marking periods and years
-                Elements syearselector2 = doc2.select("select#syear");
-                Elements mpselector2 = doc2.select("select#mp");
-                syearselector2 = syearselector2.select("option");
-                mpselector2 = mpselector2.select("option");
-
-                if(counter == 1){
-                    for (int i = 0; i < syearselector2.size(); i++) {
-                        ArrayList<String> temp = new ArrayList<String>();
-                        temp.add(syearselector2.get(i).text());
-                        temp.add(syearselector2.get(i).val());
-                        years.add(temp);
-                    }
-
-                    for (int i = 0; i < mpselector2.size(); i++) {
-                        ArrayList<String> temp = new ArrayList<String>();
-                        temp.add(mpselector2.get(i).text());
-                        temp.add(mpselector2.get(i).val());
-                        markingperiods.add(temp);
-                    }
-                }
-
-                // Log.d("Testing", String.valueOf(years));
-                Log.d("Testing", String.valueOf(markingperiods));
-
-
-
-                for(int i=0; i<markingperiods.size();i++){
-                    if(markingperiods.get(i).get(0).equals(quarterName)){
-                        mp = markingperiods.get(i).get(1);
-                    }
-                }
-
-
-
-
-
-                    
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .method(Connection.Method.GET)
                         .userAgent(USER_AGENT)
@@ -236,34 +145,23 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .userAgent(USER_AGENT)
                         .execute();
 
-
-                if (counter > 1) {
-                    if(mp!=null){
-                    Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                            .cookies(loginForm.cookies())
-                            .data("syear", "2021")
-                            .data("mp", mp)
-                            .method(Connection.Method.POST)
-                            .followRedirects(true)
-                            .userAgent(USER_AGENT)
-                            .execute();
-                    }
-                }
-
-
-
                 Document doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
                         .userAgent(USER_AGENT)
                         .get();
 
-                // Marking periods and years
-                Elements syearselector = doc.select("select#syear");
-                Elements mpselector = doc.select("select#mp");
-                syearselector = syearselector.select("option");
-                mpselector = mpselector.select("option");
+                Log.d("asdf", String.valueOf(counter));
 
-                if(counter == 1){
+                if (counter < 1) {
+                    Elements selectedyear = doc.select("select#syear option[selected]");
+                    Elements selectedmp = doc.select("select#mp option[selected]");
+
+                    // Marking periods and years
+                    Elements syearselector = doc.select("select#syear");
+                    Elements mpselector = doc.select("select#mp");
+                    syearselector = syearselector.select("option");
+                    mpselector = mpselector.select("option");
+
                     for (int i = 0; i < syearselector.size(); i++) {
                         ArrayList<String> temp = new ArrayList<String>();
                         temp.add(syearselector.get(i).text());
@@ -277,23 +175,47 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         temp.add(mpselector.get(i).val());
                         markingperiods.add(temp);
                     }
-                }
 
-               // Log.d("Testing", String.valueOf(years));
-                Log.d("Testing", String.valueOf(markingperiods));
+                    Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                            .cookies(loginForm.cookies())
+                            .data("syear", selectedyear.val())
+                            .data("mp", selectedmp.val())
+                            .method(Connection.Method.POST)
+                            .followRedirects(true)
+                            .userAgent(USER_AGENT)
+                            .execute();
 
+                    Log.d("asdf", String.valueOf(selectedyear));
+                    Log.d("asdf", selectedmp.val());
 
-
-                for(int i=0; i<markingperiods.size();i++){
-                    if(markingperiods.get(i).get(0).equals(quarterName)){
-                        mp = markingperiods.get(i).get(1);
+                    doc = Jsoup.connect(GRADES_URL)
+                            .cookies(loginForm.cookies())
+                            .userAgent(USER_AGENT)
+                            .get();
+                } else {
+                    for(int i=0; i<markingperiods.size();i++){
+                        if(markingperiods.get(i).get(0).equals(quarterName)){
+                            mp = markingperiods.get(i).get(1);
+                        }
                     }
+
+                    if(mp != null) {
+                        Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                                .cookies(loginForm.cookies())
+                                .data("syear", "2021")
+                                .data("mp", mp)
+                                .method(Connection.Method.POST)
+                                .followRedirects(true)
+                                .userAgent(USER_AGENT)
+                                .execute();
+                    }
+
+                    doc = Jsoup.connect(GRADES_URL)
+                            .cookies(loginForm.cookies())
+                            .userAgent(USER_AGENT)
+                            .get();
                 }
-
-
-
-
-
+                counter++;
 
                 org.jsoup.nodes.Element table;
                 if(doc.select("table[class=list widefat rt]").isEmpty()){
