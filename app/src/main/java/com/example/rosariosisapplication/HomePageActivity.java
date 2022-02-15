@@ -51,8 +51,9 @@ import java.util.Map;
 public class HomePageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TableLayout classes;
-    Spinner quarterSelect;
-    ArrayAdapter<CharSequence> adapter;
+    Spinner quarterSelect, yearSelect = null;
+    ArrayAdapter<CharSequence> quarterAdapter;
+    ArrayAdapter<CharSequence> yearAdapter;
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
@@ -95,12 +96,15 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         classes = (TableLayout) findViewById(R.id.main);
 
-        quarterSelect = (Spinner) findViewById(R.id.Years); //TODO: change "Years" into "Quarters"
-        adapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        quarterSelect.setAdapter(adapter);
+        quarterSelect = (Spinner) findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
+        yearSelect = (Spinner) findViewById(R.id.Years);
+        quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
+        quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        quarterSelect.setAdapter(quarterAdapter);
         quarterSelect.setOnItemSelectedListener(this);
 
+        //description_webscrape dw = new description_webscrape(); //not sure if this part works
+        //dw.execute();
     }
 
     @Override
@@ -339,6 +343,19 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            //TESTING
+            /*
+            if (counter == 1) {
+                ArrayList<String> temp = new ArrayList<String>();
+                for (int i = 0; i < markingperiods.size(); i++) {
+                    temp.add(markingperiods.get(i).get(0));
+                }
+                quarterAdapter = ArrayAdapter.createFromResource(HomePageActivity.this, R.array.quarters, android.R.layout.simple_spinner_item);
+                quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                quarterSelect.setAdapter(quarterAdapter);
+            }
+
+             */
 
             // Remove all rows except the first one
             classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
