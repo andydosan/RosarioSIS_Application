@@ -62,7 +62,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public static String classname;
     public int counter=0;
     public String mp = null;
-    int initialSpinnerPosition;
+
+    String initialMarkingPeriod;
+    String initialYear;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
@@ -81,6 +83,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     };
 
     public String quarterName;
+    public String yearName;
 
     //Testing
     public ArrayList<ArrayList<String>> markingperiods = new ArrayList<ArrayList<String>>();
@@ -98,21 +101,32 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         quarterSelect = (Spinner) findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) findViewById(R.id.Years);
-        quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
-        quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        quarterSelect.setAdapter(quarterAdapter);
-        quarterSelect.setOnItemSelectedListener(this);
+        //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
+        //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //quarterSelect.setAdapter(quarterAdapter);
 
-        //description_webscrape dw = new description_webscrape(); //not sure if this part works
-        //dw.execute();
+        description_webscrape dw = new description_webscrape(); //not sure if this part works
+        dw.execute();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
+        switch (parent.getId()) {
+            case R.id.Quarters:
+                quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
 
-        description_webscrape dw = new description_webscrape(); //not sure if this part works
-        dw.execute();
+                description_webscrape dw = new description_webscrape(); //not sure if this part works
+                dw.execute();
+                break;
+            case R.id.Years:
+                yearName = parent.getItemAtPosition(position).toString();
+
+                dw = new description_webscrape(); //not sure if this part works
+                dw.execute();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -189,14 +203,20 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .userAgent(USER_AGENT)
                             .execute();
 
-                    Log.d("asdf", String.valueOf(selectedyear));
-                    Log.d("asdf", selectedmp.val());
+                    initialMarkingPeriod = selectedmp.text();
+                    initialYear = selectedyear.text();
 
                     doc = Jsoup.connect(GRADES_URL)
                             .cookies(loginForm.cookies())
                             .userAgent(USER_AGENT)
                             .get();
                 } else {
+                    for(int i=0; i<years.size();i++){
+                        if(years.get(i).get(0).equals(yearName)){
+                            mp = markingperiods.get(i).get(1);
+                        }
+                    }
+
                     for(int i=0; i<markingperiods.size();i++){
                         if(markingperiods.get(i).get(0).equals(quarterName)){
                             mp = markingperiods.get(i).get(1);
@@ -344,18 +364,29 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
         @Override
         protected void onPostExecute(Void aVoid) {
             //TESTING
-            /*
+
             if (counter == 1) {
-                ArrayList<String> temp = new ArrayList<String>();
+                ArrayList<CharSequence> temp = new ArrayList<CharSequence>();
                 for (int i = 0; i < markingperiods.size(); i++) {
                     temp.add(markingperiods.get(i).get(0));
                 }
-                quarterAdapter = ArrayAdapter.createFromResource(HomePageActivity.this, R.array.quarters, android.R.layout.simple_spinner_item);
+                quarterAdapter = new ArrayAdapter<CharSequence>(HomePageActivity.this, android.R.layout.simple_list_item_1, temp);
                 quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 quarterSelect.setAdapter(quarterAdapter);
+                quarterSelect.setSelection(quarterAdapter.getPosition(initialMarkingPeriod));
+                quarterSelect.setOnItemSelectedListener(HomePageActivity.this);
+
+                temp = new ArrayList<CharSequence>();
+                for (int i = 0; i < years.size(); i++) {
+                    temp.add(years.get(i).get(0));
+                }
+                yearAdapter = new ArrayAdapter<CharSequence>(HomePageActivity.this, android.R.layout.simple_list_item_1, temp);
+                yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                yearSelect.setAdapter(yearAdapter);
+                yearSelect.setSelection(yearAdapter.getPosition(initialYear));
+                quarterSelect.setOnItemSelectedListener(HomePageActivity.this);
             }
 
-             */
 
             // Remove all rows except the first one
             classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
