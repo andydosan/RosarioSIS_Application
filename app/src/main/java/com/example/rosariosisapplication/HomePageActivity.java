@@ -61,7 +61,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public static ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
     public static String classname;
     public int counter=0;
-    public String mp = null;
 
     String initialMarkingPeriod;
     String initialYear;
@@ -86,8 +85,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public String yearName;
 
     //Testing
-    public ArrayList<ArrayList<String>> markingperiods = new ArrayList<ArrayList<String>>();
-    public ArrayList<ArrayList<String>> years = new ArrayList<ArrayList<String>>();
+    public ArrayList<ArrayList<String>> markingperiods;
+    public ArrayList<ArrayList<String>> years;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +148,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 grades = new ArrayList<ArrayList<String>>();
                 classGrades = new ArrayList<ArrayList<String>>();
 
+                String mp = null;
+                String yr = null;
+
                 Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .method(Connection.Method.GET)
                         .userAgent(USER_AGENT)
@@ -171,6 +173,10 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 Log.d("asdf", String.valueOf(counter));
 
                 if (counter < 1) {
+                    Log.d("asdf", "GOING INTO IF");
+                    markingperiods = new ArrayList<ArrayList<String>>();
+                    years = new ArrayList<ArrayList<String>>();
+
                     Elements selectedyear = doc.select("select#syear option[selected]");
                     Elements selectedmp = doc.select("select#mp option[selected]");
 
@@ -211,10 +217,39 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .userAgent(USER_AGENT)
                             .get();
                 } else {
+                    Log.d("asdf", "GOING INTO ELSE");
+                    markingperiods = new ArrayList<ArrayList<String>>();
+
                     for(int i=0; i<years.size();i++){
                         if(years.get(i).get(0).equals(yearName)){
-                            mp = markingperiods.get(i).get(1);
+                            yr = years.get(i).get(1);
                         }
+                    }
+
+                    if(yr != null) {
+                        Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                                .cookies(loginForm.cookies())
+                                .data("syear", yr)
+                                .method(Connection.Method.POST)
+                                .followRedirects(true)
+                                .userAgent(USER_AGENT)
+                                .execute();
+                    }
+
+                    doc = Jsoup.connect(GRADES_URL)
+                            .cookies(loginForm.cookies())
+                            .userAgent(USER_AGENT)
+                            .get();
+
+                    // Marking periods and years
+                    Elements mpselector = doc.select("select#mp");
+                    mpselector = mpselector.select("option");
+
+                    for (int i = 0; i < mpselector.size(); i++) {
+                        ArrayList<String> temp = new ArrayList<String>();
+                        temp.add(mpselector.get(i).text());
+                        temp.add(mpselector.get(i).val());
+                        markingperiods.add(temp);
                     }
 
                     for(int i=0; i<markingperiods.size();i++){
@@ -223,10 +258,10 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         }
                     }
 
-                    if(mp != null) {
-                        Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                    if(mp != null && yr != null) {
+                        Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                                 .cookies(loginForm.cookies())
-                                .data("syear", "2021")
+                                .data("syear", yr)
                                 .data("mp", mp)
                                 .method(Connection.Method.POST)
                                 .followRedirects(true)
@@ -240,6 +275,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .get();
                 }
                 counter++;
+                Log.d("asdfg", String.valueOf(markingperiods));
 
                 org.jsoup.nodes.Element table;
                 if(doc.select("table[class=list widefat rt]").isEmpty()){
@@ -363,8 +399,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            //TESTING
-
+            //TODO: make it so that it doesn't run three times on the initial login.
             if (counter == 1) {
                 ArrayList<CharSequence> temp = new ArrayList<CharSequence>();
                 for (int i = 0; i < markingperiods.size(); i++) {
@@ -380,11 +415,12 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 for (int i = 0; i < years.size(); i++) {
                     temp.add(years.get(i).get(0));
                 }
+
                 yearAdapter = new ArrayAdapter<CharSequence>(HomePageActivity.this, android.R.layout.simple_list_item_1, temp);
                 yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 yearSelect.setAdapter(yearAdapter);
                 yearSelect.setSelection(yearAdapter.getPosition(initialYear));
-                quarterSelect.setOnItemSelectedListener(HomePageActivity.this);
+                yearSelect.setOnItemSelectedListener(HomePageActivity.this);
             }
 
 
