@@ -424,6 +424,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 yearSelect.setOnItemSelectedListener(HomePageActivity.this);
             }
 
+            //Bruh
             if (counter >= 3) {
                 // Remove all rows except the first one
                 classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
