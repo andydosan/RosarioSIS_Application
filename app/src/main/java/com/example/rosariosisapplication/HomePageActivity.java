@@ -170,10 +170,7 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                         .userAgent(USER_AGENT)
                         .get();
 
-                Log.d("asdf", String.valueOf(counter));
-
                 if (counter < 1) {
-                    Log.d("asdf", "GOING INTO IF");
                     markingperiods = new ArrayList<ArrayList<String>>();
                     years = new ArrayList<ArrayList<String>>();
 
@@ -217,7 +214,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .userAgent(USER_AGENT)
                             .get();
                 } else {
-                    Log.d("asdf", "GOING INTO ELSE");
                     markingperiods = new ArrayList<ArrayList<String>>();
 
                     for(int i=0; i<years.size();i++){
@@ -275,7 +271,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                             .get();
                 }
                 counter++;
-                Log.d("asdfg", String.valueOf(markingperiods));
 
                 org.jsoup.nodes.Element table;
                 if(doc.select("table[class=list widefat rt]").isEmpty()){
