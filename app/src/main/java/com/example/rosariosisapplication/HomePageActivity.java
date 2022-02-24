@@ -1,6 +1,11 @@
 package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.AsyncQueryHandler;
 import android.content.Intent;
@@ -19,6 +24,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jsoup.Connection;
@@ -52,6 +58,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
     TableLayout classes;
     Spinner quarterSelect, yearSelect = null;
+    BottomNavigationView bottomNavigationView;
+    NavController navController;
+    AppBarConfiguration appBarConfiguration;
     ArrayAdapter<CharSequence> quarterAdapter;
     ArrayAdapter<CharSequence> yearAdapter;
 
@@ -92,6 +101,12 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        navController = Navigation.findNavController(this, R.id.fragmentContainerView2);
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment).build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         password = getResources().getString(R.string.andy_password);
         password = getString(R.string.andy_password);
