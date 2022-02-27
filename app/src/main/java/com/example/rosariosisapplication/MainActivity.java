@@ -31,7 +31,7 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     private Button eLogin;
     private CheckBox check;
     private int counter = 5;
-
+//
 
     String userName = "";
     String userPassword = "";
