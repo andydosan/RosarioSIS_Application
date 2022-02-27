@@ -74,6 +74,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     String initialMarkingPeriod;
     String initialYear;
 
+    String userName;
+    String userPassword;
+
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
@@ -101,6 +104,12 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        Bundle bundle = getIntent().getExtras();
+        userName = bundle.getString("username");
+        userPassword = bundle.getString("userpassword");
+        Log.d("login_info", userName);
+        Log.d("login_info", userPassword);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         navController = Navigation.findNavController(this, R.id.fragmentContainerView2);
@@ -173,8 +182,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
                 loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(loginForm.cookies())
-                        .data("USERNAME", "adosan")
-                        .data("PASSWORD", password)
+                        .data("USERNAME", userName)
+                        .data("PASSWORD", userPassword)
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
