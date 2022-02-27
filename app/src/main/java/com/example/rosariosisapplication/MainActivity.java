@@ -135,16 +135,16 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         Credentials credentials = new Credentials();
 
         /* Check the credentials */
-        //TODO: make a proper validate code later
         /*
         if(userName.equals(credentials.name) && userPassword.equals(credentials.password))
         {
             return true;
         }
+
         return false;
+
          */
         return true;
-
     }
 
 

@@ -1,10 +1,14 @@
 package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.AsyncQueryHandler;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +24,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jsoup.Connection;
@@ -53,6 +58,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
     TableLayout classes;
     Spinner quarterSelect, yearSelect = null;
+    BottomNavigationView bottomNavigationView;
+    NavController navController;
+    AppBarConfiguration appBarConfiguration;
     ArrayAdapter<CharSequence> quarterAdapter;
     ArrayAdapter<CharSequence> yearAdapter;
 
@@ -65,6 +73,9 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
     String initialMarkingPeriod;
     String initialYear;
+
+    String userName;
+    String userPassword;
 
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
@@ -89,15 +100,20 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public ArrayList<ArrayList<String>> markingperiods;
     public ArrayList<ArrayList<String>> years;
 
-    //for the changes in notifcations
-    private static final String PREFS_NAME = "MyPrefsFile";
-    String savedGrades; //this is the variable that compares it at the end :)
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        Bundle bundle = getIntent().getExtras();
+        userName = bundle.getString("username");
+        userPassword = bundle.getString("userpassword");
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        navController = Navigation.findNavController(this, R.id.fragmentContainerView2);
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment).build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         password = getResources().getString(R.string.andy_password);
         password = getString(R.string.andy_password);
@@ -112,11 +128,6 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
-
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //this one is the old classGrades.toString
-        //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
-        savedGrades = settings.getString("toString classGrades", "");
-
     }
 
     @Override
@@ -169,8 +180,8 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
                 loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(loginForm.cookies())
-                        .data("USERNAME", "adosan")
-                        .data("PASSWORD", password)
+                        .data("USERNAME", userName)
+                        .data("PASSWORD", userPassword)
                         .method(Connection.Method.POST)
                         .followRedirects(true)
                         .userAgent(USER_AGENT)
@@ -355,21 +366,50 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
                 }
             }
              */
-            if (counter == 3) {
-                if (savedGrades.equals(classGrades.toString())) {
-                    Log.d("yoon", "equal");
-                }
-                else {
-                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("toString classGrades", classGrades.toString());
-                    editor.commit();
-                    Log.d("yoon", "it's been saved hopefully");
 
+            FileOutputStream fos = null;
+            try {
+                fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+                fos.write(classGrades.toString().getBytes(StandardCharsets.UTF_8));
+                Log.d("testsavedtxt", getFilesDir() + "/" + FILE_NAME);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (fos != null){
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                Log.d("yoon", classGrades.toString());
             }
 
+            FileInputStream fis = null;
+            try {
+                fis = openFileInput(FILE_NAME);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader br = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                String text;
+                while ((text = br.readLine()) != null) {
+                    sb.append(text).append("\n");
+                }
+                Log.d("testsavedtxt", sb.toString());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+            e.printStackTrace();
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
             return null;
         }
