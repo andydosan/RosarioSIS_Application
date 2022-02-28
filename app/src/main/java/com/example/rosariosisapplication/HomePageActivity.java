@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.AsyncQueryHandler;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -100,6 +101,11 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
     public ArrayList<ArrayList<String>> markingperiods;
     public ArrayList<ArrayList<String>> years;
 
+
+    //for the changes in notifcations
+    private static final String PREFS_NAME = "MyPrefsFile";
+    String savedGrades; //this is the variable that compares it at the end :)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +134,11 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
 
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         dw.execute();
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //this one is the old classGrades.toString
+        //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
+        savedGrades = settings.getString("toString classGrades", "");
+
     }
 
     @Override
@@ -367,50 +378,20 @@ public class HomePageActivity extends AppCompatActivity implements AdapterView.O
             }
              */
 
-            FileOutputStream fos = null;
-            try {
-                fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-                fos.write(classGrades.toString().getBytes(StandardCharsets.UTF_8));
-                Log.d("testsavedtxt", getFilesDir() + "/" + FILE_NAME);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fos != null){
-                    try {
-                        fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            if (counter == 3) {
+                if (savedGrades.equals(classGrades.toString())) {
+                    Log.d("yoon", "equal");
                 }
-            }
+                else {
+                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("toString classGrades", classGrades.toString());
+                    editor.commit();
+                    Log.d("yoon", "it's been saved hopefully");
 
-            FileInputStream fis = null;
-            try {
-                fis = openFileInput(FILE_NAME);
-                InputStreamReader isr = new InputStreamReader(fis);
-                BufferedReader br = new BufferedReader(isr);
-                StringBuilder sb = new StringBuilder();
-                String text;
-                while ((text = br.readLine()) != null) {
-                    sb.append(text).append("\n");
                 }
-                Log.d("testsavedtxt", sb.toString());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-            e.printStackTrace();
-            } finally {
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                Log.d("yoon", classGrades.toString());
             }
-
             return null;
         }
 
