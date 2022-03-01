@@ -21,13 +21,11 @@ public class AssignmentGrades extends AppCompatActivity {
         setContentView(R.layout.activity_assignment_grades);
 
         assignmentGrades = (TableLayout) findViewById(R.id.assignmentsMain);
-        Log.d("Myapp", HomePageActivity.classname);
-        Log.d("Myapp", String.valueOf(HomePageActivity.classGrades.size()));
 
-        for (int i = 0; i < HomePageActivity.classGrades.size(); i++) {
+        for (int i = 0; i < firstFragment.classGrades.size(); i++) {
 
-            Log.d("Myapp", String.valueOf(HomePageActivity.classGrades.get(i)));
-            if (HomePageActivity.classGrades.get(i).get(0).equals(HomePageActivity.classname)) {
+            Log.d("Myapp", String.valueOf(firstFragment.classGrades.get(i)));
+            if (firstFragment.classGrades.get(i).get(0).equals(firstFragment.classname)) {
                 TableRow tbrow0 = new TableRow(AssignmentGrades.this);
                 tbrow0.setMinimumHeight(200);
 
@@ -46,9 +44,9 @@ public class AssignmentGrades extends AppCompatActivity {
                 tv1.setWidth(1500);
                 tv2.setWidth(1500);
 
-                tv0.setText(HomePageActivity.classGrades.get(i).get(1));
-                tv1.setText(HomePageActivity.classGrades.get(i).get(3));
-                tv2.setText(HomePageActivity.classGrades.get(i).get(4));
+                tv0.setText(firstFragment.classGrades.get(i).get(1));
+                tv1.setText(firstFragment.classGrades.get(i).get(3));
+                tv2.setText(firstFragment.classGrades.get(i).get(4));
 
                 tbrow0.addView(tv0);
                 tbrow0.addView(tv1);
