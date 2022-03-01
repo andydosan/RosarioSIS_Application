@@ -178,6 +178,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
+    //bruh
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
