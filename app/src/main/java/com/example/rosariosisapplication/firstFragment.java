@@ -2,10 +2,10 @@ package com.example.rosariosisapplication;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.ui.AppBarConfiguration;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,64 +13,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import android.content.AsyncQueryHandler;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.UncheckedIOException;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.net.SocketException;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -122,8 +83,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    
-    
 
     public firstFragment() {
         // Required empty public constructor
@@ -182,20 +141,55 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-        classes = (TableLayout) getView().findViewById(R.id.main);
 
-        quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
-        yearSelect = (Spinner) getView().findViewById(R.id.Years);
+        if (savedInstanceState != null) {
+            classes = (TableLayout) getView().findViewById(R.id.main);
 
-        //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
-        //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //quarterSelect.setAdapter(quarterAdapter);
+            quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
+            yearSelect = (Spinner) getView().findViewById(R.id.Years);
 
-        quarterSelect.setOnItemSelectedListener(this);
-        yearSelect.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+            //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
+            //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //quarterSelect.setAdapter(quarterAdapter);
 
-        description_webscrape dw = new description_webscrape(); //not sure if this part works
-        dw.execute();
+            quarterSelect.setOnItemSelectedListener(this);
+            yearSelect.setOnItemSelectedListener(this);
+
+            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("markingperiods")));
+            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("years")));
+            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("grades")));
+            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("classGrades")));
+
+            markingperiods=savedInstanceState.getParcelable("markingperiods");
+            years = savedInstanceState.getParcelable("years");
+            grades = savedInstanceState.getParcelable("grades");
+            classGrades = savedInstanceState.getParcelable("classGrades");
+        } else {
+            classes = (TableLayout) getView().findViewById(R.id.main);
+
+            quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
+            yearSelect = (Spinner) getView().findViewById(R.id.Years);
+
+            //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
+            //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //quarterSelect.setAdapter(quarterAdapter);
+
+            quarterSelect.setOnItemSelectedListener(this);
+            yearSelect.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+
+            description_webscrape dw = new description_webscrape(); //not sure if this part works
+            dw.execute();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("markingperiods", markingperiods);
+        outState.putSerializable("years", years);
+        outState.putSerializable("grades", grades);
+        outState.putSerializable("classGrades", classGrades);
+        outState.putInt("counter", counter);
     }
 
     @Override
