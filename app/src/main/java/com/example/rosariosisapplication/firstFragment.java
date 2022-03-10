@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -75,6 +76,9 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     private static final String PREFS_NAME = "MyPrefsFile";
     String savedGrades; //this is the variable that compares it at the end :)
 
+    private boolean isQuarterSelectTouched = false;
+    private boolean isYearSelectTouched = false;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -142,18 +146,34 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
 
+        classes = (TableLayout) getView().findViewById(R.id.main);
+
+        quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
+        yearSelect = (Spinner) getView().findViewById(R.id.Years);
+
+        quarterSelect.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isQuarterSelectTouched = true;
+                return false;
+            }
+        });
+
+        yearSelect.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isYearSelectTouched = true;
+                return false;
+            }
+        });
+
         if (savedInstanceState != null) {
-            classes = (TableLayout) getView().findViewById(R.id.main);
-
-            quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
-            yearSelect = (Spinner) getView().findViewById(R.id.Years);
-
             //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
             //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             //quarterSelect.setAdapter(quarterAdapter);
 
-            quarterSelect.setOnItemSelectedListener(this);
-            yearSelect.setOnItemSelectedListener(this);
+            //quarterSelect.setOnItemSelectedListener(this);
+            //yearSelect.setOnItemSelectedListener(this);
 
             Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("markingperiods")));
             Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("years")));
@@ -165,17 +185,12 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             grades = savedInstanceState.getParcelable("grades");
             classGrades = savedInstanceState.getParcelable("classGrades");
         } else {
-            classes = (TableLayout) getView().findViewById(R.id.main);
-
-            quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
-            yearSelect = (Spinner) getView().findViewById(R.id.Years);
-
             //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
             //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             //quarterSelect.setAdapter(quarterAdapter);
 
-            quarterSelect.setOnItemSelectedListener(this);
-            yearSelect.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+            //quarterSelect.setOnItemSelectedListener(this);
+            //yearSelect.setOnItemSelectedListener(this);
 
             description_webscrape dw = new description_webscrape(); //not sure if this part works
             dw.execute();
@@ -196,14 +211,14 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.Quarters:
+                if (!isQuarterSelectTouched) return;
                 quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
-
                 description_webscrape dw = new description_webscrape(); //not sure if this part works
                 dw.execute();
                 break;
             case R.id.Years:
+                if (!isYearSelectTouched) return;
                 yearName = parent.getItemAtPosition(position).toString();
-
                 dw = new description_webscrape(); //not sure if this part works
                 dw.execute();
                 break;
@@ -485,7 +500,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                 yearSelect.setOnItemSelectedListener(firstFragment.this);
             }
 
-            if (counter >= 3) {
+            if (counter >= 0) {
                 // Remove all rows except the first one
                 classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
                 classes.invalidate();
