@@ -2,8 +2,9 @@
     <string name="app_name">RosarioSIS Application</string>
     <string name="andy_password">ancientcity69</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    +
+    <string
+        name="hello_blank_fragment"><a href="https://whttps://www.rosariosis.org/terms-of-service/">RosarioSIS Terms of Service</a></string>
     <!--
     <string-array name="quarters">
         <item>Select Quarter</item>
