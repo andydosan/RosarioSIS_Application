@@ -11,7 +11,12 @@
         android:id="@+id/secondFragment"/>
 
     <item
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        android:id="@+id/thirdFragment"/>
+
+    <item
         android:title="Credits"
         android:icon="@drawable/ic_poop"
-        android:id="@+id/thirdFragment"/>
+        android:id="@+id/fourthFragment"/>
 </menu>
