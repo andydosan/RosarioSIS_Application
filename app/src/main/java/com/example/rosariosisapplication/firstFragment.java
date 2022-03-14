@@ -155,6 +155,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 isQuarterSelectTouched = true;
+                Log.d("onTouchListner", "Quarter select touched!");
                 return false;
             }
         });
@@ -163,6 +164,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 isYearSelectTouched = true;
+                Log.d("onTouchListner", "Year select touched!");
                 return false;
             }
         });
@@ -209,18 +211,21 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         switch (parent.getId()) {
             case R.id.Quarters:
-                if (!isQuarterSelectTouched) return;
-                quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
-                description_webscrape dw = new description_webscrape(); //not sure if this part works
-                dw.execute();
+                if (isQuarterSelectTouched == true) {
+                    quarterName = parent.getItemAtPosition(position).toString(); //"Quarter 1", "Quarter 2", etc
+                    description_webscrape dw = new description_webscrape(); //not sure if this part works
+                    dw.execute();
+                }
                 break;
             case R.id.Years:
-                if (!isYearSelectTouched) return;
-                yearName = parent.getItemAtPosition(position).toString();
-                dw = new description_webscrape(); //not sure if this part works
-                dw.execute();
+                if (isYearSelectTouched == true) {
+                    yearName = parent.getItemAtPosition(position).toString();
+                    description_webscrape dw = new description_webscrape(); //not sure if this part works
+                    dw.execute();
+                }
                 break;
             default:
                 break;
@@ -485,6 +490,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                 quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 quarterSelect.setAdapter(quarterAdapter);
                 quarterSelect.setSelection(quarterAdapter.getPosition(initialMarkingPeriod));
+                quarterName = initialMarkingPeriod;
 
                 quarterSelect.setOnItemSelectedListener(firstFragment.this);
 
@@ -497,6 +503,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                 yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 yearSelect.setAdapter(yearAdapter);
                 yearSelect.setSelection(yearAdapter.getPosition(initialYear));
+                yearName = initialYear;
+
                 yearSelect.setOnItemSelectedListener(firstFragment.this);
             }
 
