@@ -1,5 +1,7 @@
 package com.example.rosariosisapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,7 +64,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
-    final String LOGIN_ACTION_URL = "https://rosariosis.asianhope.org/Modules.php?modname=misc/Portal.php";
     final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
     public String quarterName;
@@ -79,6 +80,9 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     private boolean isQuarterSelectTouched = false;
     private boolean isYearSelectTouched = false;
 
+
+    public boolean savedToFile = false;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,6 +91,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
 
     public firstFragment() {
         // Required empty public constructor
@@ -125,12 +131,11 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         password = getResources().getString(R.string.andy_password);
         password = getString(R.string.andy_password);
 
-        /*
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //this one is the old classGrades.toString
+
+        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //this one is the old classGrades.toString
         //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
         savedGrades = settings.getString("toString classGrades", "");
 
-         */
     }
 
     @Override
@@ -181,18 +186,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         }
     }
 
-    /*
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("markingperiods", markingperiods);
-        outState.putSerializable("years", years);
-        outState.putSerializable("grades", grades);
-        outState.putSerializable("classGrades", classGrades);
-        outState.putInt("counter", counter);
-    }
-
-     */
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -434,13 +427,14 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             }
              */
 
-            /*
-            if (counter == 3) {
+
+            if (counter == 1 && !savedToFile) {
                 if (savedGrades.equals(classGrades.toString())) {
                     Log.d("yoon", "equal");
+                    //notification
                 }
                 else {
-                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                    SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("toString classGrades", classGrades.toString());
                     editor.commit();
@@ -450,7 +444,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                 Log.d("yoon", classGrades.toString());
             }
 
-             */
 
             /*
             for (int i = 0; i< classGrades.size();i++){
