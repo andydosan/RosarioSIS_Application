@@ -48,8 +48,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
     String password;
-    public static ArrayList<ArrayList<String>> grades = new ArrayList<ArrayList<String>>();
-    public static ArrayList<ArrayList<String>> classGrades = new ArrayList<ArrayList<String>>();
+    public static ArrayList<ArrayList<String>> grades = null;
+    public static ArrayList<ArrayList<String>> classGrades = null;
     public static String classname;
     public int counter=0;
 
@@ -151,6 +151,9 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) getView().findViewById(R.id.Years);
 
+        isQuarterSelectTouched = false;
+        isYearSelectTouched = false;
+
         quarterSelect.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -169,36 +172,16 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             }
         });
 
-        if (savedInstanceState != null) {
-            //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
-            //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            //quarterSelect.setAdapter(quarterAdapter);
-
-            //quarterSelect.setOnItemSelectedListener(this);
-            //yearSelect.setOnItemSelectedListener(this);
-
-            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("markingperiods")));
-            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("years")));
-            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("grades")));
-            Log.d("savedInstance", String.valueOf(savedInstanceState.getSerializable("classGrades")));
-
-            markingperiods=savedInstanceState.getParcelable("markingperiods");
-            years = savedInstanceState.getParcelable("years");
-            grades = savedInstanceState.getParcelable("grades");
-            classGrades = savedInstanceState.getParcelable("classGrades");
+        if (grades != null) {
+            counter++;
+            renderTable();
         } else {
-            //quarterAdapter = ArrayAdapter.createFromResource(this, R.array.quarters, android.R.layout.simple_spinner_item);
-            //quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            //quarterSelect.setAdapter(quarterAdapter);
-
-            //quarterSelect.setOnItemSelectedListener(this);
-            //yearSelect.setOnItemSelectedListener(this);
-
             description_webscrape dw = new description_webscrape(); //not sure if this part works
             dw.execute();
         }
     }
 
+    /*
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -208,6 +191,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         outState.putSerializable("classGrades", classGrades);
         outState.putInt("counter", counter);
     }
+
+     */
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -480,98 +465,99 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         @Override
         protected void onPostExecute(Void aVoid) {
             Log.d("counter", String.valueOf(counter));
+            renderTable();
+        }
+    }
 
-            if (counter == 1) {
-                ArrayList<CharSequence> temp = new ArrayList<CharSequence>();
-                for (int i = 0; i < markingperiods.size(); i++) {
-                    temp.add(markingperiods.get(i).get(0));
-                }
-                quarterAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_list_item_1, temp);
-                quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                quarterSelect.setAdapter(quarterAdapter);
-                quarterSelect.setSelection(quarterAdapter.getPosition(initialMarkingPeriod));
-                quarterName = initialMarkingPeriod;
+    public void renderTable() {
+        if (counter == 1) {
+            ArrayList<CharSequence> temp = new ArrayList<CharSequence>();
+            for (int i = 0; i < markingperiods.size(); i++) {
+                temp.add(markingperiods.get(i).get(0));
+            }
+            quarterAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_list_item_1, temp);
+            quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            quarterSelect.setAdapter(quarterAdapter);
+            quarterSelect.setSelection(quarterAdapter.getPosition(initialMarkingPeriod));
+            quarterName = initialMarkingPeriod;
 
-                quarterSelect.setOnItemSelectedListener(firstFragment.this);
+            quarterSelect.setOnItemSelectedListener(firstFragment.this);
 
-                temp = new ArrayList<CharSequence>();
-                for (int i = 0; i < years.size(); i++) {
-                    temp.add(years.get(i).get(0));
-                }
-
-                yearAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_list_item_1, temp);
-                yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                yearSelect.setAdapter(yearAdapter);
-                yearSelect.setSelection(yearAdapter.getPosition(initialYear));
-                yearName = initialYear;
-
-                yearSelect.setOnItemSelectedListener(firstFragment.this);
+            temp = new ArrayList<CharSequence>();
+            for (int i = 0; i < years.size(); i++) {
+                temp.add(years.get(i).get(0));
             }
 
-            if (counter >= 0) {
-                // Remove all rows except the first one
-                classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
-                classes.invalidate();
+            yearAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_list_item_1, temp);
+            yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            yearSelect.setAdapter(yearAdapter);
+            yearSelect.setSelection(yearAdapter.getPosition(initialYear));
+            yearName = initialYear;
 
-                if (grades.size() == 0) {
-                    //TODO: proper formatting
-                    TableRow tbrow0 = new TableRow(getActivity());
-                    tbrow0.setMinimumHeight(200);
+            yearSelect.setOnItemSelectedListener(firstFragment.this);
+        }
 
-                    TableRow.LayoutParams params = new TableRow.LayoutParams();
-                    params.span = 3;
+        // Remove all rows except the first one
+        classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
+        classes.invalidate();
 
-                    TextView tv0 = new TextView(getActivity());
-                    tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                    tv0.setGravity(Gravity.CENTER);
-                    tv0.setWidth(1500);
-                    tv0.setText("There are no grades for this quarter");
+        if (grades.size() == 0) {
+            //TODO: proper formatting
+            TableRow tbrow0 = new TableRow(getActivity());
+            tbrow0.setMinimumHeight(200);
 
-                    tbrow0.addView(tv0, params);
-                    classes.addView(tbrow0);
-                } else {
-                    for (int i = 0; i < grades.size(); i++) {
-                        TableRow tbrow0 = new TableRow(getActivity());
-                        tbrow0.setMinimumHeight(200);
+            TableRow.LayoutParams params = new TableRow.LayoutParams();
+            params.span = 3;
 
-                        TextView tv0 = new TextView(getActivity());
-                        TextView tv1 = new TextView(getActivity());
-                        TextView tv2 = new TextView(getActivity());
-                        tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                        tv1.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                        tv2.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+            TextView tv0 = new TextView(getActivity());
+            tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+            tv0.setGravity(Gravity.CENTER);
+            tv0.setWidth(1500);
+            tv0.setText("There are no grades for this quarter");
 
-                        tv0.setGravity(Gravity.CENTER);
-                        tv1.setGravity(Gravity.CENTER);
-                        tv2.setGravity(Gravity.CENTER);
+            tbrow0.addView(tv0, params);
+            classes.addView(tbrow0);
+        } else {
+            for (int i = 0; i < grades.size(); i++) {
+                TableRow tbrow0 = new TableRow(getActivity());
+                tbrow0.setMinimumHeight(200);
 
-                        tv0.setWidth(1500);
-                        tv1.setWidth(1500);
-                        tv2.setWidth(1500);
+                TextView tv0 = new TextView(getActivity());
+                TextView tv1 = new TextView(getActivity());
+                TextView tv2 = new TextView(getActivity());
+                tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+                tv1.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+                tv2.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
 
-                        String temp = grades.get(i).get(0);
+                tv0.setGravity(Gravity.CENTER);
+                tv1.setGravity(Gravity.CENTER);
+                tv2.setGravity(Gravity.CENTER);
 
-                        tv0.setText(temp);
-                        tv0.setClickable(true);
-                        tv1.setText(grades.get(i).get(1));
-                        tv2.setText(grades.get(i).get(2));
+                tv0.setWidth(1500);
+                tv1.setWidth(1500);
+                tv2.setWidth(1500);
 
-                        tv0.setOnClickListener(new View.OnClickListener() {
+                String temp = grades.get(i).get(0);
 
-                            @Override
-                            public void onClick(View v) {
-                                classname = temp;
-                                startActivity(new Intent(getActivity(), AssignmentGrades.class));
-                            }
-                        });
+                tv0.setText(temp);
+                tv0.setClickable(true);
+                tv1.setText(grades.get(i).get(1));
+                tv2.setText(grades.get(i).get(2));
 
-                        tbrow0.addView(tv0);
-                        tbrow0.addView(tv1);
-                        tbrow0.addView(tv2);
+                tv0.setOnClickListener(new View.OnClickListener() {
 
-                        classes.addView(tbrow0);
+                    @Override
+                    public void onClick(View v) {
+                        classname = temp;
+                        startActivity(new Intent(getActivity(), AssignmentGrades.class));
                     }
-                }
+                });
+
+                tbrow0.addView(tv0);
+                tbrow0.addView(tv1);
+                tbrow0.addView(tv2);
+
+                classes.addView(tbrow0);
             }
         }
     }
