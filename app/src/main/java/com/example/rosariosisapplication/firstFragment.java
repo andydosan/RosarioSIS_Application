@@ -177,7 +177,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             }
         });
 
-        if (grades != null) {
+        if (grades != null && markingperiods!=null) {
             counter++;
             renderTable();
         } else {
@@ -215,7 +215,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     }
 
-    private class description_webscrape extends AsyncTask<Void, Void, Void> {
+    class description_webscrape extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -419,15 +419,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             //TESTING PURPOSES, PLS DONT DELETE YET
             Log.d("notiftest", String.valueOf(classGrades));
 
-            /*
-            for (int i = 0; i< classGrades.size();i++){
-                for (int j = 0; j< classGrades.get(i).size();j++){
-                    Log.d("classgrades", classGrades.get(i).get(j));
-                }
-            }
-             */
-
-
             if (counter == 1 && !savedToFile) {
                 if (savedGrades.equals(classGrades.toString())) {
                     Log.d("yoon", "equal");
@@ -457,7 +448,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Log.d("counter", String.valueOf(counter));
             renderTable();
         }
     }
