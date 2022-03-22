@@ -31,7 +31,6 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     private EditText ePassword;
     private Button eLogin;
     private CheckBox check;
-    private int counter = 5;
     public boolean isValid2=false;
     public boolean isValid=false;
 //
@@ -53,10 +52,12 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         eLogin = findViewById(R.id.btnLogin);
         check = findViewById(R.id.checkBox);
 
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String checkbox = preferences.getString("remember","");
         if(checkbox.equals("true")){
             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+            intent.putExtra("username", preferences.getString("username", ""));
+            intent.putExtra("userpassword", preferences.getString("userpassword", ""));
             startActivity(intent);
         }else if(checkbox.equals("false")){
             Toast.makeText(this,"Please Sign In.", Toast.LENGTH_SHORT).show();
@@ -82,22 +83,6 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
                     login_webscrape lw = new login_webscrape(); //not sure if this part works
                     lw.execute();
                 }
-            }
-        });
-
-        check.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (compoundButton.isChecked()) {
-                SharedPreferences preferences1 = getSharedPreferences("checkbox", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences1.edit();
-                editor.putString("remember", "true");
-                editor.apply();
-                //Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-            } else if (!compoundButton.isChecked()) {
-                SharedPreferences preferences1 = getSharedPreferences("checkbox", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences1.edit();
-                editor.putString("remember", "false");
-                editor.apply();
-                //Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -157,6 +142,21 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
             }
             /* If valid */
             else {
+                if (check.isChecked()) {
+                    SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences1.edit();
+                    editor.putString("remember", "true");
+                    editor.putString("username", userName);
+                    editor.putString("userpassword", userPassword);
+                    editor.commit();
+                    //Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                } else {
+                    SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences1.edit();
+                    editor.putString("remember", "false");
+                    editor.commit();
+                    //Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
+                }
 
                 /* Allow the user in to your app by going into the next activity */
                 Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
