@@ -1,5 +1,6 @@
 package com.example.rosariosisapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 
@@ -45,6 +47,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
     TableLayout classes;
     Spinner quarterSelect, yearSelect = null;
+    Button logoutButton;
     ArrayAdapter<CharSequence> quarterAdapter;
     ArrayAdapter<CharSequence> yearAdapter;
 
@@ -74,7 +77,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     public ArrayList<ArrayList<String>> years;
 
     //for the changes in notifcations
-    private static final String PREFS_NAME = "MyPrefsFile";
     String savedGrades; //this is the variable that compares it at the end :)
 
     private boolean isQuarterSelectTouched = false;
@@ -128,11 +130,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         userName = bundle.getString("username");
         userPassword = bundle.getString("userpassword");
 
-        password = getResources().getString(R.string.andy_password);
-        password = getString(R.string.andy_password);
-
-
-        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //this one is the old classGrades.toString
+        SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE); //this one is the old classGrades.toString
         //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
         savedGrades = settings.getString("toString classGrades", "");
 
@@ -155,6 +153,25 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) getView().findViewById(R.id.Years);
+        logoutButton = (Button) getView().findViewById(R.id.btnLogout);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                editor = settings.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         isQuarterSelectTouched = false;
         isYearSelectTouched = false;
@@ -425,7 +442,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                     //notification
                 }
                 else {
-                    SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("toString classGrades", classGrades.toString());
                     editor.commit();
