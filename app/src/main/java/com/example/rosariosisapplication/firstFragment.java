@@ -55,6 +55,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     String password;
     public static ArrayList<ArrayList<String>> grades = null;
     public static ArrayList<ArrayList<String>> classGrades = null;
+    public static ArrayList<ArrayList<String>> zeroGrades = null;
     public static String classname;
     public int counter=0;
 
@@ -246,6 +247,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
                 grades = new ArrayList<ArrayList<String>>();
                 classGrades = new ArrayList<ArrayList<String>>();
+                zeroGrades = new ArrayList<ArrayList<String>>();
 
                 String mp = null;
                 String yr = null;
@@ -417,11 +419,18 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                             temp1.add(cols1.get(2).text()); //Points / Possible
                             temp1.add(cols1.get(3).text()); //Grade (percent)
 
+
                             //Comment
                             if (cols1.get(4).text().length() > 0) {
                                 temp1.add(cols1.get(4).text());
                             } else {
                                 temp1.add ("No comment");
+                            }
+                        }
+
+                        if(counter == 1 && temp1.size() > 0){
+                            if (temp1.get(4).equals("0.0%") || temp1.get(4).equals("*")) {
+                                zeroGrades.add(temp1);
                             }
                         }
 
@@ -433,6 +442,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             //TESTING PURPOSES, PLS DONT DELETE YET
             Log.d("notiftest", String.valueOf(classGrades));
 
@@ -452,14 +462,12 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                 Log.d("yoon", classGrades.toString());
             }
 
-
             /*
-            for (int i = 0; i< classGrades.size();i++){
-                for (int j = 0; j< classGrades.get(i).size();j++){
-                    Log.d("classgrades", classGrades.get(i).get(j));
-                }
+            for (int i = 0; i< zeroGrades.size();i++){
+                Log.d("zeroGrades", String.valueOf(zeroGrades.get(i)));
             }
              */
+
             return null;
         }
 

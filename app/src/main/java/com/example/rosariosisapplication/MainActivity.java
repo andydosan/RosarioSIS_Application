@@ -54,12 +54,12 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String checkbox = preferences.getString("remember","");
-        if(checkbox.equals("true")){
+        if(checkbox.equals("true") && preferences.getString("username", "").length() > 0){
             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
             intent.putExtra("username", preferences.getString("username", ""));
             intent.putExtra("userpassword", preferences.getString("userpassword", ""));
             startActivity(intent);
-        }else if(checkbox.equals("false")){
+        } else {
             Toast.makeText(this,"Please Sign In.", Toast.LENGTH_SHORT).show();
         }
 
