@@ -1,14 +1,13 @@
 package com.example.rosariosisapplication;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,8 +50,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     ArrayAdapter<CharSequence> quarterAdapter;
     ArrayAdapter<CharSequence> yearAdapter;
 
-    //NOTE: password is a RosarioSis password stored in strings.xml. DO NOT OPEN STRINGS.XML!
-    String password;
     public static ArrayList<ArrayList<String>> grades = null;
     public static ArrayList<ArrayList<String>> classGrades = null;
     public static ArrayList<ArrayList<String>> zeroGrades = null;
@@ -83,7 +80,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     private boolean isQuarterSelectTouched = false;
     private boolean isYearSelectTouched = false;
 
-
     public boolean savedToFile = false;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,8 +90,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
 
     public firstFragment() {
         // Required empty public constructor
@@ -134,7 +128,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE); //this one is the old classGrades.toString
         //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
         savedGrades = settings.getString("toString classGrades", "");
-
     }
 
     @Override
@@ -145,7 +138,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
-    //bruh
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
@@ -159,18 +151,28 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.commit();
-                editor = settings.edit();
-                editor.clear();
-                editor.commit();
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you would like to logout?")
+                        .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences preferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.commit();
+                                editor = settings.edit();
+                                editor.clear();
+                                editor.commit();
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
         });
 
@@ -203,7 +205,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             dw.execute();
         }
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -418,7 +419,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                             temp1.add(cols1.get(1).text()); //Assignment Category
                             temp1.add(cols1.get(2).text()); //Points / Possible
                             temp1.add(cols1.get(3).text()); //Grade (percent)
-
 
                             //Comment
                             if (cols1.get(4).text().length() > 0) {

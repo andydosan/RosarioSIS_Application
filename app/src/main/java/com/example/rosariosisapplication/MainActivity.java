@@ -59,6 +59,7 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
             intent.putExtra("username", preferences.getString("username", ""));
             intent.putExtra("userpassword", preferences.getString("userpassword", ""));
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this,"Please Sign In.", Toast.LENGTH_SHORT).show();
         }
@@ -163,7 +164,7 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
                 intent.putExtra("username", userName);
                 intent.putExtra("userpassword", userPassword);
                 startActivity(intent);
-
+                finish();
             }
         }
     }
