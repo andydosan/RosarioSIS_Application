@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".firstFragment">
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient"
@@ -165,88 +163,86 @@
                 android:text="Grades"
                 android:textColor="#FFFFFF"
                 android:textSize="18dp" />
+
             <GridLayout
+                android:id="@+id/classes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="1"
-                android:rowCount="8"
                 android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
-                >
+                android:columnCount="1"
+                android:columnOrderPreserved="false">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table0"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader0"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader0">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -255,80 +251,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader1"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader1">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -337,80 +330,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader2"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader2">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -419,80 +409,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader3"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader3">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -501,80 +488,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader4"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader4">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -583,81 +567,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader5"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader5">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -666,80 +646,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:id="@+id/table6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader6"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader6">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -748,80 +725,77 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="12dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
                         <TableLayout
+                            android:id="@+id/table7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/table7"
                             android:shrinkColumns="*">
 
                             <TableRow
+                                android:id="@+id/rowHeader7"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/rowHeader7">
+                                android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:text="Mobile App Development"
-                                    android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Mobile App Development"
+                                    android:textSize="20dp"
+                                    android:typeface="normal" />
 
                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center_horizontal"
                                     android:text="A+"
                                     android:textSize="20dp"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center_horizontal"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
+                                    android:typeface="normal" />
                             </TableRow>
+
                             <TableRow>
-                                <TextView
-                                    android:text="Eric Skogen"
-                                    android:layout_weight="1"
-                                    android:layout_column="-5"
-                                    android:gravity="left"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    />
 
                                 <TextView
-                                    android:text="100%"
-                                    android:layout_weight="0"
-                                    android:layout_column="-5"
-                                    android:gravity="center"
-                                    android:typeface="normal"
-                                    android:fontFamily="sans-serif-medium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:layout_column="-5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="left"
+                                    android:text="Eric Skogen"
+                                    android:typeface="normal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="-5"
+                                    android:layout_weight="0"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:gravity="center"
+                                    android:text="100%"
+                                    android:typeface="normal" />
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>

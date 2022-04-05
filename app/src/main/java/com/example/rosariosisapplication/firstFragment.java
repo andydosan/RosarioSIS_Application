@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 
@@ -45,6 +48,7 @@ import org.jsoup.select.Elements;
 public class firstFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     TableLayout classes;
+    GridLayout classess;
     Spinner quarterSelect, yearSelect = null;
     Button logoutButton;
     ArrayAdapter<CharSequence> quarterAdapter;
@@ -143,6 +147,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onViewCreated(View view, Bundle savedInstanceState){
 
         classes = (TableLayout) getView().findViewById(R.id.main);
+        classess = (GridLayout) getView().findViewById(R.id.classes);
 
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) getView().findViewById(R.id.Years);
@@ -199,7 +204,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         if (grades != null && markingperiods!=null) {
             counter++;
-            renderTable();
+            //renderTable();
+            renderCards();
         } else {
             description_webscrape dw = new description_webscrape(); //not sure if this part works
             dw.execute();
@@ -473,7 +479,27 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            renderTable();
+            //renderTable();
+            renderCards();
+        }
+    }
+
+    public void renderCards() {
+
+        View view = getLayoutInflater().inflate(R.layout.card, null);
+
+        TextView classname = view.findViewById(R.id.classname);
+        TextView lettergrade = view.findViewById(R.id.lettergrade);
+        TextView teacher = view.findViewById(R.id.teacher);
+        TextView percentage = view.findViewById(R.id.percentage);
+
+        for (int i = 0; i < grades.size(); i++) {
+            classess.removeView(view);
+            classname.setText(grades.get(i).get(0));
+            lettergrade.setText("B+");
+            teacher.setText(grades.get(i).get(1));
+            percentage.setText(grades.get(i).get(2));
+            classess.addView(view);
         }
     }
 

@@ -183,8 +183,6 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         }
 
 
-
-
         /* Check the credentials */
         /* Get the object of Credentials class */
         //  Credentials credentials = new Credentials();
