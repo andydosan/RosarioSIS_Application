@@ -164,6 +164,12 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/classgradesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0" />
+
             <GridLayout
                 android:id="@+id/classes"
                 android:layout_width="match_parent"
@@ -802,7 +808,6 @@
 
 
                 </androidx.cardview.widget.CardView>
-
 
             </GridLayout>
 

@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -54,9 +56,15 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     ArrayAdapter<CharSequence> quarterAdapter;
     ArrayAdapter<CharSequence> yearAdapter;
 
+    private RecyclerView recyclerView;
+    private CardAdapter adapter;
+
     public static ArrayList<ArrayList<String>> grades = null;
     public static ArrayList<ArrayList<String>> classGrades = null;
     public static ArrayList<ArrayList<String>> zeroGrades = null;
+
+    private ArrayList<CardHolder> gradesArrayList;
+
     public static String classname;
     public int counter=0;
 
@@ -152,6 +160,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) getView().findViewById(R.id.Years);
         logoutButton = (Button) getView().findViewById(R.id.btnLogout);
+
+        recyclerView = (RecyclerView) getView().findViewById(R.id.classgradesRecyclerView);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -485,7 +495,10 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     }
 
     public void renderCards() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        adapter = new CardAdapter(this.getActivity(), gradesArrayList);
 
+        /*
         View view = getLayoutInflater().inflate(R.layout.card, null);
 
         TextView classname = view.findViewById(R.id.classname);
@@ -501,6 +514,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             percentage.setText(grades.get(i).get(2));
             classess.addView(view);
         }
+
+         */
     }
 
     public void renderTable() {
