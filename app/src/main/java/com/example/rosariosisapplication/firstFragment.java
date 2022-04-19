@@ -63,7 +63,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     public static ArrayList<ArrayList<String>> classGrades = null;
     public static ArrayList<ArrayList<String>> zeroGrades = null;
 
-    private ArrayList<CardHolder> gradesArrayList;
+    private ArrayList<CardHolder> classgradesArrayList;
 
     public static String classname;
     public int counter=0;
@@ -163,6 +163,8 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         recyclerView = (RecyclerView) getView().findViewById(R.id.classgradesRecyclerView);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,7 +216,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         if (grades != null && markingperiods!=null) {
             counter++;
-            //renderTable();
+            renderTable();
             renderCards();
         } else {
             description_webscrape dw = new description_webscrape(); //not sure if this part works
@@ -489,14 +491,25 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            //renderTable();
+            renderTable();
             renderCards();
         }
     }
 
     public void renderCards() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        adapter = new CardAdapter(this.getActivity(), gradesArrayList);
+        classgradesArrayList = new ArrayList<>();
+        CardHolder temp;
+
+        for (int i = 0; i < grades.size(); i++) {
+            temp = new CardHolder(grades.get(i).get(0), grades.get(i).get(1), "A+", grades.get(i).get(2));
+            classgradesArrayList.add(temp);
+        }
+
+        adapter = new CardAdapter(this.getActivity(), classgradesArrayList);
+        recyclerView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
 
         /*
         View view = getLayoutInflater().inflate(R.layout.card, null);
