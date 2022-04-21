@@ -1,286 +1,1002 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/light_blue"
+tools:context=".MainActivity">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".firstFragment">
+    android:orientation="vertical">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient"
-        tools:context=".MainActivity">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Quarters"
+            android:fontFamily="@font/rubik_font"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+
+    </RelativeLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="1"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="@font/rubik_font"
+                    android:textAlignment="center"
+                    android:textColor="#5566e7"
+                    android:text="Q1">
+
+                </TextView>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:fontFamily="@font/rubik_font"
+                    android:textAlignment="center"
+                    android:textColor="#5566e7"
+                    android:text="Q2">
+
+                </TextView>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>                <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Quarters"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp" />
-
-
-            </RelativeLayout>
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="4"
-                android:rowCount="1"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false"
-                >
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
-                        >
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="25sp"
-                            android:textAlignment="center"
-                            android:text="Q1">
-
-                        </TextView>
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="12dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        android:gravity="center"
-                        >
-                        <TextView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="25sp"
-                            android:textAlignment="center"
-                            android:text="Q2">
-
-                        </TextView>
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>                <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="6dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center"
-                    >
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:textSize="25sp"
-                        android:textAlignment="center"
-                        android:text="Q3">
-
-                    </TextView>
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>                <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="6dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center"
-                    >
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:textSize="25sp"
-                        android:textAlignment="center"
-                        android:text="Q4">
-
-                    </TextView>
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-            </GridLayout>
-
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center"
+            >
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/rubik_font"
+                android:textSize="25sp"
                 android:gravity="center"
-                android:text="Grades"
-                android:textColor="#FFFFFF"
-                android:textSize="18dp" />
+                android:textAlignment="center"
+                android:textColor="#5566e7"
+                android:text="Q3">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/classgradesRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_row="0" />
-
-            <GridLayout
-                android:id="@+id/classes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alignmentMode="alignMargins"
-                android:columnCount="1"
-                android:columnOrderPreserved="false">
-
-
-
-            </GridLayout>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/main"
-                android:shrinkColumns="*">
-
-                <TableRow
-                    android:background="@drawable/gradiant"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rowHeader">
-
-                    <TextView
-                        android:text="Class"
-                        android:layout_weight="1"
-                        android:layout_column="-5"
-                        android:gravity="center_horizontal"
-                        android:typeface="normal"
-                        android:fontFamily="sans-serif-medium"
-                        android:textColor="@android:color/background_light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <TextView
-                        android:text="Teacher"
-                        android:layout_weight="1"
-                        android:layout_column="-5"
-                        android:gravity="center_horizontal"
-                        android:typeface="normal"
-                        android:fontFamily="sans-serif-medium"
-                        android:textColor="@android:color/background_light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <TextView
-                        android:text="Percent"
-                        android:layout_weight="1"
-                        android:layout_column="-5"
-                        android:gravity="center_horizontal"
-                        android:typeface="normal"
-                        android:fontFamily="sans-serif-medium"
-                        android:textColor="@android:color/background_light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-                </TableRow>
-
-
-            </TableLayout>
-
-
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="149dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="149dp"
-                android:layout_marginBottom="34dp"
-                android:backgroundTint="#0090D1"
-                android:text="Logout"
-                />
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:stretchColumns="0,1">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal">
-
-                    <Spinner
-                        android:id="@+id/Quarters"
-                        android:layout_width="126dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="25dp" />
-
-                    <Spinner
-                        android:id="@+id/Years"
-                        android:layout_width="126dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="25dp" />
-
-                </TableRow>
-
-            </TableLayout>
-
+            </TextView>
         </LinearLayout>
 
-    </ScrollView>
 
-</FrameLayout>
+    </androidx.cardview.widget.CardView>                <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:cardBackgroundColor="#5566e7"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
+        android:layout_margin="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center"
+            >
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/rubik_font"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:text="Q4">
+
+            </TextView>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/rubik_font"
+        android:text="Grades"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/classgradesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="1"
+        android:rowCount="8"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development "
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textSize="20dp"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table1"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader1">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textColor="#5566e7"
+                            android:textSize="20dp"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table2"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader2">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textSize="20dp"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table3"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader3">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textColor="#5566e7"
+                            android:textSize="20dp"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table4"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader4">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textSize="20dp"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table5"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader5">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textColor="#5566e7"
+                            android:textSize="20dp"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:layout_weight="0"
+                            android:textColor="#5566e7"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table6"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader6">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textColor="#5566e7"
+                            android:textSize="20dp"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table7"
+                    android:shrinkColumns="*">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowHeader7">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Mobile App Development"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="A+"
+                            android:textColor="#5566e7"
+                            android:textSize="20dp"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center_horizontal"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:text="Eric Skogen"
+                            android:textColor="#808080"
+                            android:layout_weight="1"
+                            android:layout_column="-5"
+                            android:gravity="left"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:text="100%"
+                            android:textColor="#5566e7"
+                            android:layout_weight="0"
+                            android:layout_column="-5"
+                            android:gravity="center"
+                            android:typeface="normal"
+                            android:fontFamily="@font/rubik_font"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="149dp"
+        android:layout_marginBottom="34dp"
+        android:backgroundTint="#0090D1"
+        android:text="Logout"
+        />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="0,1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <Spinner
+                android:id="@+id/Quarters"
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="25dp" />
+
+            <Spinner
+                android:id="@+id/Years"
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="25dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main"
+        android:shrinkColumns="*">
+
+        <TableRow
+            android:background="@drawable/gradiant"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rowHeader0">
+
+            <TextView
+                android:text="Class"
+                android:layout_weight="1"
+                android:layout_column="-5"
+                android:gravity="center_horizontal"
+                android:typeface="normal"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/background_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:text="Teacher"
+                android:layout_weight="1"
+                android:layout_column="-5"
+                android:gravity="center_horizontal"
+                android:typeface="normal"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/background_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:text="Percent"
+                android:layout_weight="1"
+                android:layout_column="-5"
+                android:gravity="center_horizontal"
+                android:typeface="normal"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/background_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
+
+</ScrollView>

@@ -155,7 +155,6 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onViewCreated(View view, Bundle savedInstanceState){
 
         classes = (TableLayout) getView().findViewById(R.id.main);
-        classess = (GridLayout) getView().findViewById(R.id.classes);
 
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) getView().findViewById(R.id.Years);
