@@ -190,6 +190,7 @@ tools:context=".MainActivity">
         android:id="@+id/classgradesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
         android:layout_row="0" />
 
 
