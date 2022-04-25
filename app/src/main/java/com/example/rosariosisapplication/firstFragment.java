@@ -492,7 +492,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         CardHolder temp;
 
         for (int i = 0; i < grades.size(); i++) {
-            temp = new CardHolder(grades.get(i).get(0), grades.get(i).get(1), "A+", grades.get(i).get(2));
+            temp = new CardHolder(grades.get(i).get(0), grades.get(i).get(1), letterGrade(grades.get(i).get(2)), grades.get(i).get(2));
             classgradesArrayList.add(temp);
         }
 
@@ -619,5 +619,64 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
                 classes.addView(tbrow0);
             }
         }
+    }
+
+    public String letterGrade (String percentageGrade){
+
+        if (percentageGrade == "*") {
+            return "*";
+        }
+
+        String percentageString = percentageGrade.substring(0, percentageGrade.length() - 1);
+        String letterGrade = "";
+        double percentageDouble = Double.parseDouble(percentageString);
+        int percentage = (int) Math.round(percentageDouble);
+
+        Log.d("lettergrade", String.valueOf(percentage));
+
+        if(percentage<60){
+            letterGrade="F";
+        }
+        else if(percentage<63){
+            letterGrade="D-";
+        }
+        else if(percentage<67){
+            letterGrade="D";
+        }
+        else if(percentage<70){
+            letterGrade="D+";
+        }
+        else if(percentage<73){
+            letterGrade="C-";
+        }
+        else if(percentage<77){
+            letterGrade="C";
+        }
+        else if(percentage<80){
+            letterGrade="C+";
+        }
+        else if(percentage<83){
+            letterGrade="B-";
+        }
+        else if(percentage<87){
+            letterGrade="B";
+        }
+        else if(percentage<90){
+            letterGrade="B+";
+        }
+        else if(percentage<93){
+            letterGrade="A-";
+        }
+        else if(percentage<97){
+            letterGrade="A";
+        }
+        else if(percentage<=100){
+            letterGrade="A+";
+        }
+        else{
+            letterGrade="ERROR";
+        }
+
+        return letterGrade;
     }
 }
