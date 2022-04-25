@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder2> {
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ClassGradesCardHolder> {
 
 
     private Context context2;
     private ArrayList<CardHolder> cards;
-
 
     public CardAdapter(Context context2, ArrayList<CardHolder> cards) {
         this.context2 = context2;
@@ -25,13 +24,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder2> {
 
     @NonNull
     @Override
-    public CardHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ClassGradesCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context2).inflate(R.layout.card, parent, false);
-        return new CardHolder2(view);
+        return new ClassGradesCardHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardHolder2 holder, int position) {
+    public void onBindViewHolder(@NonNull ClassGradesCardHolder holder, int position) {
         CardHolder card = cards.get(position);
         holder.setDetails((card));
     }
@@ -42,10 +41,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder2> {
         return cards.size();
     }
 
-    class CardHolder2 extends RecyclerView.ViewHolder{
+    class ClassGradesCardHolder extends RecyclerView.ViewHolder{
         private TextView teacher, percentage, classname, lettergrade;
 
-        CardHolder2(View itemView){
+        ClassGradesCardHolder(View itemView){
             super(itemView);
             teacher = itemView.findViewById(R.id.teacher);
             percentage = itemView.findViewById(R.id.percentage);
