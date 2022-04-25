@@ -10,6 +10,10 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -37,6 +41,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -49,12 +54,12 @@ import org.jsoup.select.Elements;
  */
 public class firstFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    TableLayout classes;
-    GridLayout classess;
-    Spinner quarterSelect, yearSelect = null;
-    Button logoutButton;
-    ArrayAdapter<CharSequence> quarterAdapter;
-    ArrayAdapter<CharSequence> yearAdapter;
+    static TableLayout classes;
+    static GridLayout classess;
+    static Spinner quarterSelect, yearSelect = null;
+    static Button logoutButton;
+    static ArrayAdapter<CharSequence> quarterAdapter;
+    static ArrayAdapter<CharSequence> yearAdapter;
 
     private RecyclerView recyclerView;
     private CardAdapter adapter;
@@ -66,33 +71,34 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     private ArrayList<CardHolder> classgradesArrayList;
 
     public static String classname;
-    public int counter=0;
+    public static int counter = 0;
 
-    String initialMarkingPeriod;
-    String initialYear;
+    public static String initialMarkingPeriod;
+    public static String initialYear;
 
-    String userName;
-    String userPassword;
+    public static String userName;
+    public static String userPassword;
 
-    final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
-    final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
+    final static String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
+    final static String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
     //rather than the grades, the initial log in action url is the portral page possibly?
-    final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
+    final static String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
-    public String quarterName;
-    public String yearName;
+    public static String quarterName;
+    public static String yearName;
 
     //Testing
-    public ArrayList<ArrayList<String>> markingperiods;
-    public ArrayList<ArrayList<String>> years;
+    public static ArrayList<ArrayList<String>> markingperiods;
+    public static ArrayList<ArrayList<String>> years;
 
     //for the changes in notifcations
-    String savedGrades; //this is the variable that compares it at the end :)
+    public static String savedGrades; //this is the variable that compares it at the end :)
+    public static int backgroundCheckPeriod = 15; //this is 15 minutes and this value should be able to be changed
 
     private boolean isQuarterSelectTouched = false;
     private boolean isYearSelectTouched = false;
 
-    public boolean savedToFile = false;
+    public static boolean savedToFile = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -155,6 +161,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onViewCreated(View view, Bundle savedInstanceState){
 
         classes = (TableLayout) getView().findViewById(R.id.main);
+        //classess = (GridLayout) getView().findViewById(R.id.classes);
 
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
         yearSelect = (Spinner) getView().findViewById(R.id.Years);
@@ -463,22 +470,7 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             //TESTING PURPOSES, PLS DONT DELETE YET
             Log.d("notiftest", String.valueOf(classGrades));
 
-            if (counter == 1 && !savedToFile) {
-                if (savedGrades.equals(classGrades.toString())) {
-                    Log.d("yoon", "equal");
-                    //notification
-                }
-                else {
-                    SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("toString classGrades", classGrades.toString());
-                    editor.commit();
-                    Log.d("yoon", "it's been saved hopefully");
-
-                }
-                Log.d("yoon", classGrades.toString());
-            }
-
+            periodicWork();
             /*
             for (int i = 0; i< zeroGrades.size();i++){
                 Log.d("zeroGrades", String.valueOf(zeroGrades.get(i)));
@@ -528,6 +520,12 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
         }
 
          */
+    }
+
+    public static void periodicWork() {
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                periodicWork.class, backgroundCheckPeriod, TimeUnit.MINUTES).build();
+        WorkManager.getInstance().enqueue(periodicWorkRequest);
     }
 
     public void renderTable() {
