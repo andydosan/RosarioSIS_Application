@@ -1,6 +1,8 @@
 package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,13 +17,41 @@ import java.util.ArrayList;
 public class AssignmentGrades extends AppCompatActivity {
 
     TableLayout assignmentGrades;
+    RecyclerView recyclerView;
+
+    private ArrayList<CardHolder2> assignmentgradesArrayList;
+    private CardAdapter2 adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment_grades);
 
         assignmentGrades = (TableLayout) findViewById(R.id.assignmentsMain);
+        recyclerView = (RecyclerView) findViewById(R.id.assignmentgradesRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        assignmentgradesArrayList = new ArrayList<>();
+        CardHolder2 temp;
+
+        for (int i = 0; i < firstFragment.classGrades.size(); i++) {
+            if (firstFragment.classGrades.get(i).get(0).equals(firstFragment.classname)) {
+                temp = new CardHolder2(
+                        firstFragment.classGrades.get(i).get(1),
+                        firstFragment.classGrades.get(i).get(2),
+                        firstFragment.classGrades.get(i).get(3),
+                        firstFragment.classGrades.get(i).get(4));
+                assignmentgradesArrayList.add(temp);
+            }
+
+        }
+
+        adapter = new CardAdapter2(this, assignmentgradesArrayList);
+        recyclerView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+        /*
         for (int i = 0; i < firstFragment.classGrades.size(); i++) {
 
             Log.d("Myapp", String.valueOf(firstFragment.classGrades.get(i)));
@@ -55,5 +85,6 @@ public class AssignmentGrades extends AppCompatActivity {
                 assignmentGrades.addView(tbrow0);
             }
         }
+         */
     }
 }

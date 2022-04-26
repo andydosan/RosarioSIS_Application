@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_columnWeight="1"
     android:layout_rowWeight="1"
@@ -12,6 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:background="#FFFFFF"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
@@ -30,7 +31,7 @@
 
                 <TextView
                     android:textStyle="bold"
-                    android:text="Reflection "
+                    android:id="@+id/assignmentname"
                     android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="20dp"
@@ -43,7 +44,7 @@
 
                 <TextView
                     android:textStyle="bold"
-                    android:text="10/10"
+                    android:id="@+id/points"
                     android:textSize="20dp"
                     android:textColor="#5566e7"
                     android:layout_weight="0"
@@ -58,7 +59,7 @@
             <TableRow>
 
                 <TextView
-                    android:text="Projects"
+                    android:id="@+id/assignmentcategory"
                     android:textColor="#808080"
                     android:layout_weight="1"
                     android:layout_column="-5"
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:text="100%"
+                    android:id="@+id/assignmentpercentage"
                     android:textColor="#5566e7"
                     android:layout_weight="0"
                     android:layout_column="-5"

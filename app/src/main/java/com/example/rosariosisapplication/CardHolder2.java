@@ -1,13 +1,13 @@
 package com.example.rosariosisapplication;
 
 public class CardHolder2 {
-    private String assignmentname2, assignmentcategory2, points2, percentage2;
+    private String assignmentname2, assignmentcategory2, points2, assignmentpercentage2;
 
-    public CardHolder2(String assignmentname2, String assignmentcategory2, String points2, String percentage2) {
-        this.assignmentname2 = assignmentname2;
-        this.assignmentcategory2 = assignmentcategory2;
-        this.points2 = points2;
-        this.percentage2 = percentage2;
+    public CardHolder2(String assignmentname, String assignmentcategory, String points, String assignmentpercentage) {
+        this.assignmentname2 = assignmentname;
+        this.assignmentcategory2 = assignmentcategory;
+        this.points2 = points;
+        this.assignmentpercentage2 = assignmentpercentage;
     }
 
     public String getAssignmentname2() {
@@ -22,7 +22,7 @@ public class CardHolder2 {
         return points2;
     }
 
-    public String getPercentage2() {
-        return percentage2;
+    public String getAssignmentpercentage2() {
+        return assignmentpercentage2;
     }
 }
