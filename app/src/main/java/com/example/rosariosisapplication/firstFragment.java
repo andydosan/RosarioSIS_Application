@@ -52,7 +52,9 @@ import org.jsoup.select.Elements;
  * Use the {@link firstFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class firstFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class firstFragment
+        extends Fragment
+        implements AdapterView.OnItemSelectedListener, RecyclerViewInterface {
 
     static TableLayout classes;
     static GridLayout classess;
@@ -256,6 +258,16 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(getActivity(), AssignmentGrades.class);
+
+        intent.putExtra("classname", classgradesArrayList.get(position).getClassname2());
+        intent.putExtra("classpercentage", classgradesArrayList.get(position).getPercentage2());
+
+        startActivity(intent);
     }
 
     class description_webscrape extends AsyncTask<Void, Void, Void> {
@@ -496,30 +508,10 @@ public class firstFragment extends Fragment implements AdapterView.OnItemSelecte
             classgradesArrayList.add(temp);
         }
 
-        adapter = new CardAdapter(this.getActivity(), classgradesArrayList);
+        adapter = new CardAdapter(this.getActivity(), classgradesArrayList, this);
         recyclerView.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
-
-
-        /*
-        View view = getLayoutInflater().inflate(R.layout.card, null);
-
-        TextView classname = view.findViewById(R.id.classname);
-        TextView lettergrade = view.findViewById(R.id.lettergrade);
-        TextView teacher = view.findViewById(R.id.teacher);
-        TextView percentage = view.findViewById(R.id.percentage);
-
-        for (int i = 0; i < grades.size(); i++) {
-            classess.removeView(view);
-            classname.setText(grades.get(i).get(0));
-            lettergrade.setText("B+");
-            teacher.setText(grades.get(i).get(1));
-            percentage.setText(grades.get(i).get(2));
-            classess.addView(view);
-        }
-
-         */
     }
 
     public static void periodicWork() {

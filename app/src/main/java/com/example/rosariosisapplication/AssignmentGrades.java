@@ -22,6 +22,9 @@ public class AssignmentGrades extends AppCompatActivity {
     private ArrayList<CardHolder2> assignmentgradesArrayList;
     private CardAdapter2 adapter;
 
+    String classname;
+    String classpercentage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +34,15 @@ public class AssignmentGrades extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.assignmentgradesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        Bundle bundle = this.getIntent().getExtras();
+        classname = bundle.getString("classname");
+        classpercentage = bundle.getString("classpercentage");
+
         assignmentgradesArrayList = new ArrayList<>();
         CardHolder2 temp;
 
         for (int i = 0; i < firstFragment.classGrades.size(); i++) {
-            if (firstFragment.classGrades.get(i).get(0).equals(firstFragment.classname)) {
+            if (firstFragment.classGrades.get(i).get(0).equals(classname)) {
                 temp = new CardHolder2(
                         firstFragment.classGrades.get(i).get(1),
                         firstFragment.classGrades.get(i).get(2),
