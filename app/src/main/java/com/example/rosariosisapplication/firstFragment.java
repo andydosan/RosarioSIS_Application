@@ -56,8 +56,6 @@ public class firstFragment
         extends Fragment
         implements AdapterView.OnItemSelectedListener, RecyclerViewInterface {
 
-    static TableLayout classes;
-    static GridLayout classess;
     static Spinner quarterSelect, yearSelect = null;
     static Button logoutButton;
     static ArrayAdapter<CharSequence> quarterAdapter;
@@ -162,7 +160,7 @@ public class firstFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
 
-        classes = (TableLayout) getView().findViewById(R.id.main);
+        //classes = (TableLayout) getView().findViewById(R.id.main);
         //classess = (GridLayout) getView().findViewById(R.id.classes);
 
         quarterSelect = (Spinner) getView().findViewById(R.id.Quarters); //TODO: change "Years" into "Quarters"
@@ -170,7 +168,6 @@ public class firstFragment
         logoutButton = (Button) getView().findViewById(R.id.btnLogout);
 
         recyclerView = (RecyclerView) getView().findViewById(R.id.classgradesRecyclerView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +221,6 @@ public class firstFragment
 
         if (grades != null && markingperiods!=null) {
             counter++;
-            renderTable();
             renderCards();
         } else {
             description_webscrape dw = new description_webscrape(); //not sure if this part works
@@ -494,7 +490,6 @@ public class firstFragment
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            renderTable();
             renderCards();
         }
     }
@@ -520,6 +515,7 @@ public class firstFragment
         WorkManager.getInstance().enqueue(periodicWorkRequest);
     }
 
+    /*
     public void renderTable() {
         if (counter == 1) {
             ArrayList<CharSequence> temp = new ArrayList<CharSequence>();
@@ -612,6 +608,8 @@ public class firstFragment
             }
         }
     }
+
+     */
 
     public String letterGrade (String percentageGrade){
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
@@ -137,8 +137,9 @@ tools:context=".MainActivity">
             </TextView>
         </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>                <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
@@ -239,57 +240,6 @@ tools:context=".MainActivity">
 
     </TableLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main"
-        android:shrinkColumns="*">
-
-        <TableRow
-            android:background="@drawable/gradiant"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rowHeader0">
-
-            <TextView
-                android:text="Class"
-                android:layout_weight="1"
-                android:layout_column="-5"
-                android:gravity="center_horizontal"
-                android:typeface="normal"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@android:color/background_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-            <TextView
-                android:text="Teacher"
-                android:layout_weight="1"
-                android:layout_column="-5"
-                android:gravity="center_horizontal"
-                android:typeface="normal"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@android:color/background_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-            <TextView
-                android:text="Percent"
-                android:layout_weight="1"
-                android:layout_column="-5"
-                android:gravity="center_horizontal"
-                android:typeface="normal"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@android:color/background_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        </TableRow>
-
-    </TableLayout>
-
 </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
