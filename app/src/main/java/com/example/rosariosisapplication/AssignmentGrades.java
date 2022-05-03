@@ -31,6 +31,8 @@ public class AssignmentGrades extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment_grades);
 
+        getSupportActionBar().hide();
+
         ClassNameTextView = findViewById(R.id.classnametextview);
         ClassPercentageTextView = findViewById(R.id.classpercentagetextview);
 

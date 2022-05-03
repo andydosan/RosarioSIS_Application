@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -146,6 +147,8 @@ public class firstFragment
         SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE); //this one is the old classGrades.toString
         //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
         savedGrades = settings.getString("toString classGrades", "");
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
     @Override
@@ -187,6 +190,9 @@ public class firstFragment
                                 editor = settings.edit();
                                 editor.clear();
                                 editor.commit();
+                                grades = null;
+                                classGrades = null;
+                                counter = 0;
 
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
