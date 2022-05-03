@@ -1,5 +1,6 @@
 package com.example.rosariosisapplication;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -55,7 +56,7 @@ import org.jsoup.select.Elements;
  */
 public class firstFragment
         extends Fragment
-        implements AdapterView.OnItemSelectedListener, RecyclerViewInterface {
+        implements AdapterView.OnItemSelectedListener, RecyclerViewInterface, View.OnClickListener {
 
     static Spinner quarterSelect, yearSelect = null;
     static Button logoutButton;
@@ -110,6 +111,9 @@ public class firstFragment
     private String mParam1;
     private String mParam2;
 
+    public LinearLayout quarter1, quarter2, quarter3, quarter4;
+
+
     public firstFragment() {
         // Required empty public constructor
     }
@@ -132,6 +136,7 @@ public class firstFragment
         return fragment;
     }
 
+    @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,8 +154,11 @@ public class firstFragment
         savedGrades = settings.getString("toString classGrades", "");
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
     }
 
+    @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -172,6 +180,16 @@ public class firstFragment
 
         recyclerView = (RecyclerView) getView().findViewById(R.id.classgradesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        quarter1 = (LinearLayout) getView().findViewById(R.id.quarter1);
+        quarter2 = (LinearLayout) getView().findViewById(R.id.quarter2);
+        quarter3 = (LinearLayout) getView().findViewById(R.id.quarter3);
+        quarter4 = (LinearLayout) getView().findViewById(R.id.quarter4);
+
+        quarter1.setOnClickListener(this);
+        quarter2.setOnClickListener(this);
+        quarter3.setOnClickListener(this);
+        quarter4.setOnClickListener(this);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,6 +288,34 @@ public class firstFragment
         intent.putExtra("classpercentage", classgradesArrayList.get(position).getPercentage2());
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent i;
+        description_webscrape dw = new description_webscrape(); //not sure if this part works
+        switch(v.getId()){
+            case R.id.quarter1:
+                quarterName = "Quarter 1";//"Quarter 1", "Quarter 2", etc
+                dw.execute();
+                break;
+
+            case R.id.quarter2:
+                quarterName = "Quarter 2";//"Quarter 1", "Quarter 2", etc
+                dw.execute();
+                break;
+
+            case R.id.quarter3:
+                quarterName = "Quarter 3";//"Quarter 1", "Quarter 2", etc
+                dw.execute();
+                break;
+            case R.id.quarter4:
+                quarterName = "Quarter 4";//"Quarter 1", "Quarter 2", etc
+                dw.execute();
+                break;
+
+
+        }
     }
 
     class description_webscrape extends AsyncTask<Void, Void, Void> {

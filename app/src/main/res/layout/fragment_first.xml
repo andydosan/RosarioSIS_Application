@@ -32,148 +32,155 @@ tools:context=".MainActivity">
 
 
     </RelativeLayout>
+
     <GridLayout
+        android:id="@+id/quarters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="4"
-        android:rowCount="1"
         android:alignmentMode="alignMargins"
+        android:columnCount="4"
         android:columnOrderPreserved="false"
-        >
+        android:rowCount="1">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            app:cardElevation="6dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
             app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
+            app:cardElevation="6dp">
 
             <LinearLayout
+                android:id="@+id/quarter1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="16dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp">
+
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:fontFamily="@font/rubik_font"
+                    android:gravity="center"
+                    android:text="Q1"
                     android:textAlignment="center"
                     android:textColor="#5566e7"
-                    android:text="Q1">
+                    android:textSize="25sp"
+                    android:textStyle="bold">
 
                 </TextView>
             </LinearLayout>
 
 
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            app:cardElevation="6dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
             app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
+            app:cardElevation="6dp">
 
             <LinearLayout
+                android:id="@+id/quarter2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="16dp"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp">
+
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:textSize="25sp"
-                    android:gravity="center"
                     android:fontFamily="@font/rubik_font"
+                    android:gravity="center"
+                    android:text="Q2"
                     android:textAlignment="center"
                     android:textColor="#5566e7"
-                    android:text="Q2">
+                    android:textSize="25sp"
+                    android:textStyle="bold">
 
                 </TextView>
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>                <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        app:cardElevation="6dp"
-        app:cardCornerRadius="12dp"
-        android:layout_margin="12dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            >
-            <TextView
-                android:textStyle="bold"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:fontFamily="@font/rubik_font"
-                android:textSize="25sp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textColor="#5566e7"
-                android:text="Q3">
-
-            </TextView>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        app:cardBackgroundColor="#5566e7"
-        app:cardElevation="6dp"
-        app:cardCornerRadius="12dp"
-        android:layout_margin="12dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/rubik_font"
+            <LinearLayout
+                android:id="@+id/quarter3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
                 android:gravity="center"
-                android:text="Q4"
-                android:textAlignment="center"
-                android:textColor="#5566e7"
-                android:textSize="25sp"
-                android:textStyle="bold">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            </TextView>
-        </LinearLayout>
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/rubik_font"
+                    android:gravity="center"
+                    android:text="Q3"
+                    android:textAlignment="center"
+                    android:textColor="#5566e7"
+                    android:textSize="25sp"
+                    android:textStyle="bold">
+
+                </TextView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardBackgroundColor="#5566e7"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:id="@+id/quarter4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_font"
+                    android:gravity="center"
+                    android:text="Q4"
+                    android:textAlignment="center"
+                    android:textColor="#5566e7"
+                    android:textSize="25sp"
+                    android:textStyle="bold">
+
+                </TextView>
+            </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </GridLayout>
 
     <TextView
