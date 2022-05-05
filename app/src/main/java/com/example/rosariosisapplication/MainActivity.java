@@ -2,6 +2,7 @@ package com.example.rosariosisapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
@@ -31,9 +33,10 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     private EditText ePassword;
     private Button eLogin;
     private CheckBox check;
-    public boolean isValid2=false;
-    public boolean isValid=false;
-//
+    public boolean isValid2 = false;
+    public boolean isValid = false;
+
+    boolean canConnect = false;
 
     String userName = "";
     String userPassword = "";
@@ -60,8 +63,6 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
             intent.putExtra("userpassword", preferences.getString("userpassword", ""));
             startActivity(intent);
             finish();
-        } else {
-            Toast.makeText(this,"Please Sign In.", Toast.LENGTH_SHORT).show();
         }
 
         /* Describe the logic when the login button is clicked */
@@ -100,12 +101,21 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
                 final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
                 final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
                 //rather than the grades, the initial log in action url is the portral page possibly?
-                final String GRADES_URL = "https://rosariosis.asianhope.org/Modules.php?modname=Grades/StudentGrades.php";
 
-                Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
-                        .method(Connection.Method.GET)
-                        .userAgent(USER_AGENT)
-                        .execute();
+                Connection.Response loginForm = null;
+
+                try {
+                    loginForm = Jsoup.connect(LOGIN_FORM_URL)
+                            .method(Connection.Method.GET)
+                            .userAgent(USER_AGENT)
+                            .followRedirects(false)
+                            .execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                canConnect = true;
 
                 loginForm = Jsoup.connect(LOGIN_FORM_URL)
                         .cookies(loginForm.cookies())
@@ -119,52 +129,58 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
                 isValid2 = false;
 
                 if(!(loginForm.url().toString().equals(LOGIN_FORM_URL))){
-                    Log.d("logintest", "loginForm:" + loginForm.url().toString());
-                    Log.d("logintest", "LOGIN_FORM_URL:" + LOGIN_FORM_URL);
                     isValid2=true;
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-
             return null;
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
-            isValid = validate(userName, userPassword);
+            if (canConnect == true) {
+                isValid = validate(userName, userPassword);
 
-            /* Validate the user inputs */
+                /* Validate the user inputs */
 
-            /* If not valid */
-            if (!isValid) { {
-                Toast.makeText(MainActivity.this, "Incorrect credentials, please try again!", Toast.LENGTH_SHORT).show();
-            }
-            }
-            /* If valid */
-            else {
-                if (check.isChecked()) {
-                    SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences1.edit();
-                    editor.putString("remember", "true");
-                    editor.putString("username", userName);
-                    editor.putString("userpassword", userPassword);
-                    editor.commit();
-                    //Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-                } else {
-                    SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences1.edit();
-                    editor.putString("remember", "false");
-                    editor.commit();
-                    //Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
+                /* If not valid */
+                if (!isValid) {
+                    Toast.makeText(MainActivity.this, "Incorrect credentials, please try again!", Toast.LENGTH_SHORT).show();
                 }
+                /* If valid */
+                else {
+                    if (check.isChecked()) {
+                        SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences1.edit();
+                        editor.putString("remember", "true");
+                        editor.putString("username", userName);
+                        editor.putString("userpassword", userPassword);
+                        editor.commit();
+                        //Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                    } else {
+                        SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences1.edit();
+                        editor.putString("remember", "false");
+                        editor.commit();
+                        //Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
+                    }
 
-                /* Allow the user in to your app by going into the next activity */
-                Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
-                intent.putExtra("username", userName);
-                intent.putExtra("userpassword", userPassword);
-                startActivity(intent);
-                finish();
+                    /* Allow the user in to your app by going into the next activity */
+                    Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+                    intent.putExtra("username", userName);
+                    intent.putExtra("userpassword", userPassword);
+                    startActivity(intent);
+                    finish();
+                }
+            } else {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Error")
+                        .setMessage("We couldn't connect to RosarioSIS. Your internet might have a problem, or the website might be down.")
+                        .setNegativeButton("Close", null)
+                        .show();
             }
         }
     }
@@ -174,11 +190,9 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     {
 
         if(isValid2){
-            Log.d("logintest", "login is valid");
             return true;
         }
         else{
-            Log.d("logintest", "login is invalid");
             return false;
         }
 
