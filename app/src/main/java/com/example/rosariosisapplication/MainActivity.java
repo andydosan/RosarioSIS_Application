@@ -35,6 +35,7 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
     private CheckBox check;
     public boolean isValid2 = false;
     public boolean isValid = false;
+    //bruh
 
     boolean canConnect = false;
 
