@@ -3,24 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/custom_preview.xml" value="0.14444444444444443" />
+        <entry key="..\:/RosarioSIS_Application/app/src/main/res/layout/card2.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/GoldenWare/AndroidStudioProjects/RosarioSIS_Application/app/src/main/res/layout/activity_home_page.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/GoldenWare/AndroidStudioProjects/RosarioSIS_Application/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/Windows/Downloads/RosarioSIS_Application/app/src/main/res/layout/activity_assignment_grades.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Windows/Downloads/RosarioSIS_Application/app/src/main/res/layout/activity_home_page.xml" value="0.14635416666666667" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.2140625" />
-        <entry key="app/src/main/res/font/font.xml" value="0.14444444444444443" />
-        <entry key="app/src/main/res/layout/ClassGradesCard.xml" value="0.22083333333333333" />
-        <entry key="app/src/main/res/layout/activity_assignment_grades.xml" value="0.22083333333333333" />
-        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/card.xml" value="0.129981884057971" />
-        <entry key="app/src/main/res/layout/card2.xml" value="0.22083333333333333" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_fourth.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -29,12 +20,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.33" />
-      </ProjectState>
-    </option>
   </component>
 </project>

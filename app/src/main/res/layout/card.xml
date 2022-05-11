@@ -38,9 +38,9 @@
                     android:gravity="left"
                     android:typeface="normal"
                     android:fontFamily="@font/rubik_font"
-                    android:layout_width="wrap_content"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginRight="20dp" />
 
                 <TextView
                     android:textStyle="bold"
@@ -81,7 +81,9 @@
                     android:layout_height="wrap_content"
                     />
             </TableRow>
+
         </TableLayout>
+
     </LinearLayout>
 
 
