@@ -210,7 +210,8 @@ tools:context=".MainActivity">
         android:layout_marginTop="5dp"
         android:layout_marginEnd="149dp"
         android:layout_marginBottom="34dp"
-        android:backgroundTint="#0090D1"
+        android:backgroundTint="#5566e7"
+        android:textColor="#FFFFFF"
         android:fontFamily="@font/rubik_font"
         android:text="Logout"
         />
