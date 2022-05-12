@@ -23,12 +23,12 @@ tools:context=".MainActivity">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_font"
             android:gravity="center"
             android:text="Quarters"
-            android:fontFamily="@font/rubik_font"
-            android:textStyle="bold"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
@@ -43,24 +43,25 @@ tools:context=".MainActivity">
         android:rowCount="1">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quarter1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
             <LinearLayout
-                android:id="@+id/quarter1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/quarter1text"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/rubik_font"
@@ -78,24 +79,25 @@ tools:context=".MainActivity">
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quarter2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
             <LinearLayout
-                android:id="@+id/quarter2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/quarter2text"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/rubik_font"
@@ -113,24 +115,25 @@ tools:context=".MainActivity">
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quarter3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="12dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
             <LinearLayout
-                android:id="@+id/quarter3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/quarter3text"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:fontFamily="@font/rubik_font"
@@ -147,25 +150,25 @@ tools:context=".MainActivity">
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/quarter4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="12dp"
-            app:cardBackgroundColor="#5566e7"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
             <LinearLayout
-                android:id="@+id/quarter4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/quarter4text"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_font"

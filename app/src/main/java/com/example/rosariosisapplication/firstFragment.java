@@ -2,9 +2,11 @@ package com.example.rosariosisapplication;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,8 +113,8 @@ public class firstFragment
     private String mParam1;
     private String mParam2;
 
-    public LinearLayout quarter1, quarter2, quarter3, quarter4;
-
+    public CardView quarter1, quarter2, quarter3, quarter4;
+    public TextView quarter1text, quarter2text, quarter3text, quarter4text;
 
     public firstFragment() {
         // Required empty public constructor
@@ -181,15 +183,25 @@ public class firstFragment
         recyclerView = (RecyclerView) getView().findViewById(R.id.classgradesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        quarter1 = (LinearLayout) getView().findViewById(R.id.quarter1);
-        quarter2 = (LinearLayout) getView().findViewById(R.id.quarter2);
-        quarter3 = (LinearLayout) getView().findViewById(R.id.quarter3);
-        quarter4 = (LinearLayout) getView().findViewById(R.id.quarter4);
+        quarter1text = getView().findViewById(R.id.quarter1text);
+        quarter2text = getView().findViewById(R.id.quarter2text);
+        quarter3text = getView().findViewById(R.id.quarter3text);
+        quarter4text = getView().findViewById(R.id.quarter4text);
 
-        //quarter1.setOnClickListener(this);
-        //quarter2.setOnClickListener(this);
-        //quarter3.setOnClickListener(this);
-        //quarter4.setOnClickListener(this);
+        quarter1 = getView().findViewById(R.id.quarter1);
+        quarter2 = getView().findViewById(R.id.quarter2);
+        quarter3 = getView().findViewById(R.id.quarter3);
+        quarter4 = getView().findViewById(R.id.quarter4);
+
+        quarter1.setOnClickListener(this);
+        quarter2.setOnClickListener(this);
+        quarter3.setOnClickListener(this);
+        quarter4.setOnClickListener(this);
+
+        quarter1.setClickable(false);
+        quarter2.setClickable(false);
+        quarter3.setClickable(false);
+        quarter4.setClickable(false);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -292,37 +304,102 @@ public class firstFragment
 
     @Override
     public void onClick(View v) {
-        Intent i;
         description_webscrape dw = new description_webscrape(); //not sure if this part works
         switch(v.getId()){
             case R.id.quarter1:
                 quarterName = "Quarter 1";//"Quarter 1", "Quarter 2", etc
+
+                quarter1.setCardBackgroundColor(Color.parseColor("#5566e7"));
+                quarter2.setCardBackgroundColor(Color.WHITE);
+                quarter3.setCardBackgroundColor(Color.WHITE);
+                quarter4.setCardBackgroundColor(Color.WHITE);
+
+                quarter1text.setTextColor(Color.WHITE);
+                quarter2text.setTextColor(Color.parseColor("#5566e7"));
+                quarter3text.setTextColor(Color.parseColor("#5566e7"));
+                quarter4text.setTextColor(Color.parseColor("#5566e7"));
+
+                quarter1.setClickable(false);
+                quarter2.setClickable(true);
+                quarter3.setClickable(true);
+                quarter4.setClickable(true);
+
                 dw.execute();
                 break;
 
             case R.id.quarter2:
                 quarterName = "Quarter 2";//"Quarter 1", "Quarter 2", etc
+
+                quarter1.setCardBackgroundColor(Color.WHITE);
+                quarter2.setCardBackgroundColor(Color.parseColor("#5566e7"));
+                quarter3.setCardBackgroundColor(Color.WHITE);
+                quarter4.setCardBackgroundColor(Color.WHITE);
+
+                quarter1text.setTextColor(Color.parseColor("#5566e7"));
+                quarter2text.setTextColor(Color.WHITE);
+                quarter3text.setTextColor(Color.parseColor("#5566e7"));
+                quarter4text.setTextColor(Color.parseColor("#5566e7"));
+
+                quarter1.setClickable(true);
+                quarter2.setClickable(false);
+                quarter3.setClickable(true);
+                quarter4.setClickable(true);
+
                 dw.execute();
                 break;
 
             case R.id.quarter3:
                 quarterName = "Quarter 3";//"Quarter 1", "Quarter 2", etc
+
+                quarter1.setCardBackgroundColor(Color.WHITE);
+                quarter2.setCardBackgroundColor(Color.WHITE);
+                quarter3.setCardBackgroundColor(Color.parseColor("#5566e7"));
+                quarter4.setCardBackgroundColor(Color.WHITE);
+
+                quarter1text.setTextColor(Color.parseColor("#5566e7"));
+                quarter2text.setTextColor(Color.parseColor("#5566e7"));
+                quarter3text.setTextColor(Color.WHITE);
+                quarter4text.setTextColor(Color.parseColor("#5566e7"));
+
+                quarter1.setClickable(true);
+                quarter2.setClickable(true);
+                quarter3.setClickable(false);
+                quarter4.setClickable(true);
+
                 dw.execute();
                 break;
             case R.id.quarter4:
                 quarterName = "Quarter 4";//"Quarter 1", "Quarter 2", etc
+
+                quarter1.setCardBackgroundColor(Color.WHITE);
+                quarter2.setCardBackgroundColor(Color.WHITE);
+                quarter3.setCardBackgroundColor(Color.WHITE);
+                quarter4.setCardBackgroundColor(Color.parseColor("#5566e7"));
+
+                quarter1text.setTextColor(Color.parseColor("#5566e7"));
+                quarter2text.setTextColor(Color.parseColor("#5566e7"));
+                quarter3text.setTextColor(Color.parseColor("#5566e7"));
+                quarter4text.setTextColor(Color.WHITE);
+
+                quarter1.setClickable(true);
+                quarter2.setClickable(true);
+                quarter3.setClickable(true);
+                quarter4.setClickable(false);
+
                 dw.execute();
                 break;
-
-
         }
     }
 
     class description_webscrape extends AsyncTask<Void, Void, Void> {
 
+        private ProgressDialog dialog = new ProgressDialog(getActivity());
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            this.dialog.setMessage("Please wait");
+            this.dialog.show();
         }
 
         @Override
@@ -334,10 +411,19 @@ public class firstFragment
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+
             renderCards();
+            if (counter <= 1) {
+                Log.d("test", String.valueOf(markingperiods));
+            }
+            if (counter <= 1) {
+                selectInitialCard();
+            }
         }
     }
-
 
     public static void jsoupScraper () {
 
@@ -422,6 +508,7 @@ public class firstFragment
                 }
 
                 if(yr != null) {
+                    Log.d("test", "year update successful");
                     Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                             .cookies(loginForm.cookies())
                             .data("syear", yr)
@@ -450,10 +537,13 @@ public class firstFragment
                 for(int i=0; i<markingperiods.size();i++){
                     if(markingperiods.get(i).get(0).equals(quarterName)){
                         mp = markingperiods.get(i).get(1);
+                        Log.d("test", quarterName);
+                        Log.d("test", mp);
                     }
                 }
 
                 if(mp != null && yr != null) {
+                    Log.d("test", "year and mp update successful");
                     Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
                             .cookies(loginForm.cookies())
                             .data("syear", yr)
@@ -542,7 +632,7 @@ public class firstFragment
         }
 
         //TESTING PURPOSES, PLS DONT DELETE YET
-        Log.d("notiftest", "grades pulled");
+        Log.d("notiftest", String.valueOf(grades));
 
         /*
         for (int i = 0; i< zeroGrades.size();i++) {
@@ -632,4 +722,44 @@ public class firstFragment
 
         return letterGrade;
     }
+
+    void selectInitialCard() {
+        quarterName = initialMarkingPeriod;
+        yearName = initialYear;
+
+        if (initialMarkingPeriod.equals("Quarter 1")) {
+
+            quarter1.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter1text.setTextColor(Color.WHITE);
+            quarter2.setClickable(true);
+            quarter3.setClickable(true);
+            quarter4.setClickable(true);
+
+        } else if (initialMarkingPeriod.equals("Quarter 2")) {
+
+            quarter2.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter2text.setTextColor(Color.WHITE);
+            quarter1.setClickable(true);
+            quarter3.setClickable(true);
+            quarter4.setClickable(true);
+
+        } else if (initialMarkingPeriod.equals("Quarter 3")) {
+
+            quarter3.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter3text.setTextColor(Color.WHITE);
+            quarter1.setClickable(true);
+            quarter2.setClickable(true);
+            quarter4.setClickable(true);
+
+        } else if (initialMarkingPeriod.equals("Quarter 4")) {
+
+            quarter4.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter4text.setTextColor(Color.WHITE);
+            quarter1.setClickable(true);
+            quarter2.setClickable(true);
+            quarter3.setClickable(true);
+
+        }
+    }
+
 }
