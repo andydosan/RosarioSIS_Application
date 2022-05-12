@@ -186,10 +186,10 @@ public class firstFragment
         quarter3 = (LinearLayout) getView().findViewById(R.id.quarter3);
         quarter4 = (LinearLayout) getView().findViewById(R.id.quarter4);
 
-        quarter1.setOnClickListener(this);
-        quarter2.setOnClickListener(this);
-        quarter3.setOnClickListener(this);
-        quarter4.setOnClickListener(this);
+        //quarter1.setOnClickListener(this);
+        //quarter2.setOnClickListener(this);
+        //quarter3.setOnClickListener(this);
+        //quarter4.setOnClickListener(this);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,16 +327,8 @@ public class firstFragment
 
         @Override
         protected Void doInBackground(Void... voids) {
-
             jsoupScraper();
             periodicWork();
-
-            /*
-            for (int i = 0; i< zeroGrades.size();i++){
-                Log.d("zeroGrades", String.valueOf(zeroGrades.get(i)));
-            }
-             */
-
             return null;
         }
 
@@ -578,7 +570,7 @@ public class firstFragment
 
     public static void periodicWork() {
         PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
-                periodicWork.class, backgroundCheckPeriod, TimeUnit.MINUTES).build();
+                periodicWork.class, backgroundCheckPeriod, TimeUnit.MINUTES).setInitialDelay(backgroundCheckPeriod, TimeUnit.MINUTES).build();
         WorkManager.getInstance().enqueue(periodicWorkRequest);
     }
 
