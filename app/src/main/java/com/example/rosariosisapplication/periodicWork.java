@@ -2,6 +2,7 @@ package com.example.rosariosisapplication;
 
 import static com.example.rosariosisapplication.firstFragment.classGrades;
 import static com.example.rosariosisapplication.firstFragment.counter;
+import static com.example.rosariosisapplication.firstFragment.jsoupScraper;
 import static com.example.rosariosisapplication.firstFragment.savedGrades;
 import static com.example.rosariosisapplication.firstFragment.savedToFile;
 
@@ -24,6 +25,7 @@ import androidx.work.WorkerParameters;
 public class periodicWork extends Worker {
 
     private static final String TAG = "yoonThePeriodicWork";
+    private String CHANNEL_ID = "873";
     private static int notificationNum = 0;
 
     public periodicWork(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -32,11 +34,15 @@ public class periodicWork extends Worker {
     @NonNull
     @Override
 
+
     public Result doWork() {
+        createNotificationChannel();
+
+        jsoupScraper();
         if (counter == 1 && !savedToFile) {
             if (savedGrades.equals(classGrades.toString())) {
                 Log.d("yoon", "equal");
-                //notifiaction below is for testing reasons should be moved down underneath the else
+                //notification below is for testing reasons should be moved down underneath the else
 
             } else {
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
@@ -45,7 +51,7 @@ public class periodicWork extends Worker {
                 editor.commit();
                 Log.d("yoon", "it's been saved hopefully");
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getApplicationContext(), "873")
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getApplicationContext(), CHANNEL_ID)
                         .setSmallIcon(R.drawable.rosariosisthing)
                         .setContentTitle("Rosarosis")
                         .setContentText("Your grades have been updated!")
@@ -60,5 +66,19 @@ public class periodicWork extends Worker {
 
         }
         return Result.success();
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "grade updated channel name";
+            String description = "grade updated channel description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = this.getApplicationContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

@@ -328,209 +328,9 @@ public class firstFragment
         @Override
         protected Void doInBackground(Void... voids) {
 
-            try {
-
-                grades = new ArrayList<ArrayList<String>>();
-                classGrades = new ArrayList<ArrayList<String>>();
-                zeroGrades = new ArrayList<ArrayList<String>>();
-
-                String mp = null;
-                String yr = null;
-
-                Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
-                        .method(Connection.Method.GET)
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-                loginForm = Jsoup.connect(LOGIN_FORM_URL)
-                        .cookies(loginForm.cookies())
-                        .data("USERNAME", userName)
-                        .data("PASSWORD", userPassword)
-                        .method(Connection.Method.POST)
-                        .followRedirects(true)
-                        .userAgent(USER_AGENT)
-                        .execute();
-
-                Document doc = Jsoup.connect(GRADES_URL)
-                        .cookies(loginForm.cookies())
-                        .userAgent(USER_AGENT)
-                        .get();
-
-                if (counter < 1) {
-                    markingperiods = new ArrayList<ArrayList<String>>();
-                    years = new ArrayList<ArrayList<String>>();
-
-                    Elements selectedyear = doc.select("select#syear option[selected]");
-                    Elements selectedmp = doc.select("select#mp option[selected]");
-
-                    // Marking periods and years
-                    Elements syearselector = doc.select("select#syear");
-                    Elements mpselector = doc.select("select#mp");
-                    syearselector = syearselector.select("option");
-                    mpselector = mpselector.select("option");
-
-                    for (int i = 0; i < syearselector.size(); i++) {
-                        ArrayList<String> temp = new ArrayList<String>();
-                        temp.add(syearselector.get(i).text());
-                        temp.add(syearselector.get(i).val());
-                        years.add(temp);
-                    }
-
-                    for (int i = 0; i < mpselector.size(); i++) {
-                        ArrayList<String> temp = new ArrayList<String>();
-                        temp.add(mpselector.get(i).text());
-                        temp.add(mpselector.get(i).val());
-                        markingperiods.add(temp);
-                    }
-
-                    Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                            .cookies(loginForm.cookies())
-                            .data("syear", selectedyear.val())
-                            .data("mp", selectedmp.val())
-                            .method(Connection.Method.POST)
-                            .followRedirects(true)
-                            .userAgent(USER_AGENT)
-                            .execute();
-
-                    initialMarkingPeriod = selectedmp.text();
-                    initialYear = selectedyear.text();
-
-                    doc = Jsoup.connect(GRADES_URL)
-                            .cookies(loginForm.cookies())
-                            .userAgent(USER_AGENT)
-                            .get();
-                } else {
-                    markingperiods = new ArrayList<ArrayList<String>>();
-
-                    for(int i=0; i<years.size();i++){
-                        if(years.get(i).get(0).equals(yearName)){
-                            yr = years.get(i).get(1);
-                        }
-                    }
-
-                    if(yr != null) {
-                        Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                                .cookies(loginForm.cookies())
-                                .data("syear", yr)
-                                .method(Connection.Method.POST)
-                                .followRedirects(true)
-                                .userAgent(USER_AGENT)
-                                .execute();
-                    }
-
-                    doc = Jsoup.connect(GRADES_URL)
-                            .cookies(loginForm.cookies())
-                            .userAgent(USER_AGENT)
-                            .get();
-
-                    // Marking periods and years
-                    Elements mpselector = doc.select("select#mp");
-                    mpselector = mpselector.select("option");
-
-                    for (int i = 0; i < mpselector.size(); i++) {
-                        ArrayList<String> temp = new ArrayList<String>();
-                        temp.add(mpselector.get(i).text());
-                        temp.add(mpselector.get(i).val());
-                        markingperiods.add(temp);
-                    }
-
-                    for(int i=0; i<markingperiods.size();i++){
-                        if(markingperiods.get(i).get(0).equals(quarterName)){
-                            mp = markingperiods.get(i).get(1);
-                        }
-                    }
-
-                    if(mp != null && yr != null) {
-                        Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
-                                .cookies(loginForm.cookies())
-                                .data("syear", yr)
-                                .data("mp", mp)
-                                .method(Connection.Method.POST)
-                                .followRedirects(true)
-                                .userAgent(USER_AGENT)
-                                .execute();
-                    }
-
-                    doc = Jsoup.connect(GRADES_URL)
-                            .cookies(loginForm.cookies())
-                            .userAgent(USER_AGENT)
-                            .get();
-                }
-                counter++;
-
-                org.jsoup.nodes.Element table;
-                if(doc.select("table[class=list widefat rt]").isEmpty()){
-                    return null;
-                } else {
-                    table = doc.select("table[class=list widefat rt]").get(0);
-                }
-                Elements rows = table.select("tr");
-
-                for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
-                    org.jsoup.nodes.Element row = rows.get(i);
-                    Elements cols = row.select("td");
-                    Elements link = row.select("a[href]");
-                    String classLink = "https://rosariosis.asianhope.org/" + link.get(0).attr("href");
-
-                    ArrayList<String> temp = new ArrayList<String>();
-                    temp.add(cols.get(0).text()); //Class name
-                    temp.add(cols.get(1).text()); //Teacher name
-                    temp.add(cols.get(3).text()); //Grade (percent)
-
-                    temp.add(classLink);
-                    grades.add(temp);
-
-                    org.jsoup.nodes.Document doc1 = Jsoup.connect(classLink)
-                            .cookies(loginForm.cookies())
-                            .userAgent(USER_AGENT)
-                            .get();
-
-                    org.jsoup.nodes.Element table1 = doc1.select("table[class=list widefat rt]").get(0);
-                    doc1.select(".header2").remove();
-                    doc1.select(".header2 align-right").remove();
-
-                    Elements rows1 = table1.select("tr");
-                    for (int j = 1; j < rows1.size(); j++) {
-
-                        Element row1 = rows1.get(j);
-                        Elements cols1 = row1.select("td");
-
-                        ArrayList<String> temp1 = new ArrayList<String>();
-
-                        if (cols1.size() > 0) {
-                            temp1.add(cols.get(0).text());
-                            temp1.add(cols1.get(0).text()); //Assignment Name
-                            temp1.add(cols1.get(1).text()); //Assignment Category
-                            temp1.add(cols1.get(2).text()); //Points / Possible
-                            temp1.add(cols1.get(3).text()); //Grade (percent)
-
-                            //Comment
-                            if (cols1.get(4).text().length() > 0) {
-                                temp1.add(cols1.get(4).text());
-                            } else {
-                                temp1.add ("No comment");
-                            }
-                        }
-
-                        if(counter == 1 && temp1.size() > 0){
-                            if (temp1.get(4).equals("0.0%") || temp1.get(4).equals("*")) {
-                                zeroGrades.add(temp1);
-                            }
-                        }
-
-                        if (temp1.size() > 0) {
-                            classGrades.add(temp1);
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //TESTING PURPOSES, PLS DONT DELETE YET
-            Log.d("notiftest", String.valueOf(classGrades));
-
+            jsoupScraper();
             periodicWork();
+
             /*
             for (int i = 0; i< zeroGrades.size();i++){
                 Log.d("zeroGrades", String.valueOf(zeroGrades.get(i)));
@@ -545,6 +345,221 @@ public class firstFragment
             renderCards();
         }
     }
+
+
+    public static void jsoupScraper () {
+
+        try {
+
+            grades = new ArrayList<ArrayList<String>>();
+            classGrades = new ArrayList<ArrayList<String>>();
+            zeroGrades = new ArrayList<ArrayList<String>>();
+
+            String mp = null;
+            String yr = null;
+
+            Connection.Response loginForm = Jsoup.connect(LOGIN_FORM_URL)
+                    .method(Connection.Method.GET)
+                    .userAgent(USER_AGENT)
+                    .execute();
+
+            loginForm = Jsoup.connect(LOGIN_FORM_URL)
+                    .cookies(loginForm.cookies())
+                    .data("USERNAME", userName)
+                    .data("PASSWORD", userPassword)
+                    .method(Connection.Method.POST)
+                    .followRedirects(true)
+                    .userAgent(USER_AGENT)
+                    .execute();
+
+            Document doc = Jsoup.connect(GRADES_URL)
+                    .cookies(loginForm.cookies())
+                    .userAgent(USER_AGENT)
+                    .get();
+
+            if (counter < 1) {
+                markingperiods = new ArrayList<ArrayList<String>>();
+                years = new ArrayList<ArrayList<String>>();
+
+                Elements selectedyear = doc.select("select#syear option[selected]");
+                Elements selectedmp = doc.select("select#mp option[selected]");
+
+                // Marking periods and years
+                Elements syearselector = doc.select("select#syear");
+                Elements mpselector = doc.select("select#mp");
+                syearselector = syearselector.select("option");
+                mpselector = mpselector.select("option");
+
+                for (int i = 0; i < syearselector.size(); i++) {
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(syearselector.get(i).text());
+                    temp.add(syearselector.get(i).val());
+                    years.add(temp);
+                }
+
+                for (int i = 0; i < mpselector.size(); i++) {
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(mpselector.get(i).text());
+                    temp.add(mpselector.get(i).val());
+                    markingperiods.add(temp);
+                }
+
+                Connection.Response quarter = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                        .cookies(loginForm.cookies())
+                        .data("syear", selectedyear.val())
+                        .data("mp", selectedmp.val())
+                        .method(Connection.Method.POST)
+                        .followRedirects(true)
+                        .userAgent(USER_AGENT)
+                        .execute();
+
+                initialMarkingPeriod = selectedmp.text();
+                initialYear = selectedyear.text();
+
+                doc = Jsoup.connect(GRADES_URL)
+                        .cookies(loginForm.cookies())
+                        .userAgent(USER_AGENT)
+                        .get();
+            } else {
+                markingperiods = new ArrayList<ArrayList<String>>();
+
+                for(int i=0; i<years.size();i++){
+                    if(years.get(i).get(0).equals(yearName)){
+                        yr = years.get(i).get(1);
+                    }
+                }
+
+                if(yr != null) {
+                    Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                            .cookies(loginForm.cookies())
+                            .data("syear", yr)
+                            .method(Connection.Method.POST)
+                            .followRedirects(true)
+                            .userAgent(USER_AGENT)
+                            .execute();
+                }
+
+                doc = Jsoup.connect(GRADES_URL)
+                        .cookies(loginForm.cookies())
+                        .userAgent(USER_AGENT)
+                        .get();
+
+                // Marking periods and years
+                Elements mpselector = doc.select("select#mp");
+                mpselector = mpselector.select("option");
+
+                for (int i = 0; i < mpselector.size(); i++) {
+                    ArrayList<String> temp = new ArrayList<String>();
+                    temp.add(mpselector.get(i).text());
+                    temp.add(mpselector.get(i).val());
+                    markingperiods.add(temp);
+                }
+
+                for(int i=0; i<markingperiods.size();i++){
+                    if(markingperiods.get(i).get(0).equals(quarterName)){
+                        mp = markingperiods.get(i).get(1);
+                    }
+                }
+
+                if(mp != null && yr != null) {
+                    Connection.Response update = Jsoup.connect("https://rosariosis.asianhope.org/Side.php?sidefunc=update")
+                            .cookies(loginForm.cookies())
+                            .data("syear", yr)
+                            .data("mp", mp)
+                            .method(Connection.Method.POST)
+                            .followRedirects(true)
+                            .userAgent(USER_AGENT)
+                            .execute();
+                }
+
+                doc = Jsoup.connect(GRADES_URL)
+                        .cookies(loginForm.cookies())
+                        .userAgent(USER_AGENT)
+                        .get();
+            }
+            counter++;
+
+            org.jsoup.nodes.Element table = null;
+
+            if(doc.select("table[class=list widefat rt]").isEmpty()){
+
+            } else {
+                table = doc.select("table[class=list widefat rt]").get(0);
+            }
+            Elements rows = table.select("tr");
+
+            for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+                org.jsoup.nodes.Element row = rows.get(i);
+                Elements cols = row.select("td");
+                Elements link = row.select("a[href]");
+                String classLink = "https://rosariosis.asianhope.org/" + link.get(0).attr("href");
+
+                ArrayList<String> temp = new ArrayList<String>();
+                temp.add(cols.get(0).text()); //Class name
+                temp.add(cols.get(1).text()); //Teacher name
+                temp.add(cols.get(3).text()); //Grade (percent)
+
+                temp.add(classLink);
+                grades.add(temp);
+
+                org.jsoup.nodes.Document doc1 = Jsoup.connect(classLink)
+                        .cookies(loginForm.cookies())
+                        .userAgent(USER_AGENT)
+                        .get();
+
+                org.jsoup.nodes.Element table1 = doc1.select("table[class=list widefat rt]").get(0);
+                doc1.select(".header2").remove();
+                doc1.select(".header2 align-right").remove();
+
+                Elements rows1 = table1.select("tr");
+                for (int j = 1; j < rows1.size(); j++) {
+
+                    Element row1 = rows1.get(j);
+                    Elements cols1 = row1.select("td");
+
+                    ArrayList<String> temp1 = new ArrayList<String>();
+
+                    if (cols1.size() > 0) {
+                        temp1.add(cols.get(0).text());
+                        temp1.add(cols1.get(0).text()); //Assignment Name
+                        temp1.add(cols1.get(1).text()); //Assignment Category
+                        temp1.add(cols1.get(2).text()); //Points / Possible
+                        temp1.add(cols1.get(3).text()); //Grade (percent)
+
+                        //Comment
+                        if (cols1.get(4).text().length() > 0) {
+                            temp1.add(cols1.get(4).text());
+                        } else {
+                            temp1.add ("No comment");
+                        }
+                    }
+
+                    if(counter == 1 && temp1.size() > 0){
+                        if (temp1.get(4).equals("0.0%") || temp1.get(4).equals("*")) {
+                            zeroGrades.add(temp1);
+                        }
+                    }
+
+                    if (temp1.size() > 0) {
+                        classGrades.add(temp1);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //TESTING PURPOSES, PLS DONT DELETE YET
+        Log.d("notiftest", "grades pulled");
+
+        /*
+        for (int i = 0; i< zeroGrades.size();i++) {
+            Log.d("zeroGrades", String.valueOf(zeroGrades.get(i)));
+        }
+             */
+
+    }
+
 
     public void renderCards() {
         classgradesArrayList = new ArrayList<>();
@@ -566,102 +581,6 @@ public class firstFragment
                 periodicWork.class, backgroundCheckPeriod, TimeUnit.MINUTES).build();
         WorkManager.getInstance().enqueue(periodicWorkRequest);
     }
-
-    /*
-    public void renderTable() {
-        if (counter == 1) {
-            ArrayList<CharSequence> temp = new ArrayList<CharSequence>();
-            for (int i = 0; i < markingperiods.size(); i++) {
-                temp.add(markingperiods.get(i).get(0));
-            }
-            quarterAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_list_item_1, temp);
-            quarterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            quarterSelect.setAdapter(quarterAdapter);
-            quarterSelect.setSelection(quarterAdapter.getPosition(initialMarkingPeriod));
-            quarterName = initialMarkingPeriod;
-
-            quarterSelect.setOnItemSelectedListener(firstFragment.this);
-
-            temp = new ArrayList<CharSequence>();
-            for (int i = 0; i < years.size(); i++) {
-                temp.add(years.get(i).get(0));
-            }
-
-            yearAdapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_list_item_1, temp);
-            yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            yearSelect.setAdapter(yearAdapter);
-            yearSelect.setSelection(yearAdapter.getPosition(initialYear));
-            yearName = initialYear;
-
-            yearSelect.setOnItemSelectedListener(firstFragment.this);
-        }
-
-        // Remove all rows except the first one
-        classes.removeViews(1, Math.max(0, classes.getChildCount() - 1));
-        classes.invalidate();
-
-        if (grades.size() == 0) {
-            //TODO: proper formatting
-            TableRow tbrow0 = new TableRow(getActivity());
-            tbrow0.setMinimumHeight(200);
-
-            TableRow.LayoutParams params = new TableRow.LayoutParams();
-            params.span = 3;
-
-            TextView tv0 = new TextView(getActivity());
-            tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-            tv0.setGravity(Gravity.CENTER);
-            tv0.setWidth(1500);
-            tv0.setText("There are no grades for this quarter");
-
-            tbrow0.addView(tv0, params);
-            classes.addView(tbrow0);
-        } else {
-            for (int i = 0; i < grades.size(); i++) {
-                TableRow tbrow0 = new TableRow(getActivity());
-                tbrow0.setMinimumHeight(200);
-
-                TextView tv0 = new TextView(getActivity());
-                TextView tv1 = new TextView(getActivity());
-                TextView tv2 = new TextView(getActivity());
-                tv0.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                tv1.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-                tv2.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-
-                tv0.setGravity(Gravity.CENTER);
-                tv1.setGravity(Gravity.CENTER);
-                tv2.setGravity(Gravity.CENTER);
-
-                tv0.setWidth(1500);
-                tv1.setWidth(1500);
-                tv2.setWidth(1500);
-
-                String temp = grades.get(i).get(0);
-
-                tv0.setText(temp);
-                tv0.setClickable(true);
-                tv1.setText(grades.get(i).get(1));
-                tv2.setText(grades.get(i).get(2));
-
-                tv0.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        classname = temp;
-                        startActivity(new Intent(getActivity(), AssignmentGrades.class));
-                    }
-                });
-
-                tbrow0.addView(tv0);
-                tbrow0.addView(tv1);
-                tbrow0.addView(tv2);
-
-                classes.addView(tbrow0);
-            }
-        }
-    }
-
-     */
 
     public String letterGrade (String percentageGrade){
 
