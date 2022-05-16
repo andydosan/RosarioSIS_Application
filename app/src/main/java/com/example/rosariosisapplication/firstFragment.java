@@ -258,6 +258,7 @@ public class firstFragment
         if (grades != null && markingperiods!=null) {
             counter++;
             renderCards();
+            selectCard();
         } else {
             description_webscrape dw = new description_webscrape(); //not sure if this part works
             dw.execute();
@@ -417,10 +418,9 @@ public class firstFragment
 
             renderCards();
             if (counter <= 1) {
-                Log.d("test", String.valueOf(markingperiods));
-            }
-            if (counter <= 1) {
-                selectInitialCard();
+                quarterName = initialMarkingPeriod;
+                yearName = initialYear;
+                selectCard();
             }
         }
     }
@@ -723,11 +723,9 @@ public class firstFragment
         return letterGrade;
     }
 
-    void selectInitialCard() {
-        quarterName = initialMarkingPeriod;
-        yearName = initialYear;
+    void selectCard() {
 
-        if (initialMarkingPeriod.equals("Quarter 1")) {
+        if (quarterName.equals("Quarter 1")) {
 
             quarter1.setCardBackgroundColor(Color.parseColor("#5566e7"));
             quarter1text.setTextColor(Color.WHITE);
@@ -735,7 +733,7 @@ public class firstFragment
             quarter3.setClickable(true);
             quarter4.setClickable(true);
 
-        } else if (initialMarkingPeriod.equals("Quarter 2")) {
+        } else if (quarterName.equals("Quarter 2")) {
 
             quarter2.setCardBackgroundColor(Color.parseColor("#5566e7"));
             quarter2text.setTextColor(Color.WHITE);
@@ -743,7 +741,7 @@ public class firstFragment
             quarter3.setClickable(true);
             quarter4.setClickable(true);
 
-        } else if (initialMarkingPeriod.equals("Quarter 3")) {
+        } else if (quarterName.equals("Quarter 3")) {
 
             quarter3.setCardBackgroundColor(Color.parseColor("#5566e7"));
             quarter3text.setTextColor(Color.WHITE);
@@ -751,7 +749,7 @@ public class firstFragment
             quarter2.setClickable(true);
             quarter4.setClickable(true);
 
-        } else if (initialMarkingPeriod.equals("Quarter 4")) {
+        } else if (quarterName.equals("Quarter 4")) {
 
             quarter4.setCardBackgroundColor(Color.parseColor("#5566e7"));
             quarter4text.setTextColor(Color.WHITE);
