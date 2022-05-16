@@ -37,9 +37,8 @@ public class periodicWork extends Worker {
 
     public Result doWork() {
         createNotificationChannel();
-
-        jsoupScraper();
-        if (counter == 1 && !savedToFile) {
+        if (counter >=0 || !savedToFile) {
+            jsoupScraper();
             if (savedGrades.equals(classGrades.toString())) {
                 Log.d("yoon", "equal");
                 //notification below is for testing reasons should be moved down underneath the else

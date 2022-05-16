@@ -406,7 +406,6 @@ public class firstFragment
         @Override
         protected Void doInBackground(Void... voids) {
             jsoupScraper();
-            periodicWork();
             return null;
         }
 
@@ -420,6 +419,7 @@ public class firstFragment
             if (counter <= 1) {
                 quarterName = initialMarkingPeriod;
                 yearName = initialYear;
+                periodicWork();
                 selectCard();
             }
         }
@@ -632,7 +632,7 @@ public class firstFragment
         }
 
         //TESTING PURPOSES, PLS DONT DELETE YET
-        Log.d("notiftest", String.valueOf(grades));
+        Log.d("notiftest", "Grades pulled");
 
         /*
         for (int i = 0; i< zeroGrades.size();i++) {
@@ -659,9 +659,10 @@ public class firstFragment
     }
 
     public static void periodicWork() {
+        Log.e("timer", "periodicWork: time starts now");
         PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
                 periodicWork.class, backgroundCheckPeriod, TimeUnit.MINUTES).setInitialDelay(backgroundCheckPeriod, TimeUnit.MINUTES).build();
-        WorkManager.getInstance().enqueue(periodicWorkRequest);
+        WorkManager.getInstance().enqueueUniquePeriodicWork("PWR",ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest);
     }
 
     public String letterGrade (String percentageGrade){
