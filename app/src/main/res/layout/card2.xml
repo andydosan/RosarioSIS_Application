@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_columnWeight="1"
     android:layout_rowWeight="1"
+    android:background="#FFFFFF"
     app:cardElevation="6dp"
     app:cardCornerRadius="12dp"
     android:layout_margin="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"

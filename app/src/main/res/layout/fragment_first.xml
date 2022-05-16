@@ -1,256 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/light_blue"
-tools:context=".MainActivity">
-
-<LinearLayout
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/light_blue"
+    tools:context=".MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_font"
+                android:gravity="center"
+                android:text="Quarters"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <GridLayout
+            android:id="@+id/quarters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4"
+            android:columnOrderPreserved="false"
+            android:rowCount="1">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/quarter1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/quarter1text"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:fontFamily="@font/rubik_font"
+                        android:gravity="center"
+                        android:text="Q1"
+                        android:textAlignment="center"
+                        android:textColor="#5566e7"
+                        android:textSize="25sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/quarter2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/quarter2text"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:fontFamily="@font/rubik_font"
+                        android:gravity="center"
+                        android:text="Q2"
+                        android:textAlignment="center"
+                        android:textColor="#5566e7"
+                        android:textSize="25sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/quarter3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/quarter3text"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:fontFamily="@font/rubik_font"
+                        android:gravity="center"
+                        android:text="Q3"
+                        android:textAlignment="center"
+                        android:textColor="#5566e7"
+                        android:textSize="25sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/quarter4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/quarter4text"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_font"
+                        android:gravity="center"
+                        android:text="Q4"
+                        android:textAlignment="center"
+                        android:textColor="#5566e7"
+                        android:textSize="25sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:fontFamily="@font/rubik_font"
             android:gravity="center"
-            android:text="Quarters"
+            android:text="Grades"
             android:textColor="#000000"
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/classgradesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:nestedScrollingEnabled="false" />
 
-    </RelativeLayout>
 
-    <GridLayout
-        android:id="@+id/quarters"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alignmentMode="alignMargins"
-        android:columnCount="4"
-        android:columnOrderPreserved="false"
-        android:rowCount="1">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/quarter1"
+        <Button
+            android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
+            android:layout_marginStart="149dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="149dp"
+            android:layout_marginBottom="34dp"
+            android:backgroundTint="#5566e7"
+            android:fontFamily="@font/rubik_font"
+            android:text="Logout"
+            android:textColor="#FFFFFF" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/quarter1text"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:fontFamily="@font/rubik_font"
-                    android:gravity="center"
-                    android:text="Q1"
-                    android:textAlignment="center"
-                    android:textColor="#5566e7"
-                    android:textSize="25sp"
-                    android:textStyle="bold">
-
-                </TextView>
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/quarter2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/quarter2text"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:fontFamily="@font/rubik_font"
-                    android:gravity="center"
-                    android:text="Q2"
-                    android:textAlignment="center"
-                    android:textColor="#5566e7"
-                    android:textSize="25sp"
-                    android:textStyle="bold">
-
-                </TextView>
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/quarter3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/quarter3text"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:fontFamily="@font/rubik_font"
-                    android:gravity="center"
-                    android:text="Q3"
-                    android:textAlignment="center"
-                    android:textColor="#5566e7"
-                    android:textSize="25sp"
-                    android:textStyle="bold">
-
-                </TextView>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/quarter4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/quarter4text"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_font"
-                    android:gravity="center"
-                    android:text="Q4"
-                    android:textAlignment="center"
-                    android:textColor="#5566e7"
-                    android:textSize="25sp"
-                    android:textStyle="bold">
-
-                </TextView>
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:gravity="center"
-        android:fontFamily="@font/rubik_font"
-        android:text="Grades"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:textSize="20dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/classgradesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        android:layout_row="0" />
-
-
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="149dp"
-        android:layout_marginBottom="34dp"
-        android:backgroundTint="#5566e7"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/rubik_font"
-        android:text="Logout"
-        />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="0,1">
-
-        <TableRow
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal">
+            android:stretchColumns="0,1">
 
-            <Spinner
-                android:id="@+id/Quarters"
-                android:layout_width="126dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
 
-            <Spinner
-                android:id="@+id/Years"
-                android:layout_width="126dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp" />
+                <Spinner
+                    android:id="@+id/Quarters"
+                    android:layout_width="126dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp" />
 
-        </TableRow>
+                <Spinner
+                    android:id="@+id/Years"
+                    android:layout_width="126dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp" />
 
-    </TableLayout>
+            </TableRow>
 
-</LinearLayout>
+        </TableLayout>
+
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -1,12 +1,14 @@
 package com.example.rosariosisapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.AssignmentGr
     @Override
     public void onBindViewHolder(@NonNull AssignmentGradesCardHolder holder, int position) {
         CardHolder2 card = cards.get(position);
+        holder.itemView.setBackgroundColor(Color.parseColor("#FFF7F7"));
         holder.setDetails((card));
     }
 
@@ -56,6 +59,11 @@ public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.AssignmentGr
             points.setText(card.getPoints2());
             assignmentcategory.setText(card.getAssignmentcategory2());
             assignmentpercentage.setText(card.getAssignmentpercentage2());
+            /*if (assignmentpercentage.equals("0.0%") || assignmentpercentage.equals("*")) {
+
+            }
+
+             */
         }
     }
 }

@@ -9,10 +9,15 @@
         <entry key="..\:/Users/Windows/Downloads/RosarioSIS_Application/app/src/main/res/layout/activity_assignment_grades.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Windows/Downloads/RosarioSIS_Application/app/src/main/res/layout/activity_home_page.xml" value="0.14635416666666667" />
         <entry key="app/src/main/res/drawable/gradiant.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_assignment_grades.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/card.xml" value="0.1272644927536232" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.11548913043478261" />
+        <entry key="app/src/main/res/layout/fragment_fourth.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.11548913043478261" />
+        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.1272644927536232" />
       </map>
     </option>
   </component>
@@ -21,5 +26,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.11548913043478261" />
+      </ProjectState>
+    </option>
   </component>
 </project>
