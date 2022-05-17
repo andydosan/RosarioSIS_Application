@@ -2,6 +2,7 @@ package com.example.rosariosisapplication;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,12 @@ public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.AssignmentGr
     @Override
     public void onBindViewHolder(@NonNull AssignmentGradesCardHolder holder, int position) {
         CardHolder2 card = cards.get(position);
-        holder.itemView.setBackgroundColor(Color.parseColor("#FFF7F7"));
+        if (holder.getGrade(card).equals("0.0%") || holder.getGrade(card).equals("*")) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFF7F7"));
+        }
+        else{
+            holder.itemView.setBackgroundColor(Color.WHITE);
+        }
         holder.setDetails((card));
     }
 
@@ -59,11 +65,13 @@ public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.AssignmentGr
             points.setText(card.getPoints2());
             assignmentcategory.setText(card.getAssignmentcategory2());
             assignmentpercentage.setText(card.getAssignmentpercentage2());
-            /*if (assignmentpercentage.equals("0.0%") || assignmentpercentage.equals("*")) {
-
-            }
-
+            /*
+if (holder.getGrade(card).equals("0.0%") || holder.getGrade(card).equals("*")) {
              */
+        }
+        String getGrade(CardHolder2 card) {
+            Log.d("BRUH:", card.getAssignmentpercentage2());
+            return card.getAssignmentpercentage2();
         }
     }
 }
