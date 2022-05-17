@@ -27,6 +27,7 @@ public class periodicWork extends Worker {
     private static final String TAG = "yoonThePeriodicWork";
     private String CHANNEL_ID = "873";
     private static int notificationNum = 0;
+    private static int notificationNumTest = 0;
 
     public periodicWork(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -42,7 +43,14 @@ public class periodicWork extends Worker {
             if (savedGrades.equals(classGrades.toString())) {
                 Log.d("yoon", "equal");
                 //notification below is for testing reasons should be moved down underneath the else
-
+                NotificationCompat.Builder builderTest = new NotificationCompat.Builder(this.getApplicationContext(), CHANNEL_ID)
+                        .setSmallIcon(R.drawable.rosariosisthing)
+                        .setContentTitle("Rosarosis")
+                        .setContentText("Your grades have NOT been updated!")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                NotificationManagerCompat notificationManagerTest = NotificationManagerCompat.from(getApplicationContext());
+                notificationManagerTest.notify(notificationNumTest, builderTest.build());
+                notificationNumTest++;
             } else {
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
