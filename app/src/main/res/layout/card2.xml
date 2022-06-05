@@ -6,18 +6,18 @@
     android:layout_height="wrap_content"
     android:layout_columnWeight="1"
     android:layout_rowWeight="1"
-    android:background="#FFFFFF"
     app:cardElevation="6dp"
     app:cardCornerRadius="12dp"
-    android:layout_margin="12dp">
+    android:layout_margin="12dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/secondary"
         android:padding="16dp"
-        android:gravity="center"
-        >
+        android:gravity="center" >
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,7 +33,7 @@
                     android:textStyle="bold"
                     android:id="@+id/assignmentname"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/maintext"
                     android:textSize="20dp"
                     android:layout_column="-5"
                     android:gravity="left"
@@ -47,7 +47,7 @@
                     android:textStyle="bold"
                     android:id="@+id/points"
                     android:textSize="20dp"
-                    android:textColor="#5566e7"
+                    android:textColor="@color/highlight"
                     android:layout_weight="0"
                     android:layout_column="-5"
                     android:gravity="center_horizontal"
@@ -61,7 +61,7 @@
 
                 <TextView
                     android:id="@+id/assignmentcategory"
-                    android:textColor="#808080"
+                    android:textColor="@color/subtext"
                     android:layout_weight="1"
                     android:layout_column="-5"
                     android:gravity="left"
@@ -72,7 +72,7 @@
 
                 <TextView
                     android:id="@+id/assignmentpercentage"
-                    android:textColor="#5566e7"
+                    android:textColor="@color/highlight"
                     android:layout_weight="0"
                     android:layout_column="-5"
                     android:gravity="center"

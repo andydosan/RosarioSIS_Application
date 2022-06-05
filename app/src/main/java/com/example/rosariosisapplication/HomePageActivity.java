@@ -57,13 +57,8 @@ import java.util.Map;
 
 public class HomePageActivity extends AppCompatActivity {
 
-
     BottomNavigationView bottomNavigationView;
     NavController navController;
-    AppBarConfiguration appBarConfiguration;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +67,6 @@ public class HomePageActivity extends AppCompatActivity {
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         navController = Navigation.findNavController(this, R.id.fragmentContainerView2);
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.firstFragment, R.id.secondFragment, R.id.thirdFragment).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-
-
-
     }
-
-
-
 }

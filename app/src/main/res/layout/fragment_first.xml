@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:layout_height="wrap_content"
+    android:background="@color/primary"
+    android:paddingBottom="56dp"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -23,12 +24,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_font"
-                android:gravity="center"
                 android:text="Quarters"
-                android:textColor="#000000"
+                android:textColor="@color/maintext"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
 
         </RelativeLayout>
 
@@ -48,7 +47,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/secondary"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -67,7 +66,7 @@
                         android:gravity="center"
                         android:text="Q1"
                         android:textAlignment="center"
-                        android:textColor="#5566e7"
+                        android:textColor="@color/highlight"
                         android:textSize="25sp"
                         android:textStyle="bold">
 
@@ -84,7 +83,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/secondary"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -103,7 +102,7 @@
                         android:gravity="center"
                         android:text="Q2"
                         android:textAlignment="center"
-                        android:textColor="#5566e7"
+                        android:textColor="@color/highlight"
                         android:textSize="25sp"
                         android:textStyle="bold">
 
@@ -120,7 +119,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/secondary"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -139,7 +138,7 @@
                         android:gravity="center"
                         android:text="Q3"
                         android:textAlignment="center"
-                        android:textColor="#5566e7"
+                        android:textColor="@color/highlight"
                         android:textSize="25sp"
                         android:textStyle="bold">
 
@@ -155,7 +154,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/secondary"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -174,27 +173,33 @@
                         android:gravity="center"
                         android:text="Q4"
                         android:textAlignment="center"
-                        android:textColor="#5566e7"
+                        android:textColor="@color/highlight"
                         android:textSize="25sp"
                         android:textStyle="bold">
 
                     </TextView>
                 </LinearLayout>
-
-
             </androidx.cardview.widget.CardView>
         </GridLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:fontFamily="@font/rubik_font"
-            android:gravity="center"
-            android:text="Grades"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_font"
+                android:gravity="center"
+                android:text="Grades"
+                android:textColor="@color/maintext"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/classgradesRecyclerView"
@@ -203,21 +208,8 @@
             android:layout_row="0"
             android:nestedScrollingEnabled="false" />
 
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="149dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="149dp"
-            android:layout_marginBottom="34dp"
-            android:backgroundTint="#5566e7"
-            android:fontFamily="@font/rubik_font"
-            android:text="Logout"
-            android:textColor="#FFFFFF" />
-
         <TableLayout
+            android:layout_marginTop="32dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:stretchColumns="0,1">
@@ -248,6 +240,20 @@
             </TableRow>
 
         </TableLayout>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="149dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="149dp"
+            android:layout_marginBottom="34dp"
+            android:backgroundTint="@color/highlight"
+            android:fontFamily="@font/rubik_font"
+            android:text="Logout"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

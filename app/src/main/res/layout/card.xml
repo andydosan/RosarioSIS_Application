@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,13 +8,13 @@
     android:layout_rowWeight="1"
     app:cardElevation="6dp"
     app:cardCornerRadius="12dp"
-    android:layout_margin="12dp">
+    android:layout_margin="12dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#FFFFFF"
+        android:background="@color/secondary"
         android:padding="16dp"
         android:gravity="center">
 
@@ -32,7 +33,7 @@
                     android:textStyle="bold"
                     android:id="@+id/classname"
                     android:layout_weight="1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/maintext"
                     android:textSize="20dp"
                     android:layout_column="-5"
                     android:gravity="left"
@@ -46,7 +47,7 @@
                     android:textStyle="bold"
                     android:id="@+id/lettergrade"
                     android:textSize="20dp"
-                    android:textColor="#5566e7"
+                    android:textColor="@color/highlight"
                     android:layout_weight="0"
                     android:layout_column="-5"
                     android:gravity="center_horizontal"
@@ -59,7 +60,7 @@
             <TableRow>
                 <TextView
                     android:id="@+id/teacher"
-                    android:textColor="#808080"
+                    android:textColor="@color/subtext"
                     android:layout_weight="1"
                     android:layout_column="-5"
                     android:gravity="left"
@@ -71,7 +72,7 @@
 
                 <TextView
                     android:id="@+id/percentage"
-                    android:textColor="#5566e7"
+                    android:textColor="@color/highlight"
                     android:layout_weight="0"
                     android:layout_column="-5"
                     android:gravity="center"

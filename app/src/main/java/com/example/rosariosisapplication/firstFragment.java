@@ -151,13 +151,9 @@ public class firstFragment
         userName = bundle.getString("username");
         userPassword = bundle.getString("userpassword");
 
-        SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE); //this one is the old classGrades.toString
+        SharedPreferences settings = getActivity().getSharedPreferences("SavedData", Context.MODE_PRIVATE); //this one is the old classGrades.toString
         //SharedPreferences settings2 = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); //can be used for other needed to be saved variables
         savedGrades = settings.getString("toString classGrades", "");
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
-
     }
 
     @SuppressLint("WrongViewCast")
@@ -305,81 +301,79 @@ public class firstFragment
 
     @Override
     public void onClick(View v) {
-        description_webscrape dw = new description_webscrape(); //not sure if this part works
-        switch(v.getId()){
+        //Switch case for each quarter button. Changes color, sets quarterName, and disables button while setting others to be clickable.
+        switch(v.getId()) {
             case R.id.quarter1:
-                quarterName = "Quarter 1";//"Quarter 1", "Quarter 2", etc
+                quarterName = "Quarter 1";
 
-                quarter1.setCardBackgroundColor(Color.parseColor("#5566e7"));
-                quarter2.setCardBackgroundColor(Color.WHITE);
-                quarter3.setCardBackgroundColor(Color.WHITE);
-                quarter4.setCardBackgroundColor(Color.WHITE);
+                quarter1.setCardBackgroundColor(getResources().getColor(R.color.highlight));
+                quarter2.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter3.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter4.setCardBackgroundColor(getResources().getColor(R.color.secondary));
 
                 quarter1text.setTextColor(Color.WHITE);
-                quarter2text.setTextColor(Color.parseColor("#5566e7"));
-                quarter3text.setTextColor(Color.parseColor("#5566e7"));
-                quarter4text.setTextColor(Color.parseColor("#5566e7"));
+                quarter2text.setTextColor(getResources().getColor(R.color.highlight));
+                quarter3text.setTextColor(getResources().getColor(R.color.highlight));
+                quarter4text.setTextColor(getResources().getColor(R.color.highlight));
 
                 quarter1.setClickable(false);
                 quarter2.setClickable(true);
                 quarter3.setClickable(true);
                 quarter4.setClickable(true);
 
-                dw.execute();
                 break;
 
             case R.id.quarter2:
-                quarterName = "Quarter 2";//"Quarter 1", "Quarter 2", etc
+                quarterName = "Quarter 2";
 
-                quarter1.setCardBackgroundColor(Color.WHITE);
-                quarter2.setCardBackgroundColor(Color.parseColor("#5566e7"));
-                quarter3.setCardBackgroundColor(Color.WHITE);
-                quarter4.setCardBackgroundColor(Color.WHITE);
+                quarter1.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter2.setCardBackgroundColor(getResources().getColor(R.color.highlight));
+                quarter3.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter4.setCardBackgroundColor(getResources().getColor(R.color.secondary));
 
-                quarter1text.setTextColor(Color.parseColor("#5566e7"));
+                quarter1text.setTextColor(getResources().getColor(R.color.highlight));
                 quarter2text.setTextColor(Color.WHITE);
-                quarter3text.setTextColor(Color.parseColor("#5566e7"));
-                quarter4text.setTextColor(Color.parseColor("#5566e7"));
+                quarter3text.setTextColor(getResources().getColor(R.color.highlight));
+                quarter4text.setTextColor(getResources().getColor(R.color.highlight));
 
                 quarter1.setClickable(true);
                 quarter2.setClickable(false);
                 quarter3.setClickable(true);
                 quarter4.setClickable(true);
 
-                dw.execute();
                 break;
 
             case R.id.quarter3:
-                quarterName = "Quarter 3";//"Quarter 1", "Quarter 2", etc
+                quarterName = "Quarter 3";
 
-                quarter1.setCardBackgroundColor(Color.WHITE);
-                quarter2.setCardBackgroundColor(Color.WHITE);
-                quarter3.setCardBackgroundColor(Color.parseColor("#5566e7"));
-                quarter4.setCardBackgroundColor(Color.WHITE);
+                quarter1.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter2.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter3.setCardBackgroundColor(getResources().getColor(R.color.highlight));
+                quarter4.setCardBackgroundColor(getResources().getColor(R.color.secondary));
 
-                quarter1text.setTextColor(Color.parseColor("#5566e7"));
-                quarter2text.setTextColor(Color.parseColor("#5566e7"));
+                quarter1text.setTextColor(getResources().getColor(R.color.highlight));
+                quarter2text.setTextColor(getResources().getColor(R.color.highlight));
                 quarter3text.setTextColor(Color.WHITE);
-                quarter4text.setTextColor(Color.parseColor("#5566e7"));
+                quarter4text.setTextColor(getResources().getColor(R.color.highlight));
 
                 quarter1.setClickable(true);
                 quarter2.setClickable(true);
                 quarter3.setClickable(false);
                 quarter4.setClickable(true);
 
-                dw.execute();
                 break;
+
             case R.id.quarter4:
-                quarterName = "Quarter 4";//"Quarter 1", "Quarter 2", etc
+                quarterName = "Quarter 4";
 
-                quarter1.setCardBackgroundColor(Color.WHITE);
-                quarter2.setCardBackgroundColor(Color.WHITE);
-                quarter3.setCardBackgroundColor(Color.WHITE);
-                quarter4.setCardBackgroundColor(Color.parseColor("#5566e7"));
+                quarter1.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter2.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter3.setCardBackgroundColor(getResources().getColor(R.color.secondary));
+                quarter4.setCardBackgroundColor(getResources().getColor(R.color.highlight));
 
-                quarter1text.setTextColor(Color.parseColor("#5566e7"));
-                quarter2text.setTextColor(Color.parseColor("#5566e7"));
-                quarter3text.setTextColor(Color.parseColor("#5566e7"));
+                quarter1text.setTextColor(getResources().getColor(R.color.highlight));
+                quarter2text.setTextColor(getResources().getColor(R.color.highlight));
+                quarter3text.setTextColor(getResources().getColor(R.color.highlight));
                 quarter4text.setTextColor(Color.WHITE);
 
                 quarter1.setClickable(true);
@@ -387,9 +381,11 @@ public class firstFragment
                 quarter3.setClickable(true);
                 quarter4.setClickable(false);
 
-                dw.execute();
                 break;
         }
+
+        description_webscrape dw = new description_webscrape();
+        dw.execute();
     }
 
     class description_webscrape extends AsyncTask<Void, Void, Void> {
@@ -416,6 +412,7 @@ public class firstFragment
             }
 
             renderCards();
+
             if (counter <= 1) {
                 quarterName = initialMarkingPeriod;
                 yearName = initialYear;
@@ -459,12 +456,22 @@ public class firstFragment
                 markingperiods = new ArrayList<ArrayList<String>>();
                 years = new ArrayList<ArrayList<String>>();
 
-                Elements selectedyear = doc.select("select#syear option[selected]");
-                Elements selectedmp = doc.select("select#mp option[selected]");
-
                 // Marking periods and years
                 Elements syearselector = doc.select("select#syear");
                 Elements mpselector = doc.select("select#mp");
+                Elements selectedyear = doc.select("select#syear option[selected]");
+                Elements selectedmp = doc.select("select#mp option[selected]");
+
+                if (selectedyear.isEmpty()) {
+                    selectedyear = syearselector.select("option:first-child");
+                }
+
+                if (selectedmp.isEmpty()) {
+                    selectedmp = mpselector.select("option:first-child");
+                }
+
+                Log.d("test", String.valueOf(selectedmp));
+
                 syearselector = syearselector.select("option");
                 mpselector = mpselector.select("option");
 
@@ -491,8 +498,17 @@ public class firstFragment
                         .userAgent(USER_AGENT)
                         .execute();
 
-                initialMarkingPeriod = selectedmp.text();
                 initialYear = selectedyear.text();
+                initialMarkingPeriod = selectedmp.text();
+
+                /*
+                if (selectedmp.text().isEmpty()) {
+                    initialMarkingPeriod = "Quarter 1";
+                } else {
+                    initialMarkingPeriod = selectedmp.text();
+                }
+
+                 */
 
                 doc = Jsoup.connect(GRADES_URL)
                         .cookies(loginForm.cookies())
@@ -728,7 +744,7 @@ public class firstFragment
 
         if (quarterName.equals("Quarter 1")) {
 
-            quarter1.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter1.setCardBackgroundColor(getResources().getColor(R.color.highlight));
             quarter1text.setTextColor(Color.WHITE);
             quarter2.setClickable(true);
             quarter3.setClickable(true);
@@ -736,7 +752,7 @@ public class firstFragment
 
         } else if (quarterName.equals("Quarter 2")) {
 
-            quarter2.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter2.setCardBackgroundColor(getResources().getColor(R.color.highlight));
             quarter2text.setTextColor(Color.WHITE);
             quarter1.setClickable(true);
             quarter3.setClickable(true);
@@ -744,7 +760,7 @@ public class firstFragment
 
         } else if (quarterName.equals("Quarter 3")) {
 
-            quarter3.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter3.setCardBackgroundColor(getResources().getColor(R.color.highlight));
             quarter3text.setTextColor(Color.WHITE);
             quarter1.setClickable(true);
             quarter2.setClickable(true);
@@ -752,7 +768,7 @@ public class firstFragment
 
         } else if (quarterName.equals("Quarter 4")) {
 
-            quarter4.setCardBackgroundColor(Color.parseColor("#5566e7"));
+            quarter4.setCardBackgroundColor(getResources().getColor(R.color.highlight));
             quarter4text.setTextColor(Color.WHITE);
             quarter1.setClickable(true);
             quarter2.setClickable(true);

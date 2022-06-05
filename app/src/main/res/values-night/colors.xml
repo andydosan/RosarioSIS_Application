@@ -10,10 +10,10 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="primary">#F9FBFF</color>
-    <color name="secondary">#FFFFFF</color>
-    <color name="highlight">#5566e7</color>
-    <color name="maintext">#000000</color>
-    <color name="subtext">#808080</color>
+    <color name="primary">#121212</color>
+    <color name="secondary">#3B3B3B</color>
+    <color name="highlight">#8a95e3</color>
+    <color name="maintext">#FFFFFF</color>
+    <color name="subtext">#CFCFCF</color>
 
 </resources>

@@ -48,8 +48,6 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().hide();
-
         /* Bind the XML views to Java Code Elements */
         eName = findViewById(R.id.etName);
         ePassword = findViewById(R.id.etPassword);
@@ -57,8 +55,12 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         check = findViewById(R.id.checkBox);
 
         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences SavedData = getSharedPreferences("SavedData", MODE_PRIVATE);
+
         String checkbox = preferences.getString("remember","");
-        if(checkbox.equals("true") && preferences.getString("username", "").length() > 0){
+        String savedusername = SavedData.getString("username", "");
+
+        if (checkbox.equals("true") && savedusername.length() > 0) {
             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
             intent.putExtra("username", preferences.getString("username", ""));
             intent.putExtra("userpassword", preferences.getString("userpassword", ""));
@@ -154,19 +156,23 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
                 /* If valid */
                 else {
                     if (check.isChecked()) {
-                        SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences1.edit();
+                        SharedPreferences SavedData = getSharedPreferences("SavedData", MODE_PRIVATE);
+                        SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("remember", "true");
+                        editor.commit();
+
+                        editor = SavedData.edit();
                         editor.putString("username", userName);
                         editor.putString("userpassword", userPassword);
                         editor.commit();
-                        //Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+
                     } else {
                         SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences1.edit();
                         editor.putString("remember", "false");
                         editor.commit();
-                        //Toast.makeText(MainActivity.this, "Save Credentials?", Toast.LENGTH_SHORT).show();
                     }
 
                     /* Allow the user in to your app by going into the next activity */

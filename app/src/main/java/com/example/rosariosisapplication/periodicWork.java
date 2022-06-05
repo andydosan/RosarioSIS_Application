@@ -52,7 +52,7 @@ public class periodicWork extends Worker {
                 notificationManagerTest.notify(notificationNumTest, builderTest.build());
                 notificationNumTest++;
             } else {
-                SharedPreferences settings = getApplicationContext().getSharedPreferences("MyPrefsFile", Context.MODE_PRIVATE);
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("SavedData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("toString classGrades", classGrades.toString());
                 editor.commit();
