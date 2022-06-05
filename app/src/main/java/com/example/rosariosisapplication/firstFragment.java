@@ -419,7 +419,7 @@ public class firstFragment
             if (counter <= 1) {
                 quarterName = initialMarkingPeriod;
                 yearName = initialYear;
-                periodicWork();
+                //periodicWork();
                 selectCard();
             }
         }
