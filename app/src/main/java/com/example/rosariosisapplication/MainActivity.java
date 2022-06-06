@@ -207,19 +207,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-
-        /* Check the credentials */
-        /* Get the object of Credentials class */
-        //  Credentials credentials = new Credentials();
-        /*
-        if(userName.equals(credentials.name) && userPassword.equals(credentials.password))
-        {
-            return true;
-        }
-        return false;
-         */
-
-
     }
 
 
