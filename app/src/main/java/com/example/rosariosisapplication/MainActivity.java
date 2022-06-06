@@ -1,5 +1,7 @@
 package com.example.rosariosisapplication;
 
+//Import Statements
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -9,33 +11,27 @@ import android.os.Bundle;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.Map;
 
-public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
+//Main Class
+public class MainActivity extends AppCompatActivity {
 
-    /* Define the UI elements */
+    //Define the UI elements
     private EditText eName;
     private EditText ePassword;
     private Button eLogin;
     private CheckBox check;
     public boolean isValid2 = false;
     public boolean isValid = false;
-    //bruh
 
     boolean canConnect = false;
 
@@ -48,19 +44,27 @@ public class MainActivity<Class1, Teacher1, Grade1> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         /* Bind the XML views to Java Code Elements */
         eName = findViewById(R.id.etName);
         ePassword = findViewById(R.id.etPassword);
         eLogin = findViewById(R.id.btnLogin);
         check = findViewById(R.id.checkBox);
 
+
+        /* Algorithm to check if username and password are saved
+        * "UserPrefs" Shared preferences stores information on whether the checkbox was checked before
+        * "SavedData" Shared preferences stores information about saved username and password */
         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         SharedPreferences SavedData = getSharedPreferences("SavedData", MODE_PRIVATE);
 
         String checkbox = preferences.getString("remember","");
         String savedusername = SavedData.getString("username", "");
 
+        /* If checkbox was previously ticked and saved username has length greater than 0 */
         if (checkbox.equals("true") && savedusername.length() > 0) {
+
+            /* Create intent with saved username and password, and start new HomePageActivity with Intent */
             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
             intent.putExtra("username", preferences.getString("username", ""));
             intent.putExtra("userpassword", preferences.getString("userpassword", ""));
