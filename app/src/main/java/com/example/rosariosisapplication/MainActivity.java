@@ -97,22 +97,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //asdf
-
     private class login_webscrape extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
 
             try {
-                String mp = null;
-                String yr = null;
                 final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
                 final String LOGIN_FORM_URL = "https://rosariosis.asianhope.org/index.php";
-                //rather than the grades, the initial log in action url is the portral page possibly?
 
                 Connection.Response loginForm = null;
 
+                // If the connection fails, it goes to catch, and canConnect stays false.
                 try {
                     loginForm = Jsoup.connect(LOGIN_FORM_URL)
                             .method(Connection.Method.GET)
@@ -135,10 +131,11 @@ public class MainActivity extends AppCompatActivity {
                         .userAgent(USER_AGENT)
                         .execute();
 
-                isValid2 = false;
+                // Checks if username and password are valid
+                isValid = false;
 
                 if(!(loginForm.url().toString().equals(LOGIN_FORM_URL))){
-                    isValid2=true;
+                    isValid = true;
                 }
 
             } catch (IOException e) {
@@ -150,10 +147,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (canConnect == true) {
-                isValid = validate(userName, userPassword);
 
-                /* Validate the user inputs */
+            // Checks if it was able to connect and if the credentials were valid
+            if (canConnect == true) {
 
                 /* If not valid */
                 if (!isValid) {
@@ -161,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 /* If valid */
                 else {
+
+                    // If checkbox was checked, set string "remember" in UserPrefs to "true"
+                    // If checkbox was checked, save username and userpassword to SavedData]
                     if (check.isChecked()) {
                         SharedPreferences SavedData = getSharedPreferences("SavedData", MODE_PRIVATE);
                         SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -173,22 +172,25 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("username", userName);
                         editor.putString("userpassword", userPassword);
                         editor.commit();
-
-                    } else {
+                    }
+                    // Else, set string "remember" in UserPrefs to false
+                    else {
                         SharedPreferences preferences1 = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences1.edit();
                         editor.putString("remember", "false");
                         editor.commit();
                     }
 
-                    /* Allow the user in to your app by going into the next activity */
+                    // Allow the user in to your app by going into the next activity
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                     intent.putExtra("username", userName);
                     intent.putExtra("userpassword", userPassword);
                     startActivity(intent);
                     finish();
                 }
-            } else {
+            }
+            // If not able to connect, show a dialog
+            else {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("Error")
                         .setMessage("We couldn't connect to RosarioSIS. Your internet might have a problem, or the website might be down.")
@@ -197,19 +199,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    /* Validate the credentials */
-    private boolean validate(String userName, String userPassword)
-    {
-
-        if(isValid2){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-    }
-
-
 }
